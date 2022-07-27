@@ -5,16 +5,43 @@ import "./RestaurantList.scss";
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [location, setLocation] = useState("");
+  const [dietaryRestriction, setDietaryRestriction] = useState("");
+  // const getRestaurants = (data) => {
+  //   axios
+  //     .get(`http://localhost:8080/restaurants/`)
+  //     .then((response) => {
+  //       return setRestaurants(response.data.businesses);
+  //     })
+  //     .catch((error) => {
+  //       return console.log(error);
+  //     });
+  // };
+
   const getRestaurants = () => {
-    axios
-      .get(`http://localhost:8080/restaurants/test?location=${location}`)
+    const data = JSON.stringify({
+      "term": "restaurant",
+      "location": "Vancouver",
+      "categories": "vegetarian",
+    });
+
+    const config = {
+      method: "GET",
+      url: "http://localhost:8080/restaurants/?location=Vancouver&term=restaurant",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
       .then((response) => {
-        return setRestaurants(response.data.businesses);
+        console.log(response.data);
       })
       .catch((error) => {
-        return console.log(error);
+        console.log(error);
       });
   };
+  
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -25,14 +52,25 @@ const RestaurantList = () => {
     return setLocation(e.target.value);
   };
 
-  const handleSubmit=(e)=>{
+  const handleSelectDietaryRestriction = (e) => {
+    e.preventDefault();
+    return setDietaryRestriction(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     getRestaurants();
-  }
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <select onChange={handleSelectDietaryRestriction}>
+          <option>Choose Dietary Restriction</option>
+          <option value="Gluten-Free">Gluten-Free</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Vegetarian">Vegetarian</option>
+        </select>
         <input
           type="text"
           placeholder="Enter a different city"
