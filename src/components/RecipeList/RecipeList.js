@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import "./RecipeList.scss";
 
 const RecipeList = () => {
@@ -89,24 +83,12 @@ const RecipeList = () => {
           // })
           .map((recipe) => {
             return (
-              <div className="recipes__card" key={recipe.id}>
-                <Card sx={{ maxWidth: 345 }}>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={recipe.image}
-                    alt="green iguana"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {recipe.title}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small">Share</Button>
-                    <Button size="small">Learn More</Button>
-                  </CardActions>
-                </Card>
+              <div
+                className="recipes__card"
+                key={recipe.id}
+                style={{ backgroundImage: `url(${recipe.image})` }}
+              >
+                <p className="recipes__text">{recipe.title}</p>
               </div>
             );
           })}
