@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./RestaurantList.scss";
+import Dropdown from 'react-dropdown';
+
+
 
 const RestaurantList = () => {
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
@@ -9,28 +12,8 @@ const RestaurantList = () => {
   const [categories, setCategories] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
   const [dietaryRestriction, setDietaryRestriction] = useState([]);
-  // const getRestaurants = (data) => {
-  //   axios
-  //     .get(`http://localhost:8080/restaurants/`)
-  //     .then((response) => {
-  //       return setRestaurants(response.data.businesses);
-  //     })
-  //     .catch((error) => {
-  //       return console.log(error);
-  //     });
-  // };
 
   const getRestaurants = () => {
-    // const buildDataToSend=()=>{
-
-    //   let dataToSend = ''
-
-    //   if(location)
-    //   dataToSend += `${location}`
-
-    //   return dataToSend;
-
-    // }
 
     const fetchSetOfCategories = (businesses) => {
       //set automatically eliminates duplicates

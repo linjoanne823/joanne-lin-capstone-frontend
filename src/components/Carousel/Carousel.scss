@@ -1,0 +1,10 @@
+.carousel {
+
+  &__image {
+    width: 80vw;
+    height: 30rem;
+    object-fit: cover;
+    overflow: hidden;
+
+  }
+}
