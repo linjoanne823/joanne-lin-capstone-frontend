@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../Carousel/Carousel.scss";
 const sliderImages = [
   {
@@ -35,6 +36,14 @@ const Carousel = () => {
   useInterval(goToNextImage);
   return (
     <div className="carousel">
+      <div className="carousel__button-container">
+        <Link to={"/recipes"}>
+          <button className="carousel__button">Recipes</button>
+        </Link>
+
+        <button className="carousel__button">Restaurants</button>
+      </div>
+
       <img src={sliderImages[currentImage].urls} className="carousel__image" />
     </div>
   );

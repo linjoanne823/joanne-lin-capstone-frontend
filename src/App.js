@@ -6,10 +6,18 @@ import NavItem from "./components/NavItem/NavItem";
 import "./App.scss";
 import DropdownMenu from "./components/DropdownMenu/DropdownMenu";
 import Home from "./pages/Home/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Home/>} />
+          <Route path="/recipes" element={<RecipeList/>} />
+          <Route path="/restaurants" element={<RestaurantList/>} />
+        </Routes>
+      </BrowserRouter>
       {/* <NavBar>
         <NavItem icon="🙂" />
         <NavItem icon="🙂" />
@@ -18,8 +26,8 @@ function App() {
           <DropdownMenu/>
         </NavItem>
       </NavBar> */}
-      <Home/>
-      <RestaurantList />
+      {/* <Home/>
+      <RestaurantList /> */}
       {/* <RecipeList /> */}
     </div>
   );

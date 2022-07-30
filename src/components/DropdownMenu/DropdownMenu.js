@@ -15,10 +15,12 @@ const DropdownMenu = () => {
         classNames="menu-primary"
       >
         <div className="menu">
-          <DropdownItem>My Profile</DropdownItem>
+          <DropdownItem>Home</DropdownItem>
           <DropdownItem goToMenu="settings" setActiveMenu={setActiveMenu}>
-            Settings
+            Signup
           </DropdownItem>
+          <DropdownItem>Login</DropdownItem>
+          <DropdownItem>Test User</DropdownItem>
         </div>
       </CSSTransition>
       <CSSTransition

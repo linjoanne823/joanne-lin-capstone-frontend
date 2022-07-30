@@ -1,18 +1,16 @@
 import React from "react";
-import ButtonsWithPictures from "../../components/ButtonBase/ButtonBase";
 import Carousel from "../../components/Carousel/Carousl";
 import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
+import Header from "../../components/Header/Header";
 import "./Home.scss";
 
 const Home = () => {
   return (
     <div>
-      <ButtonsWithPictures />
       <div className="homepage__body">
-       <DropdownMenu/>
-      <Carousel />
+        <DropdownMenu />
+        <Carousel />
       </div>
-     
     </div>
   );
 };
