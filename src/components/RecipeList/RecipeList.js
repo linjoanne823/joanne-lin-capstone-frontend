@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./RecipeList.scss";
+import { Link } from "react-router-dom";
+import RecipeDetails from "../RecipeDetails/RecipeDetails";
 
-const RecipeList = () => {
+const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState("");
   const [intolerances, setIntolerances] = useState("");
@@ -89,6 +91,9 @@ const RecipeList = () => {
                 style={{ backgroundImage: `url(${recipe.image})` }}
               >
                 <p className="recipes__text">{recipe.title}</p>
+                <Link to={`/recipes/${recipe.id}`}>
+                  <button>Learn More</button>
+                </Link>
               </div>
             );
           })}

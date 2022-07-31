@@ -7,6 +7,7 @@ import "./App.scss";
 import DropdownMenu from "./components/DropdownMenu/DropdownMenu";
 import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RecipeDetails from "./components/RecipeDetails/RecipeDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home/>} />
           <Route path="/recipes" element={<RecipeList/>} />
+          <Route path='/recipes/:recipeId' element ={<RecipeDetails/>}/>
           <Route path="/restaurants" element={<RestaurantList/>} />
         </Routes>
       </BrowserRouter>
