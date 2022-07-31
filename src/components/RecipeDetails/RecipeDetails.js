@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-import Modal from "../Modal/Modal";
 import axios from "axios";
+import "./RecipeDetails.scss";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 const RecipeDetails = (props) => {
   const { recipeId } = useParams();
   const [recipeDetails, setRecipeDetails] = useState({});
-  const [show, setShow] = useState(false);
+  const [showIngredients, setShowIngredients] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const getSelectRecipe = () => {
     axios.get(`http://localhost:8080/recipes/${recipeId}`).then((response) => {
@@ -26,21 +30,45 @@ const RecipeDetails = (props) => {
     <div>
       {Object.keys(recipeDetails).length > 0 ? (
         <div>
-          <img src={recipeDetails.image}></img>
-          <h2>{recipeDetails.title}</h2>
-          <p>Servings: serves {recipeDetails.servings}</p>
-          <p>Ready in: {recipeDetails.readyInMinutes} minutes</p>
-          <button onClick={() => setShow(!show)}>Instructions</button>
+          <button onClick={() => navigate(-1)} className="recipe__back-button">
+            ↩{" "}
+          </button>
+          <img src={recipeDetails.image} className="recipe__image"></img>
+          <div className="recipe__text">
+            <h2>{recipeDetails.title}</h2>
+            <p>Servings: serves {recipeDetails.servings} people</p>
+            <p>Ready in: {recipeDetails.readyInMinutes} minutes</p>
+            {console.log(recipeDetails)}
+            <Box>
+              <ButtonGroup>
+                <Button onClick={() => setShowIngredients(!showIngredients)}>
+                  Ingredients
+                </Button>
+                <Button onClick={() => setShowInstructions(!showInstructions)}>
+                  Instructions
+                </Button>
+              </ButtonGroup>
+            </Box>
+            {showIngredients ? (
+              <ul>
+                {recipeDetails.extendedIngredients.map((element) => {
+                  return <li className="recipe__text"> {element.original}</li>;
+                })}
+              </ul>
+            ) : null}
 
-          {show ? (
-            <ol>
-              {recipeDetails.analyzedInstructions[0].steps.map(
-                (element, index) => {
-                  return <li key={index}>{element.step}</li>;
-                }
-              )}
-            </ol>
-          ) : null}
+            {showInstructions ? (
+              <ol>
+                {recipeDetails.analyzedInstructions[0].steps.map((element) => {
+                  return (
+                    <li key={element.step.number} className="recipe__text">
+                      {element.step}
+                    </li>
+                  );
+                })}
+              </ol>
+            ) : null}
+          </div>
         </div>
       ) : (
         <p>loading...</p>

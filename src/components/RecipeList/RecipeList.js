@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./RecipeList.scss";
 import { Link } from "react-router-dom";
-import RecipeDetails from "../RecipeDetails/RecipeDetails";
+
 
 const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -80,9 +80,6 @@ const RecipeList = (props) => {
       <button onClick={handleSubmit}>Submit</button>
       <div className="recipes">
         {recipes
-          // .filter((restaurant) => {
-          //   return restaurant.location.city === location;
-          // })
           .map((recipe) => {
             return (
               <div
@@ -90,9 +87,8 @@ const RecipeList = (props) => {
                 key={recipe.id}
                 style={{ backgroundImage: `url(${recipe.image})` }}
               >
-                <p className="recipes__text">{recipe.title}</p>
                 <Link to={`/recipes/${recipe.id}`}>
-                  <button>Learn More</button>
+                  <p className="recipes__text">{recipe.title}</p>
                 </Link>
               </div>
             );
