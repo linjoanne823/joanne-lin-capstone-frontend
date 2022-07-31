@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./RecipeList.scss";
 import { Link } from "react-router-dom";
+import LikeButton from "../LikeButton/LikeButton";
 
 
 const RecipeList = (props) => {
@@ -47,6 +48,11 @@ const RecipeList = (props) => {
     return setIntolerances(e.target.value);
   };
 
+  const handleSelectCuisine = (e) => {
+    e.preventDefault();
+    return setCuisine(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("The diet is " + diet);
@@ -76,23 +82,33 @@ const RecipeList = (props) => {
           <option value="Seafood">Seafood</option>
           <option value="Soy">Soy</option>
         </select>
+        <select onChange={handleSelectCuisine}>
+          <option>Choose Cuisine</option>
+          <option value="African">African</option>
+          <option value="American">American</option>
+          <option value="British">British</option>
+          <option value="Cajun">Cajun</option>
+          <option value="Chinese">Chinese</option>
+          <option value="French">French</option>
+        </select>
       </form>
+
       <button onClick={handleSubmit}>Submit</button>
       <div className="recipes">
-        {recipes
-          .map((recipe) => {
-            return (
-              <div
-                className="recipes__card"
-                key={recipe.id}
-                style={{ backgroundImage: `url(${recipe.image})` }}
-              >
-                <Link to={`/recipes/${recipe.id}`}>
-                  <p className="recipes__text">{recipe.title}</p>
-                </Link>
-              </div>
-            );
-          })}
+        {recipes.map((recipe) => {
+          return (
+            <div
+              className="recipes__card"
+              key={recipe.id}
+              style={{ backgroundImage: `url(${recipe.image})` }}
+            >
+                <LikeButton/>
+              <Link to={`/recipes/${recipe.id}`}>
+                <p className="recipes__text">{recipe.title}</p>
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

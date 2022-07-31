@@ -5,6 +5,7 @@ import "./RecipeDetails.scss";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import LikeButton from "../LikeButton/LikeButton";
 
 const RecipeDetails = (props) => {
   const { recipeId } = useParams();
@@ -35,7 +36,9 @@ const RecipeDetails = (props) => {
           </button>
           <img src={recipeDetails.image} className="recipe__image"></img>
           <div className="recipe__text">
+            <LikeButton />
             <h2>{recipeDetails.title}</h2>
+
             <p>Servings: serves {recipeDetails.servings} people</p>
             <p>Ready in: {recipeDetails.readyInMinutes} minutes</p>
             {console.log(recipeDetails)}
