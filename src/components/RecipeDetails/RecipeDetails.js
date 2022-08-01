@@ -8,13 +8,13 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import LikeButton from "../LikeButton/LikeButton";
 
 const RecipeDetails = (props) => {
-  const { recipeId } = useParams();
+
   const [recipeDetails, setRecipeDetails] = useState({});
   const [showIngredients, setShowIngredients] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
 
   const getSelectRecipe = () => {
-    axios.get(`http://localhost:8080/recipes/${recipeId}`).then((response) => {
+    axios.get(`http://localhost:8080/recipes/${props.recipeId}`).then((response) => {
       setRecipeDetails(response.data);
       console.log(recipeDetails);
     });

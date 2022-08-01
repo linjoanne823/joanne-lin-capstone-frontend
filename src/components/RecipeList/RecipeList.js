@@ -3,13 +3,15 @@ import axios from "axios";
 import "./RecipeList.scss";
 import { Link } from "react-router-dom";
 import LikeButton from "../LikeButton/LikeButton";
-
+import UseModal from "../Modal/UseModal";
 
 const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState("");
   const [intolerances, setIntolerances] = useState("");
   const [cuisine, setCuisine] = useState("");
+//   const [show, setShow] = useState(false);
+  const [activeModalIndex, setActiveModalIndex] = useState(-1);
 
   const buildQueryString = () => {
     let queryString = "";
@@ -95,17 +97,19 @@ const RecipeList = (props) => {
 
       <button onClick={handleSubmit}>Submit</button>
       <div className="recipes">
-        {recipes.map((recipe) => {
+        {recipes.map((recipe, i) => {
           return (
             <div
               className="recipes__card"
               key={recipe.id}
               style={{ backgroundImage: `url(${recipe.image})` }}
+              onClick={() => setActiveModalIndex(i)}
             >
-                <LikeButton/>
-              <Link to={`/recipes/${recipe.id}`}>
-                <p className="recipes__text">{recipe.title}</p>
-              </Link>
+              {activeModalIndex===i && <UseModal closeModal={setActiveModalIndex} recipeId={recipe.id} />}
+              <LikeButton />
+              {/* <Link to={`/recipes/${recipe.id}`}> */}
+              <p className="recipes__text">{recipe.title}</p>
+              {/* </Link> */}
             </div>
           );
         })}
