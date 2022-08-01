@@ -1,0 +1,25 @@
+.form {
+  margin-left: 2rem;
+  &__title {
+    font-size: 15px;
+  }
+  &__outer-container {
+    display: flex;
+    flex-direction: row;
+    gap:1.5rem;
+  }
+
+  &__inner-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__field-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__label {
+    font-size: 14px;
+  }
+}

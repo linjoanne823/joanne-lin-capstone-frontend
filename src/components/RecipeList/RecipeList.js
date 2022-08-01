@@ -77,12 +77,12 @@ const RecipeList = (props) => {
 
         <select onChange={handleSelectAllergies}>
           <option>Choose Allergies</option>
-          <option value="Peanut">Peanut</option>
-          <option value="Treenut">Treenut</option>
           <option value="Dairy">Dairy</option>
           <option value="Egg">Egg</option>
           <option value="Gluten">Gluten</option>
           <option value="Grain">Grain</option>
+          <option value="Peanut">Peanut</option>
+          <option value="Treenut">Treenut</option>
           <option value="Sesame">Sesame</option>
           <option value="Shellfish">Shellfish</option>
           <option value="Seafood">Seafood</option>
