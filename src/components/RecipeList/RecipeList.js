@@ -11,6 +11,7 @@ const RecipeList = (props) => {
   const [intolerances, setIntolerances] = useState("");
   const [cuisine, setCuisine] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
+  const [noRecipesFound, setNoRecipesFound] = useState(false);
 
   const buildQueryString = () => {
     let queryString = "";
@@ -27,6 +28,7 @@ const RecipeList = (props) => {
     axios
       .get(`http://localhost:8080/recipes/?${buildQueryString()}`)
       .then((response) => {
+        setNoRecipesFound(response.data.results.length === 0);
         return setRecipes(response.data.results);
       })
       .catch((error) => {
@@ -68,6 +70,9 @@ const RecipeList = (props) => {
           <option value="Gluten-Free">Gluten-Free</option>
           <option value="Vegan">Vegan</option>
           <option value="Vegetarian">Vegetarian</option>
+          <option value="Ketogenic">Ketogenic</option>
+          <option value="Pescetarian">Pescetarian</option>
+          <option value="Paleo">Paleo</option>
         </select>
 
         <select onChange={handleSelectAllergies}>
@@ -96,24 +101,25 @@ const RecipeList = (props) => {
 
       <button onClick={handleSubmit}>Submit</button>
       <div className="recipes">
-        {recipes.map((recipe, i) => {
-          return (
-            <div
-              className="recipes__card"
-              key={recipe.id}
-              style={{ backgroundImage: `url(${recipe.image})` }}
-              onClick={() => setActiveModalIndex(i)}
-            >
-              {activeModalIndex === i && (
-                <UseModal closeModal={setActiveModalIndex}>
-                  {<RecipeDetails recipeId={recipe.id} />}
-                </UseModal>
-              )}
-              <LikeButton />
-              <p className="recipes__text">{recipe.title}</p>
-            </div>
-          );
-        })}
+        {noRecipesFound ? "Oh nuu :/" :
+          recipes.map((recipe, i) => {
+            return (
+              <div
+                className="recipes__card"
+                key={recipe.id}
+                style={{ backgroundImage: `url(${recipe.image})` }}
+                onClick={() => setActiveModalIndex(i)}
+              >
+                {activeModalIndex === i && (
+                  <UseModal closeModal={setActiveModalIndex}>
+                    {<RecipeDetails recipeId={recipe.id} />}
+                  </UseModal>
+                )}
+                <LikeButton />
+                <p className="recipes__text">{recipe.title}</p>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
