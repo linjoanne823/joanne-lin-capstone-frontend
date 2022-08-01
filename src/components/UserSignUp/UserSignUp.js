@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import UseModal from "../Modal/UseModal";
 import UserInfo from "../UserInfo/UserInfo";
+import Button from "@mui/material/Button";
+import "./UserSignUp.scss";
 
-const UserSignUp = () => {
+const UserSignUp = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -39,36 +41,52 @@ const UserSignUp = () => {
           <div>
             <h2>Sign Up</h2>
             <form>
-              <label>First Name:</label>
-              <input
-                type="text"
-                placeholder="First Name"
-                name="firstName"
-                onChange={handleChange}
-              ></input>
-              <label>Last Name:</label>
-              <input
-                type="text"
-                placeholder="Last Name"
-                name="lastName"
-                onChange={handleChange}
-              ></input>
-              <label>Email:</label>
-              <input
-                type="email"
-                placeholder="Email"
-                name="email"
-                onChange={handleChange}
-              ></input>
-              <label>Password:</label>
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={handleChange}
-              ></input>
+              <div className="signup__input-container">
+                <label className="signup__label">First Name:</label>
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  name="firstName"
+                  onChange={handleChange}
+                  className="signup__input"
+                ></input>
+              </div>
+              <div className="signup__input-container">
+                <label className="signup__label">Last Name:</label>
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  name="lastName"
+                  onChange={handleChange}
+                  className="signup__input"
+                ></input>
+              </div>
+              <div className="signup__input-container">
+                <label className="signup__label">Email:</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  onChange={handleChange}
+                  className="signup__input"
+                ></input>
+              </div>
+              <div className="signup__input-container">
+                <label className="signup__label">Password:</label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  onChange={handleChange}
+                  className="signup__input"
+                ></input>
+              </div>
             </form>
-            <button onClick={hideSignUpAndShowUserInfo}>Create Account</button>
+            <div className="signup__button">
+              <Button variant="outlined" onClick={hideSignUpAndShowUserInfo}>
+                Create Account
+              </Button>
+            </div>
           </div>
         ) : null}
         {goToUserInfo && <UserInfo />}

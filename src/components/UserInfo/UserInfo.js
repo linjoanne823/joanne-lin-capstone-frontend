@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./UserInfo.scss";
+import Button from "@mui/material/Button";
 
-const UserInfo = () => {
+const UserInfo = (props) => {
   const [dietaryRestrictions, setDietaryRestrictions] = useState({
     glutenFree: false,
     vegan: false,
@@ -260,7 +261,11 @@ const UserInfo = () => {
           onChange={handleCityChange}
         ></input>
       </form>
-      <button onClick={handleSubmit}>Submit</button>
+      <div className="form__button">
+        <Button variant="outlined" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </div>
     </div>
   );
 };

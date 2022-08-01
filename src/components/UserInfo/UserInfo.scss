@@ -6,7 +6,7 @@
   &__outer-container {
     display: flex;
     flex-direction: row;
-    gap:1.5rem;
+    gap: 1.5rem;
   }
 
   &__inner-container {
@@ -21,5 +21,11 @@
 
   &__label {
     font-size: 14px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem 1rem 3rem;
   }
 }
