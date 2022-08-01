@@ -1,5 +1,5 @@
 import React from "react";
-import Carousel from "../../components/Carousel/Carousl";
+import Carousel from "../../components/Carousel/Carousel";
 import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
 import Header from "../../components/Header/Header";
 import "./Home.scss";

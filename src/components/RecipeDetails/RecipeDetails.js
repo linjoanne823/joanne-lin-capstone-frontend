@@ -77,14 +77,6 @@ const RecipeDetails = (props) => {
         <p>loading...</p>
       )}
     </div>
-
-    // <Modal
-    //   onClick={() => {
-    //     props.history.push(props.location.pathname); //push a new route and ref current location
-    //   }}
-    // >
-    //   Recipe Modal
-    // </Modal>
   );
 };
 

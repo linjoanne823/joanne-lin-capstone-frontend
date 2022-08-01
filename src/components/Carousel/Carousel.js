@@ -40,8 +40,9 @@ const Carousel = () => {
         <Link to={"/recipes"}>
           <button className="carousel__button">Recipes</button>
         </Link>
-
-        <button className="carousel__button">Restaurants</button>
+        <Link to={"/restaurants"}>
+          <button className="carousel__button">Restaurants</button>
+        </Link>
       </div>
 
       <img src={sliderImages[currentImage].urls} className="carousel__image" />

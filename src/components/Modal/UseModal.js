@@ -9,9 +9,7 @@ const UseModal = (props) => {
       <Modal isOpen={true} className="modal">
         <div className="modal__content" onClick={(e) => e.stopPropagation()}>
           <ul className="modal__list">
-            <li className="modal__list-item">
-              <RecipeDetails recipeId={props.recipeId} />
-            </li>
+            <li className="modal__list-item">{props.children}</li>
           </ul>
           <button
             onClick={() => props.closeModal(-1)}

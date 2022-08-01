@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./RestaurantList.scss";
-import Dropdown from 'react-dropdown';
-
-
+import Dropdown from "react-dropdown";
+import { convertLength } from "@mui/material/styles/cssUtils";
+import LikeButton from "../LikeButton/LikeButton";
+import UseModal from "../Modal/UseModal";
+import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 
 const RestaurantList = () => {
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
@@ -12,9 +14,9 @@ const RestaurantList = () => {
   const [categories, setCategories] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
   const [dietaryRestriction, setDietaryRestriction] = useState([]);
+  const [activeModalIndex, setActiveModalIndex] = useState(-1);
 
   const getRestaurants = () => {
-
     const fetchSetOfCategories = (businesses) => {
       //set automatically eliminates duplicates
       const categories = new Set();
@@ -32,7 +34,7 @@ const RestaurantList = () => {
 
     const data = JSON.stringify({
       term: "restaurant",
-      location: location,
+      location: location || "Vancouver",
       categories: dietaryRestriction,
     });
 
@@ -112,21 +114,48 @@ const RestaurantList = () => {
         </select>
       </form>
       <button onClick={handleSubmit}>Filter</button>
-      {restaurants
-        .filter((restaurant) => {
-          return restaurant.categories.some((category) => {
-            return category.title === selectCategory || selectCategory === "";
-          });
-        })
-        .map((restaurant) => {
-          return (
-            <div className="restaurants" key={restaurant.id}>
-              <img src={restaurant.photos} className="restaurants__image"></img>
-              <h3>Restaurant Name: {restaurant.name}</h3>
-              <h3>City: {restaurant.location.city}</h3>
-            </div>
-          );
-        })}
+      <div className="restaurants">
+        {restaurants
+          .filter((restaurant) => {
+            return restaurant.categories.some((category) => {
+              return category.title === selectCategory || selectCategory === "";
+            });
+          })
+          .map((restaurant, i) => {
+            return (
+              <div
+                className="restaurants__card"
+                key={restaurant.id}
+                style={{
+                  backgroundImage: `url(${restaurant.photos})`,
+                  backgroundSize: "18.125rem 12.5rem",
+                  backgroundRepeat: "no-repeat",
+                }}
+                onClick={() => setActiveModalIndex(i)}
+              >
+                {activeModalIndex === i && (
+                  <UseModal closeModal={setActiveModalIndex}>
+                    {
+                      <RestaurantDetails
+                        name={restaurant.name}
+                        photo={restaurant.photos}
+                        price={restaurant.price}
+                        rating={restaurant.rating}
+                        location={restaurant.location.address1}
+                        reviewText={restaurant.reviews[0].text}
+                        categories={restaurant.categories
+                          .map((element) => element.title)
+                          .join(" / ")}
+                      />
+                    }
+                  </UseModal>
+                )}
+                <LikeButton />
+                <p className="restaurants__text">{restaurant.name}</p>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
