@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./UserInfo.scss";
 import Button from "@mui/material/Button";
+import axios from "axios";
 
 const UserInfo = (props) => {
   const [dietaryRestrictions, setDietaryRestrictions] = useState({
@@ -58,6 +59,21 @@ const UserInfo = (props) => {
       "Allergies are " + JSON.stringify(allergies),
       "City is " + city
     );
+    axios
+      .post(
+        "http://localhost/8080/userinfo",
+        {
+          dietaryRestrictions: dietaryRestrictions,
+          allergies: allergies,
+          city: city,
+        },
+        {
+          "Content-Type": "application/json",
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (

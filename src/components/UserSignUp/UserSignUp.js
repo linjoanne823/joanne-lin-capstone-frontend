@@ -3,6 +3,7 @@ import UseModal from "../Modal/UseModal";
 import UserInfo from "../UserInfo/UserInfo";
 import Button from "@mui/material/Button";
 import "./UserSignUp.scss";
+import axios from "axios";
 
 const UserSignUp = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -28,10 +29,30 @@ const UserSignUp = (props) => {
     }
   };
 
-  const hideSignUpAndShowUserInfo = (e) => {
-    e.preventDefault();
+  const hideSignUpAndShowUserInfo = () => {
     setShowSignUpForm(!showSignUpForm);
     setGoToUserInfo(!goToUserInfo);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    hideSignUpAndShowUserInfo();
+    axios
+      .post(
+        "http://localhost/8080/signup",
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        },
+        {
+          "Content-Type": "application/json",
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (
@@ -83,7 +104,7 @@ const UserSignUp = (props) => {
               </div>
             </form>
             <div className="signup__button">
-              <Button variant="outlined" onClick={hideSignUpAndShowUserInfo}>
+              <Button variant="outlined" onClick={handleSubmit}>
                 Create Account
               </Button>
             </div>
