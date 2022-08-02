@@ -259,6 +259,7 @@ const UserInfo = (props) => {
           type="text"
           placeholder="Enter your city"
           onChange={handleCityChange}
+          className="form__input"
         ></input>
       </form>
       <div className="form__button">

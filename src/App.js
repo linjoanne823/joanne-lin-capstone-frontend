@@ -8,15 +8,17 @@ import DropdownMenu from "./components/DropdownMenu/DropdownMenu";
 import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RecipeDetails from "./components/RecipeDetails/RecipeDetails";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact element={<Home/>} />
-          <Route path="/recipes" element={<RecipeList/>} />
-          <Route path="/restaurants" element={<RestaurantList/>} />
+          <Route path="/" exact element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/recipes" element={<RecipeList />} />
+          <Route path="/restaurants" element={<RestaurantList />} />
         </Routes>
       </BrowserRouter>
       {/* <NavBar>
