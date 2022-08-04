@@ -9,6 +9,7 @@ import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RecipeDetails from "./components/RecipeDetails/RecipeDetails";
 import Profile from "./pages/Profile/Profile";
+import Favourites from "./pages/Favourites/Favourites";
 
 function App() {
   return (
@@ -19,19 +20,10 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/recipes" element={<RecipeList />} />
           <Route path="/restaurants" element={<RestaurantList />} />
+          <Route path="/favourites" element={<Favourites />} />
         </Routes>
       </BrowserRouter>
-      {/* <NavBar>
-        <NavItem icon="🙂" />
-        <NavItem icon="🙂" />
-        <caretIcon/>
-        <NavItem icon= "⬇" >
-          <DropdownMenu/>
-        </NavItem>
-      </NavBar> */}
-      {/* <Home/>
-      <RestaurantList /> */}
-      {/* <RecipeList /> */}
+
     </div>
   );
 }
