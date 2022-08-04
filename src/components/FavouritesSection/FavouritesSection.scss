@@ -1,0 +1,9 @@
+.favourites-section {
+  display: flex;
+  flex-direction: row;
+  gap:3rem;
+
+  &__inner-container{
+      width:40vw;
+  }
+}

@@ -1,12 +1,10 @@
 import React from "react";
-import FavouriteRecipes from "../../components/FavouriteRecipes/FavouriteRecipes";
-import FavouriteRestaurants from "../../components/FavouriteRestaurants/FavouriteRestaurants";
+import FavouritesSection from "../../components/FavouritesSection/FavouritesSection";
 
 const Favourites = () => {
   return (
     <div>
-      {/* <FavouriteRecipes /> */}
-      <FavouriteRestaurants />
+      <FavouritesSection />
     </div>
   );
 };
