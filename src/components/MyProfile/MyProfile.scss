@@ -1,0 +1,36 @@
+.my-profile {
+  border-left: 1px solid black;
+  width: 80vw;
+
+  &__title {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+
+  &__input-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    width: 13rem;
+  }
+
+  &__input {
+    width: 13rem;
+  }
+
+  &__multi-select {
+    margin-left: 1rem;
+    width: 13rem;
+  }
+
+  &__label {
+    font-size: 1rem;
+    margin-left: 1rem;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}

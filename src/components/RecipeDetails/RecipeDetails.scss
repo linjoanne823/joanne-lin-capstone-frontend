@@ -1,0 +1,18 @@
+.recipe {
+  &__text {
+    margin: 1rem;
+  }
+
+  &__back-button {
+    position: absolute;
+    top: 1rem;
+    left: 0.5rem;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 40%;
+  }
+
+  &__image {
+    width: 30vw;
+  }
+}

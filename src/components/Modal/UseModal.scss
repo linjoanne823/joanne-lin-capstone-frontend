@@ -1,0 +1,45 @@
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__content {
+    width: 70vw;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+
+  &__list {
+    margin-left: -3rem;
+    list-style: none;
+  }
+
+  &__list-item {
+    padding: 0.5rem;
+    margin-left: 1rem;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: gray;
+  }
+
+  &__button {
+    background-color: white;
+    opacity: 0.6;
+    border: 1px solid gray;
+    border-radius: 1.2rem;
+  }
+}
