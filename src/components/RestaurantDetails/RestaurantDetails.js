@@ -12,7 +12,7 @@ const RestaurantDetails = (props) => {
           <p>{props.price}</p>
           <p>{"⭐".repeat(props.rating)}</p>
           <p>{props.location}</p>
-          <p>{props.reviewText}</p>
+          <p>{props.review}</p>
         </div>
       ) : null}
     </div>

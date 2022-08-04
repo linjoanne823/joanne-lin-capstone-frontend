@@ -9,7 +9,7 @@
     transition: 0.5s;
     width: 18rem;
     height: auto;
-    border-radius:2rem;
+    border-radius: 2rem;
 
     &:hover {
       box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.5);
@@ -23,5 +23,9 @@
     font-weight: 600;
     background-color: grey;
     text-align: center;
+  }
+
+  &__review {
+    border-bottom: 1px solid black;
   }
 }

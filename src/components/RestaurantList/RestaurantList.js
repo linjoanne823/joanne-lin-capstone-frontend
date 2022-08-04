@@ -142,7 +142,15 @@ const RestaurantList = () => {
                         price={restaurant.price}
                         rating={restaurant.rating}
                         location={restaurant.location.address1}
-                        reviewText={restaurant.reviews[0].text}
+                        review={restaurant.reviews.map((element) => {
+                          return (
+                            <div className="restaurants__review">
+                              <p>{element.user.name}</p>
+                              <p>{"⭐".repeat(element.rating)}</p>
+                              <p>{element.text}</p>
+                            </div>
+                          );
+                        })}
                         categories={restaurant.categories
                           .map((element) => element.title)
                           .join(" / ")}
