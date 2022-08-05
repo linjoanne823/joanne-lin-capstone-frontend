@@ -8,6 +8,13 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import Box from "@mui/material/Box";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Button,
+} from "@mui/material";
 
 const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -68,17 +75,31 @@ const RecipeList = (props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <FormControl sx={{ m: 1, minWidth: 200 }}>
+        <InputLabel id="demo-simple-select-autowidth-label">
+          Dietary Restriction
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-autowidth-label"
+          id="demo-simple-select-autowidth"
+          value={diet}
+          onChange={handleSelectDietaryRestriction}
+          autoWidth
+          label="Dietary Restriction"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="Gluten-Free">Gluten-Free</MenuItem>
+          <MenuItem value="Vegan">Vegan</MenuItem>
+          <MenuItem value="Vegetarian">Vegetarian</MenuItem>
+          <MenuItem value="Ketogenic">Ketogenic</MenuItem>
+          <MenuItem value="Pescetarian">Pescetarian</MenuItem>
+          <MenuItem value="Paleo">Paleo</MenuItem>
+        </Select>
+      </FormControl>
       {/* <form onSubmit={handleSubmit}>
-        <select onChange={handleSelectDietaryRestriction}>
-          <option>Choose Dietary Restriction</option>
-          <option value="Gluten-Free">Gluten-Free</option>
-          <option value="Vegan">Vegan</option>
-          <option value="Vegetarian">Vegetarian</option>
-          <option value="Ketogenic">Ketogenic</option>
-          <option value="Pescetarian">Pescetarian</option>
-          <option value="Paleo">Paleo</option>
-        </select>
-
+       
         <select onChange={handleSelectAllergies}>
           <option>Choose Allergies</option>
           <option value="Dairy">Dairy</option>
@@ -103,7 +124,9 @@ const RecipeList = (props) => {
         </select>
       </form> */}
 
-      {/* <button onClick={handleSubmit}>Submit</button> */}
+      <Button variant="outlined" onClick={handleSubmit}>
+        Submit
+      </Button>
       <ImageList
         sx={{
           mb: 8,
