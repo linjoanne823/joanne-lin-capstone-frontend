@@ -15,6 +15,8 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
+import DietFilter from "../Filters/DietFilter";
+import CuisineFilter from "../Filters/CuisineFilter";
 
 const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -75,54 +77,28 @@ const RecipeList = (props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <FormControl sx={{ m: 1, minWidth: 200 }}>
-        <InputLabel id="demo-simple-select-autowidth-label">
-          Dietary Restriction
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-autowidth-label"
-          id="demo-simple-select-autowidth"
-          value={diet}
-          onChange={handleSelectDietaryRestriction}
-          autoWidth
-          label="Dietary Restriction"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Gluten-Free">Gluten-Free</MenuItem>
-          <MenuItem value="Vegan">Vegan</MenuItem>
-          <MenuItem value="Vegetarian">Vegetarian</MenuItem>
-          <MenuItem value="Ketogenic">Ketogenic</MenuItem>
-          <MenuItem value="Pescetarian">Pescetarian</MenuItem>
-          <MenuItem value="Paleo">Paleo</MenuItem>
-        </Select>
-      </FormControl>
-      {/* <form onSubmit={handleSubmit}>
-       
-        <select onChange={handleSelectAllergies}>
-          <option>Choose Allergies</option>
-          <option value="Dairy">Dairy</option>
-          <option value="Egg">Egg</option>
-          <option value="Gluten">Gluten</option>
-          <option value="Grain">Grain</option>
-          <option value="Peanut">Peanut</option>
-          <option value="Treenut">Treenut</option>
-          <option value="Sesame">Sesame</option>
-          <option value="Shellfish">Shellfish</option>
-          <option value="Seafood">Seafood</option>
-          <option value="Soy">Soy</option>
-        </select>
-        <select onChange={handleSelectCuisine}>
-          <option>Choose Cuisine</option>
-          <option value="African">African</option>
-          <option value="American">American</option>
-          <option value="British">British</option>
-          <option value="Cajun">Cajun</option>
-          <option value="Chinese">Chinese</option>
-          <option value="French">French</option>
-        </select>
-      </form> */}
+      <DietFilter
+        diet={diet}
+        handleSelectDietaryRestriction={handleSelectDietaryRestriction}
+      />
+      <CuisineFilter
+        cuisine={cuisine}
+        handleSelectCuisine={handleSelectCuisine}
+      />
+
+      <select onChange={handleSelectAllergies}>
+        <option>Choose Allergies</option>
+        <option value="Dairy">Dairy</option>
+        <option value="Egg">Egg</option>
+        <option value="Gluten">Gluten</option>
+        <option value="Grain">Grain</option>
+        <option value="Peanut">Peanut</option>
+        <option value="Treenut">Treenut</option>
+        <option value="Sesame">Sesame</option>
+        <option value="Shellfish">Shellfish</option>
+        <option value="Seafood">Seafood</option>
+        <option value="Soy">Soy</option>
+      </select>
 
       <Button variant="outlined" onClick={handleSubmit}>
         Submit
