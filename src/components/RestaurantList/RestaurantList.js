@@ -7,7 +7,7 @@ import LikeButton from "../LikeButton/LikeButton";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 
-const RestaurantList = () => {
+const RestaurantList = (props) => {
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
   const [restaurants, setRestaurants] = useState([]);
   const [location, setLocation] = useState("");
@@ -134,6 +134,7 @@ const RestaurantList = () => {
                 onClick={() => setActiveModalIndex(i)}
               >
                 {activeModalIndex === i && (
+                  // <div onClick={() => props.closeModal(-1)}>
                   <UseModal closeModal={setActiveModalIndex}>
                     {
                       <RestaurantDetails
@@ -142,13 +143,22 @@ const RestaurantList = () => {
                         price={restaurant.price}
                         rating={restaurant.rating}
                         location={restaurant.location.address1}
-                        reviewText={restaurant.reviews[0].text}
+                        review={restaurant.reviews.map((element) => {
+                          return (
+                            <div className="restaurants__review">
+                              <p>{element.user.name}</p>
+                              <p>{"⭐".repeat(element.rating)}</p>
+                              <p>{element.text}</p>
+                            </div>
+                          );
+                        })}
                         categories={restaurant.categories
                           .map((element) => element.title)
                           .join(" / ")}
                       />
                     }
                   </UseModal>
+                  // </div>
                 )}
                 <LikeButton />
                 <p className="restaurants__text">{restaurant.name}</p>
