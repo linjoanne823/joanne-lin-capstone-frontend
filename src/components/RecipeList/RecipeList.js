@@ -17,11 +17,12 @@ import {
 } from "@mui/material";
 import DietFilter from "../Filters/DietFilter";
 import CuisineFilter from "../Filters/CuisineFilter";
+import AllergyFilter from "../Filters/AllergyFilter";
 
 const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState("");
-  const [intolerances, setIntolerances] = useState("");
+  const [intolerances, setIntolerances] = useState([]);
   const [cuisine, setCuisine] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
   const [noRecipesFound, setNoRecipesFound] = useState(false);
@@ -81,24 +82,14 @@ const RecipeList = (props) => {
         diet={diet}
         handleSelectDietaryRestriction={handleSelectDietaryRestriction}
       />
+      <AllergyFilter
+        intolerances={intolerances}
+        handleSelectAllergies={handleSelectAllergies}
+      />
       <CuisineFilter
         cuisine={cuisine}
         handleSelectCuisine={handleSelectCuisine}
       />
-
-      <select onChange={handleSelectAllergies}>
-        <option>Choose Allergies</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Egg">Egg</option>
-        <option value="Gluten">Gluten</option>
-        <option value="Grain">Grain</option>
-        <option value="Peanut">Peanut</option>
-        <option value="Treenut">Treenut</option>
-        <option value="Sesame">Sesame</option>
-        <option value="Shellfish">Shellfish</option>
-        <option value="Seafood">Seafood</option>
-        <option value="Soy">Soy</option>
-      </select>
 
       <Button variant="outlined" onClick={handleSubmit}>
         Submit

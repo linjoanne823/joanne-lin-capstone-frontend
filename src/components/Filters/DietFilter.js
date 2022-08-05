@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const DietFilter = (props) => {
+
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 200 }}>
