@@ -1,4 +1,5 @@
 .restaurant {
+  height: 60vh;
   &__text {
     margin: 1rem;
   }
@@ -14,8 +15,7 @@
 
   &__image {
     width: 35vw;
-    height: auto;
+    height: 30vh;
+    object-fit: cover;
   }
-
-
 }

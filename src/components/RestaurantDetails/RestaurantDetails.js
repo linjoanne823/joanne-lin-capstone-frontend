@@ -10,6 +10,7 @@ const RestaurantDetails = (props) => {
           <h2>{props.name}</h2>
           <p>{props.categories}</p>
           <p>{props.price}</p>
+          <h3>Recommended Reviews:</h3>
           <p>{"⭐".repeat(props.rating)}</p>
           <p>{props.location}</p>
           <p>{props.review}</p>
