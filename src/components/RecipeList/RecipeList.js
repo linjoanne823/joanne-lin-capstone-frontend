@@ -8,13 +8,7 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import Box from "@mui/material/Box";
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import DietFilter from "../Filters/DietFilter";
 import CuisineFilter from "../Filters/CuisineFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
@@ -78,22 +72,29 @@ const RecipeList = (props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <DietFilter
-        diet={diet}
-        handleSelectDietaryRestriction={handleSelectDietaryRestriction}
-      />
-      <AllergyFilter
-        intolerances={intolerances}
-        handleSelectAllergies={handleSelectAllergies}
-      />
-      <CuisineFilter
-        cuisine={cuisine}
-        handleSelectCuisine={handleSelectCuisine}
-      />
+      <Box sx={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
+        <DietFilter
+          diet={diet}
+          handleSelectDietaryRestriction={handleSelectDietaryRestriction}
+        />
+        <AllergyFilter
+          intolerances={intolerances}
+          handleSelectAllergies={handleSelectAllergies}
+        />
+        <CuisineFilter
+          cuisine={cuisine}
+          handleSelectCuisine={handleSelectCuisine}
+        />
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          size="small"
+          style={{ margin: "1rem" }}
+        >
+          Submit
+        </Button>
+      </Box>
 
-      <Button variant="outlined" onClick={handleSubmit}>
-        Submit
-      </Button>
       <ImageList
         sx={{
           mb: 8,
