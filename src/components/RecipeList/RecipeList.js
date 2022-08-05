@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./RecipeList.scss";
+// import "./RecipeList.scss";
 import LikeButton from "../LikeButton/LikeButton";
 import UseModal from "../Modal/UseModal";
 import RecipeDetails from "../RecipeDetails/RecipeDetails";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import Box from "@mui/material/Box";
 
 const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -63,8 +67,8 @@ const RecipeList = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <Box sx={{ flexGrow: 1 }}>
+      {/* <form onSubmit={handleSubmit}>
         <select onChange={handleSelectDietaryRestriction}>
           <option>Choose Dietary Restriction</option>
           <option value="Gluten-Free">Gluten-Free</option>
@@ -97,31 +101,48 @@ const RecipeList = (props) => {
           <option value="Chinese">Chinese</option>
           <option value="French">French</option>
         </select>
-      </form>
+      </form> */}
 
-      <button onClick={handleSubmit}>Submit</button>
-      <div className="recipes">
-        {noRecipesFound ? "Oh nuu :/" :
-          recipes.map((recipe, i) => {
-            return (
-              <div
-                className="recipes__card"
-                key={recipe.id}
-                style={{ backgroundImage: `url(${recipe.image})` }}
-                onClick={() => setActiveModalIndex(i)}
-              >
-                {activeModalIndex === i && (
-                  <UseModal closeModal={setActiveModalIndex}>
-                    {<RecipeDetails recipeId={recipe.id} />}
-                  </UseModal>
-                )}
-                <LikeButton />
-                <p className="recipes__text">{recipe.title}</p>
-              </div>
-            );
-          })}
-      </div>
-    </div>
+      {/* <button onClick={handleSubmit}>Submit</button> */}
+      <ImageList
+        sx={{
+          mb: 8,
+          gridTemplateColumns:
+            "repeat(auto-fill, minmax(280px, 1fr))!important",
+        }}
+      >
+        {noRecipesFound
+          ? "Oh nuu :/"
+          : recipes.map((recipe, i) => {
+              return (
+                <ImageListItem
+                  className="recipes__card"
+                  key={recipe.id}
+                  // style={{ backgroundImage: `url(${recipe.image})` }}
+                  onClick={() => setActiveModalIndex(i)}
+                >
+                  <img
+                    src={`${recipe.image}?w=400&fit=crop&auto=format`}
+                    srcSet={`${recipe.image}?w=400&fit=crop&auto=format&dpr=2 2x`}
+                    alt={recipe.title}
+                    loading="lazy"
+                  />
+
+                  {activeModalIndex === i && (
+                    <UseModal closeModal={setActiveModalIndex}>
+                      {<RecipeDetails recipeId={recipe.id} />}
+                    </UseModal>
+                  )}
+
+                  <ImageListItemBar
+                    className="recipes__text"
+                    title={recipe.title}
+                  ></ImageListItemBar>
+                </ImageListItem>
+              );
+            })}
+      </ImageList>
+    </Box>
   );
 };
 
