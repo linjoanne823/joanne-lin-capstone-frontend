@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./RecipeList.scss";
+// import "./RecipeList.scss";
 import LikeButton from "../LikeButton/LikeButton";
 import UseModal from "../Modal/UseModal";
 import RecipeDetails from "../RecipeDetails/RecipeDetails";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import DietFilter from "../Filters/DietFilter";
+import CuisineFilter from "../Filters/CuisineFilter";
+import AllergyFilter from "../Filters/AllergyFilter";
 
 const RecipeList = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState("");
-  const [intolerances, setIntolerances] = useState("");
+  const [intolerances, setIntolerances] = useState([]);
   const [cuisine, setCuisine] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
   const [noRecipesFound, setNoRecipesFound] = useState(false);
@@ -63,65 +71,69 @@ const RecipeList = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <select onChange={handleSelectDietaryRestriction}>
-          <option>Choose Dietary Restriction</option>
-          <option value="Gluten-Free">Gluten-Free</option>
-          <option value="Vegan">Vegan</option>
-          <option value="Vegetarian">Vegetarian</option>
-          <option value="Ketogenic">Ketogenic</option>
-          <option value="Pescetarian">Pescetarian</option>
-          <option value="Paleo">Paleo</option>
-        </select>
+    <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
+        <DietFilter
+          diet={diet}
+          handleSelectDietaryRestriction={handleSelectDietaryRestriction}
+        />
+        <AllergyFilter
+          intolerances={intolerances}
+          handleSelectAllergies={handleSelectAllergies}
+        />
+        <CuisineFilter
+          cuisine={cuisine}
+          handleSelectCuisine={handleSelectCuisine}
+        />
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          size="small"
+          style={{ margin: "1rem" }}
+        >
+          Submit
+        </Button>
+      </Box>
 
-        <select onChange={handleSelectAllergies}>
-          <option>Choose Allergies</option>
-          <option value="Dairy">Dairy</option>
-          <option value="Egg">Egg</option>
-          <option value="Gluten">Gluten</option>
-          <option value="Grain">Grain</option>
-          <option value="Peanut">Peanut</option>
-          <option value="Treenut">Treenut</option>
-          <option value="Sesame">Sesame</option>
-          <option value="Shellfish">Shellfish</option>
-          <option value="Seafood">Seafood</option>
-          <option value="Soy">Soy</option>
-        </select>
-        <select onChange={handleSelectCuisine}>
-          <option>Choose Cuisine</option>
-          <option value="African">African</option>
-          <option value="American">American</option>
-          <option value="British">British</option>
-          <option value="Cajun">Cajun</option>
-          <option value="Chinese">Chinese</option>
-          <option value="French">French</option>
-        </select>
-      </form>
+      <ImageList
+        sx={{
+          mb: 8,
+          gridTemplateColumns:
+            "repeat(auto-fill, minmax(280px, 1fr))!important",
+        }}
+      >
+        {noRecipesFound
+          ? "Oh nuu :/"
+          : recipes.map((recipe, i) => {
+              return (
+                <ImageListItem
+                  className="recipes__card"
+                  key={recipe.id}
+                  // style={{ backgroundImage: `url(${recipe.image})` }}
+                  onClick={() => setActiveModalIndex(i)}
+                >
+                  <img
+                    src={`${recipe.image}?w=400&fit=crop&auto=format`}
+                    srcSet={`${recipe.image}?w=400&fit=crop&auto=format&dpr=2 2x`}
+                    alt={recipe.title}
+                    loading="lazy"
+                  />
 
-      <button onClick={handleSubmit}>Submit</button>
-      <div className="recipes">
-        {noRecipesFound ? "Oh nuu :/" :
-          recipes.map((recipe, i) => {
-            return (
-              <div
-                className="recipes__card"
-                key={recipe.id}
-                style={{ backgroundImage: `url(${recipe.image})` }}
-                onClick={() => setActiveModalIndex(i)}
-              >
-                {activeModalIndex === i && (
-                  <UseModal closeModal={setActiveModalIndex}>
-                    {<RecipeDetails recipeId={recipe.id} />}
-                  </UseModal>
-                )}
-                <LikeButton />
-                <p className="recipes__text">{recipe.title}</p>
-              </div>
-            );
-          })}
-      </div>
-    </div>
+                  {activeModalIndex === i && (
+                    <UseModal closeModal={setActiveModalIndex}>
+                      {<RecipeDetails recipeId={recipe.id} />}
+                    </UseModal>
+                  )}
+
+                  <ImageListItemBar
+                    className="recipes__text"
+                    title={recipe.title}
+                  ></ImageListItemBar>
+                </ImageListItem>
+              );
+            })}
+      </ImageList>
+    </Box>
   );
 };
 
