@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./RestaurantList.scss";
+// import "./RestaurantList.scss";
 import Dropdown from "react-dropdown";
 import { convertLength } from "@mui/material/styles/cssUtils";
 import LikeButton from "../LikeButton/LikeButton";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
+import { IoMdRestaurant } from "react-icons/io";
+import DietFilter from "../Filters/DietFilter";
 
 const RestaurantList = (props) => {
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
@@ -13,7 +20,7 @@ const RestaurantList = (props) => {
   const [location, setLocation] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
-  const [dietaryRestriction, setDietaryRestriction] = useState([]);
+  const [dietaryRestriction, setDietaryRestriction] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
 
   const getRestaurants = () => {
@@ -82,39 +89,46 @@ const RestaurantList = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     getRestaurants();
+    console.log(restaurants);
   };
 
   console.log(categories);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <select onChange={handleSelectDietaryRestriction}>
-          <option>Choose Dietary Restriction</option>
-          <option value="gluten_free">Gluten-Free</option>
-          <option value="vegan">Vegan</option>
-          <option value="vegetarian">Vegetarian</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Enter a different city"
-          onChange={handleLocationChange}
-        ></input>
-      </form>
-      <button onClick={handleSubmit}>Search</button>
-      <form onSubmit={handleSubmit}>
-        <select onChange={handleSelectCategories}>
-          {categories.map((category, index) => {
-            return (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            );
-          })}
-        </select>
-      </form>
+    <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
+        {/* <form onSubmit={handleSubmit}> */}
+        <DietFilter
+          diet={dietaryRestriction}
+          handleSelectDietaryRestriction={handleSelectDietaryRestriction}
+        />
+        {/* <input
+            type="text"
+            placeholder="Enter a different city"
+            onChange={handleLocationChange}
+          ></input> */}
+        {/* </form> */}
+        <button onClick={handleSubmit}>Search</button>
+        <form onSubmit={handleSubmit}>
+          <select onChange={handleSelectCategories}>
+            {categories.map((category, index) => {
+              return (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              );
+            })}
+          </select>
+        </form>
+      </Box>
       <button onClick={handleSubmit}>Filter</button>
-      <div className="restaurants">
+      <ImageList
+        sx={{
+          mb: 8,
+          gridTemplateColumns:
+            "repeat(auto-fill, minmax(250px, 1fr))!important",
+        }}
+      >
         {restaurants
           .filter((restaurant) => {
             return restaurant.categories.some((category) => {
@@ -123,16 +137,22 @@ const RestaurantList = (props) => {
           })
           .map((restaurant, i) => {
             return (
-              <div
+              <ImageListItem
                 className="restaurants__card"
                 key={restaurant.id}
-                style={{
-                  backgroundImage: `url(${restaurant.photos})`,
-                  backgroundSize: "18.125rem 12.5rem",
-                  backgroundRepeat: "no-repeat",
-                }}
+                // style={{
+                //   backgroundImage: `url(${restaurant.photos})`,
+                //   backgroundSize: "18.125rem 12.5rem",
+                //   backgroundRepeat: "no-repeat",
+                // }}
                 onClick={() => setActiveModalIndex(i)}
               >
+                <img
+                  src={`${restaurant.photos}?w=400&fit=crop&auto=format`}
+                  srcSet={`${restaurant.photos}?w=400&fit=crop&auto=format&dpr=2 2x`}
+                  alt={restaurant.name}
+                  loading="lazy"
+                />
                 {activeModalIndex === i && (
                   // <div onClick={() => props.closeModal(-1)}>
                   <UseModal closeModal={setActiveModalIndex}>
@@ -160,13 +180,15 @@ const RestaurantList = (props) => {
                   </UseModal>
                   // </div>
                 )}
-                <LikeButton />
-                <p className="restaurants__text">{restaurant.name}</p>
-              </div>
+                <ImageListItemBar
+                  className="recipes__text"
+                  title={restaurant.name}
+                ></ImageListItemBar>
+              </ImageListItem>
             );
           })}
-      </div>
-    </div>
+      </ImageList>
+    </Box>
   );
 };
 

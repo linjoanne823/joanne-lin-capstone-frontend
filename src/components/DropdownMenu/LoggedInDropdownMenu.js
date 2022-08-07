@@ -9,6 +9,7 @@ import { IoIosArrowDropleft } from "react-icons/io";
 import { MdOutlineExplore } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLogOutCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 const LoggedInDropdownMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");
@@ -48,8 +49,12 @@ const LoggedInDropdownMenu = () => {
           <DropdownItem setActiveMenu={setActiveMenu} goToMenu="main">
             <IoIosArrowDropleft />
           </DropdownItem>
-          <DropdownItem>Find Recipes</DropdownItem>
-          <DropdownItem>Find Restaurants</DropdownItem>
+          <DropdownItem>
+            <Link to={"/recipes"}>Find Recipes</Link>
+          </DropdownItem>
+          <DropdownItem>
+            <Link to={"/restaurants"}>Find Restaurants</Link>
+          </DropdownItem>
         </div>
       </CSSTransition>
     </div>
