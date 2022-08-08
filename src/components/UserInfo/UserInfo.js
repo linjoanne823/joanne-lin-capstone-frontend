@@ -61,7 +61,7 @@ const UserInfo = (props) => {
     );
     axios
       .post(
-        "http://localhost/8080/userinfo",
+        "http://localhost:8080/userinfo",
         {
           dietaryRestrictions: dietaryRestrictions,
           allergies: allergies,

@@ -3,15 +3,25 @@ import likeButton from "../../assets/icons/heart-992.svg";
 import whiteLikeButton from "../../assets/icons/heart-917.svg";
 import "./LikeButton.scss";
 
-const LikeButton = () => {
-  const [toggled, setToggled] = useState(true);
+const LikeButton = (props) => {
+  const [liked, setLiked] = useState(props.recipeDetails.isLiked);
 
-  const toggleImage = () => setToggled(!toggled);
+
+  const toggleImage = () => {
+    setLiked(!liked);
+    if (!liked) {
+      props.handleLike();
+    } else {
+      props.handleUnlike();
+    }
+  };
+
+
 
   return (
     <div onClick={toggleImage}>
-      {toggled && <img src={whiteLikeButton} className="toggle-button" />}
-      {!toggled && <img src={likeButton} className="toggle-button" />}
+      {!liked && <img src={whiteLikeButton} className="toggle-button" />}
+      {liked && <img src={likeButton} className="toggle-button" />}
     </div>
   );
 };
