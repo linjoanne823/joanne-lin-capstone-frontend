@@ -8,10 +8,12 @@ const FavouriteRecipes = () => {
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
 
   const getFavouriteRecipes = () => {
-    axios.get("http://localhost:8080/recipes/favourites/").then((response) => {
-      setFavouriteRecipes(response.data);
-      console.log(response.data);
-    });
+    axios
+      .get(`http://localhost:8080/recipes/favourites/?userId=${1}`)
+      .then((response) => {
+        setFavouriteRecipes(response.data);
+        console.log(response.data);
+      });
   };
 
   useEffect(() => {
@@ -25,7 +27,12 @@ const FavouriteRecipes = () => {
           <div key={recipe.id} onClick={() => setActiveModalIndex(i)}>
             {activeModalIndex === i && (
               <UseModal closeModal={setActiveModalIndex}>
-                {<RecipeDetails recipeId={recipe.id} favouriteRecipeDetails={recipe} />}
+                {
+                  <RecipeDetails
+                    recipeId={recipe.id}
+                    favouriteRecipeDetails={recipe}
+                  />
+                }
               </UseModal>
             )}
             <img src={recipe.photo} style={{ width: "300px" }}></img>

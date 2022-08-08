@@ -46,14 +46,19 @@ const RecipeDetails = (props) => {
     );
   };
 
-  const handleUnlikeRecipes = (e) => {
-    // e.preventDefault();
-    // axios.post('http://localhost:8080/recipes/favourites',{
-    //     recipeDetails,
-    //     userId:1,
-    // },{
-    //     'Content-Type':"application/json"
-    // })
+  const handleUnlikeRecipes = () => {
+    axios.delete(
+      "http://localhost:8080/recipes/favourites",
+      {
+        data: {
+          recipeDetails,
+          userId: 1,
+        },
+      },
+      {
+        "Content-Type": "application/json",
+      }
+    );
   };
 
   return (
