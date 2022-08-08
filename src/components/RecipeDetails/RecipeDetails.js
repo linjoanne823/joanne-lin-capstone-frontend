@@ -8,24 +8,53 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import LikeButton from "../LikeButton/LikeButton";
 
 const RecipeDetails = (props) => {
-
   const [recipeDetails, setRecipeDetails] = useState({});
   const [showIngredients, setShowIngredients] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
+  const [userId, setUserId] = useState(1);
 
   const getSelectRecipe = () => {
-    axios.get(`http://localhost:8080/recipes/${props.recipeId}`).then((response) => {
-      setRecipeDetails(response.data);
-      console.log(recipeDetails);
-    });
+    axios
+      .get(`http://localhost:8080/recipes/${props.recipeId}?userId=${userId}`)
+      .then((response) => {
+        setRecipeDetails(response.data);
+        console.log(recipeDetails);
+      });
   };
 
   useEffect(() => {
-    getSelectRecipe();
+    if (props.favouriteRecipeDetails) {
+      setRecipeDetails(props.favouriteRecipeDetails);
+    } else {
+      getSelectRecipe();
+    }
     console.log(recipeDetails);
-  }, []);
+  }, {});
 
   const navigate = useNavigate();
+
+  const handleLikeRecipes = () => {
+    axios.post(
+      "http://localhost:8080/recipes/favourites",
+      {
+        recipeDetails,
+        userId: 1,
+      },
+      {
+        "Content-Type": "application/json",
+      }
+    );
+  };
+
+  const handleUnlikeRecipes = (e) => {
+    // e.preventDefault();
+    // axios.post('http://localhost:8080/recipes/favourites',{
+    //     recipeDetails,
+    //     userId:1,
+    // },{
+    //     'Content-Type':"application/json"
+    // })
+  };
 
   return (
     <div>
@@ -36,7 +65,11 @@ const RecipeDetails = (props) => {
           </button>
           <img src={recipeDetails.image} className="recipe__image"></img>
           <div className="recipe__text">
-            <LikeButton />
+            <LikeButton
+              handleLike={handleLikeRecipes}
+              handleUnlike={handleUnlikeRecipes}
+              recipeDetails={recipeDetails}
+            />
             <h2>{recipeDetails.title}</h2>
 
             <p>Servings: serves {recipeDetails.servings} people</p>
@@ -53,24 +86,26 @@ const RecipeDetails = (props) => {
               </ButtonGroup>
             </Box>
             {showIngredients ? (
-              <ul>
-                {recipeDetails.extendedIngredients.map((element) => {
-                  return <li className="recipe__text"> {element.original}</li>;
-                })}
-              </ul>
-            ) : null}
+              <>{recipeDetails.ingredients}</>
+            ) : //   <ul>
+            //     {recipeDetails.extendedIngredients.map((element) => {
+            //       return <li className="recipe__text"> {element.original}</li>;
+            //     })}
+            //   </ul>
+            null}
 
             {showInstructions ? (
-              <ol>
-                {recipeDetails.analyzedInstructions[0].steps.map((element) => {
-                  return (
-                    <li key={element.step.number} className="recipe__text">
-                      {element.step}
-                    </li>
-                  );
-                })}
-              </ol>
-            ) : null}
+              <>{recipeDetails.instructions}</>
+            ) : //   <ol>
+            //     {recipeDetails.analyzedInstructions[0].steps.map((element) => {
+            //       return (
+            //         <li key={element.step.number} className="recipe__text">
+            //           {element.step}
+            //         </li>
+            //       );
+            //     })}
+            //   </ol>
+            null}
           </div>
         </div>
       ) : (

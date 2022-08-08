@@ -39,7 +39,7 @@ const UserSignUp = (props) => {
     hideSignUpAndShowUserInfo();
     axios
       .post(
-        "http://localhost/8080/signup",
+        "http://localhost:8080/signup",
         {
           firstName: firstName,
           lastName: lastName,
