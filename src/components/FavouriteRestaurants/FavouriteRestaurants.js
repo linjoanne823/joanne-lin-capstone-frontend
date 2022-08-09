@@ -38,6 +38,7 @@ const FavouriteRestaurants = () => {
                     price={restaurant.price}
                     rating={restaurant.rating}
                     location={restaurant.location}
+                    restaurant={restaurant}
                     review={restaurant.reviews.map((element) => {
                       return (
                         <div>

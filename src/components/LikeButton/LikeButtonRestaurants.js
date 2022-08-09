@@ -4,7 +4,7 @@ import whiteLikeButton from "../../assets/icons/heart-917.svg";
 import "./LikeButton.scss";
 
 const LikeButton = (props) => {
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(true);
 
 
   const toggleImage = () => {

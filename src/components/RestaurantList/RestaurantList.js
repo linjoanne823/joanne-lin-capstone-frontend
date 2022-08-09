@@ -14,7 +14,6 @@ import { Button } from "@mui/material";
 import { IoMdRestaurant } from "react-icons/io";
 import DietFilter from "../Filters/DietFilter";
 
-
 const RestaurantList = (props) => {
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
   const [restaurants, setRestaurants] = useState([]);
@@ -23,7 +22,7 @@ const RestaurantList = (props) => {
   const [selectCategory, setSelectCategory] = useState("");
   const [dietaryRestriction, setDietaryRestriction] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
-  const [userId, setUserId] = useState(1)
+  const [userId, setUserId] = useState(1);
 
   const getRestaurants = () => {
     const fetchSetOfCategories = (businesses) => {
