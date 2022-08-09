@@ -4,14 +4,15 @@ import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 
 const FavouriteRestaurants = () => {
-  const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
+  //   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
-  const [userId, setUserId]=useState(1)
+  const [userId, setUserId] = useState(1);
   const getFavouriteRestaurants = () => {
     axios
       .get(`http://localhost:8080/restaurants/favourites/?userId=${userId}`)
       .then((response) => {
-        setFavouriteRestaurants(response.data);
+        setRestaurants(response.data);
         console.log(response.data);
       });
   };
@@ -21,7 +22,7 @@ const FavouriteRestaurants = () => {
   }, []);
   return (
     <div>
-      {favouriteRestaurants.map((restaurant, i) => {
+      {restaurants.map((restaurant, i) => {
         return (
           <div
             onClick={() => {
@@ -33,17 +34,25 @@ const FavouriteRestaurants = () => {
                 {
                   <RestaurantDetails
                     name={restaurant.name}
-                    photo={restaurant.photo}
+                    photo={restaurant.photos}
                     price={restaurant.price}
-                    rating={restaurant.ratings}
+                    rating={restaurant.rating}
                     location={restaurant.location}
-                    reviewText={restaurant.reviews}
+                    review={restaurant.reviews.map((element) => {
+                      return (
+                        <div>
+                          <p>{element.user.name}</p>
+                          <p>{"⭐".repeat(element.rating)}</p>
+                          <p>{element.text}</p>
+                        </div>
+                      );
+                    })}
                     categories={restaurant.categories}
                   />
                 }
               </UseModal>
             )}
-            <img src={restaurant.photo} style={{ width: "300px" }}></img>
+            <img src={restaurant.photos} style={{ width: "300px" }}></img>
             <p>{restaurant.name}</p>
           </div>
         );
