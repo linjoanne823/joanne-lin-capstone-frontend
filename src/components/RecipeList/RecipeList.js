@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import "./RecipeList.scss";
-import LikeButton from "../LikeButton/LikeButton";
+import LikeButton from "../LikeButton/LikeButtonRecipes";
 import UseModal from "../Modal/UseModal";
 import RecipeDetails from "../RecipeDetails/RecipeDetails";
 import ImageList from "@mui/material/ImageList";

@@ -3,7 +3,7 @@ import axios from "axios";
 // import "./RestaurantList.scss";
 import Dropdown from "react-dropdown";
 import { convertLength } from "@mui/material/styles/cssUtils";
-import LikeButton from "../LikeButton/LikeButton";
+import LikeButton from "../LikeButton/LikeButtonRecipes";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 import ImageList from "@mui/material/ImageList";
@@ -14,6 +14,7 @@ import { Button } from "@mui/material";
 import { IoMdRestaurant } from "react-icons/io";
 import DietFilter from "../Filters/DietFilter";
 
+
 const RestaurantList = (props) => {
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
   const [restaurants, setRestaurants] = useState([]);
@@ -22,6 +23,7 @@ const RestaurantList = (props) => {
   const [selectCategory, setSelectCategory] = useState("");
   const [dietaryRestriction, setDietaryRestriction] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
+  const [userId, setUserId] = useState(1)
 
   const getRestaurants = () => {
     const fetchSetOfCategories = (businesses) => {
@@ -47,7 +49,7 @@ const RestaurantList = (props) => {
 
     const config = {
       method: "POST",
-      url: "http://localhost:8080/restaurants/",
+      url: `http://localhost:8080/restaurants/?userId=${userId}`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -163,6 +165,7 @@ const RestaurantList = (props) => {
                         price={restaurant.price}
                         rating={restaurant.rating}
                         location={restaurant.location.address1}
+                        restaurant={restaurant}
                         review={restaurant.reviews.map((element) => {
                           return (
                             <div className="restaurants__review">

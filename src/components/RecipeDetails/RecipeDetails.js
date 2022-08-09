@@ -5,7 +5,7 @@ import "./RecipeDetails.scss";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import LikeButton from "../LikeButton/LikeButton";
+import LikeButton from "../LikeButton/LikeButtonRecipes";
 
 const RecipeDetails = (props) => {
   const [recipeDetails, setRecipeDetails] = useState({});

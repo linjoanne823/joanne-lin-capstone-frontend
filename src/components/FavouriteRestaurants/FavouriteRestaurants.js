@@ -6,9 +6,10 @@ import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 const FavouriteRestaurants = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
+  const [userId, setUserId]=useState(1)
   const getFavouriteRestaurants = () => {
     axios
-      .get("http://localhost:8080/restaurants/favourites")
+      .get(`http://localhost:8080/restaurants/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRestaurants(response.data);
         console.log(response.data);
