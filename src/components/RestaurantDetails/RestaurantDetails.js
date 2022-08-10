@@ -3,10 +3,11 @@ import LikeButton from "../LikeButton/LikeButtonRestaurants";
 import "./RestaurantDetails.scss";
 import axios from "axios";
 
+
 const RestaurantDetails = (props) => {
-    const restaurant=props.restaurant
-//   const restaurant = props.restaurant;
-  console.log("restaurant info here" + props.name)
+
+  const restaurant = props.restaurant;
+  console.log("restaurant info here" + props.name);
   const handleLikeRestaurants = () => {
     axios.post(
       "http://localhost:8080/restaurants/favourites",
@@ -34,7 +35,7 @@ const RestaurantDetails = (props) => {
       }
     );
   };
-  console.log(restaurant)
+  console.log(restaurant);
   return (
     <div className="restaurant">
       {props.name.length > 0 ? (

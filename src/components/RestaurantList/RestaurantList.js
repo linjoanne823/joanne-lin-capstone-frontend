@@ -57,9 +57,9 @@ const RestaurantList = (props) => {
 
     axios(config)
       .then((response) => {
-        console.log(response.data.search.business);
-        setRestaurants(response.data.search.business);
-        setCategories(fetchSetOfCategories(response.data.search.business));
+        console.log(response.data);
+        setRestaurants(response.data);
+        setCategories(fetchSetOfCategories(response.data));
         console.log(categories);
       })
       .catch((error) => {
