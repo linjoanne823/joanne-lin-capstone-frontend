@@ -5,7 +5,8 @@ import "./LikeButton.scss";
 
 const LikeButton = (props) => {
   const [liked, setLiked] = useState(props.recipeDetails.isLiked);
-
+  console.log("--------");
+  console.log(props.recipeDetails.isLiked);
 
   const toggleImage = () => {
     setLiked(!liked);
@@ -15,8 +16,6 @@ const LikeButton = (props) => {
       props.handleUnlike();
     }
   };
-
-
 
   return (
     <div onClick={toggleImage}>

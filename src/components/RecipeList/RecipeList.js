@@ -47,7 +47,6 @@ const RecipeList = (props) => {
   useEffect(() => {
     getRecipes();
   }, []);
-  console.log(recipes);
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();

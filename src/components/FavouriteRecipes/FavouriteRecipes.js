@@ -12,7 +12,6 @@ const FavouriteRecipes = () => {
       .get(`http://localhost:8080/recipes/favourites/?userId=${1}`)
       .then((response) => {
         setFavouriteRecipes(response.data);
-        console.log(response.data);
       });
   };
 

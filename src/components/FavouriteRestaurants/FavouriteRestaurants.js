@@ -3,7 +3,6 @@ import axios from "axios";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 
-
 const FavouriteRestaurants = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
@@ -13,7 +12,6 @@ const FavouriteRestaurants = () => {
       .get(`http://localhost:8080/restaurants/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRestaurants(response.data);
-        console.log(response.data);
       });
   };
 
@@ -38,7 +36,8 @@ const FavouriteRestaurants = () => {
                     price={restaurant.price}
                     rating={restaurant.rating}
                     location={restaurant.location}
-                    restaurant={restaurant}
+                    favouriteRestaurantDetails={restaurant}
+                    restaurantId={restaurant.restaurant_id}
                     review={restaurant.reviews.map((element) => {
                       return (
                         <div>

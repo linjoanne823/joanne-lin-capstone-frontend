@@ -18,18 +18,21 @@ const RecipeDetails = (props) => {
       .get(`http://localhost:8080/recipes/${props.recipeId}?userId=${userId}`)
       .then((response) => {
         setRecipeDetails(response.data);
-        console.log(recipeDetails);
+        // console.log(recipeDetails);
       });
   };
 
   useEffect(() => {
     if (props.favouriteRecipeDetails) {
       setRecipeDetails(props.favouriteRecipeDetails);
+      //if the recipe is favourited, then update recipe details 
+      //to the favourited recipe details 
     } else {
       getSelectRecipe();
+      //if not, just return the regular recipe details 
     }
     console.log(recipeDetails);
-  }, {});
+  }, {}); //it's an object because there is just one
 
   const navigate = useNavigate();
 

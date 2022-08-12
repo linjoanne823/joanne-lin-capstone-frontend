@@ -20,7 +20,7 @@ const MyProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(allergies);
+    // console.log(allergies);
     axios
       .put(
         "http://localhost:8080/users/",
@@ -39,7 +39,7 @@ const MyProfile = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        // console.log(response);
       });
   };
   return (

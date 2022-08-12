@@ -31,7 +31,7 @@ const RestaurantList = (props) => {
       businesses.forEach((business) => {
         //loops through all businesses and in each business
         //loops through all the categories
-        business.categories.forEach((category) => {
+        business.categories.split(",").forEach((category) => {
           if (!presetCategories.includes(category.title))
             //this excludes the preset ones
             categories.add(category.title); //and only adds those not in preset
@@ -57,10 +57,8 @@ const RestaurantList = (props) => {
 
     axios(config)
       .then((response) => {
-        console.log(response.data);
         setRestaurants(response.data);
         setCategories(fetchSetOfCategories(response.data));
-        console.log(categories);
       })
       .catch((error) => {
         console.log(error);
@@ -70,7 +68,6 @@ const RestaurantList = (props) => {
   useEffect(() => {
     getRestaurants();
   }, []);
-  console.log(restaurants);
 
   const handleLocationChange = (e) => {
     e.preventDefault();
@@ -90,10 +87,7 @@ const RestaurantList = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     getRestaurants();
-    console.log(restaurants);
   };
-
-  console.log(categories);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -132,15 +126,15 @@ const RestaurantList = (props) => {
       >
         {restaurants
           .filter((restaurant) => {
-            return restaurant.categories.some((category) => {
-              return category.title === selectCategory || selectCategory === "";
+            return restaurant.categories.split(",").some((category) => {
+              return category === selectCategory || selectCategory === "";
             });
           })
           .map((restaurant, i) => {
             return (
               <ImageListItem
                 className="restaurants__card"
-                key={restaurant.id}
+                key={i}
                 // style={{
                 //   backgroundImage: `url(${restaurant.photos})`,
                 //   backgroundSize: "18.125rem 12.5rem",
@@ -165,7 +159,9 @@ const RestaurantList = (props) => {
                         rating={restaurant.rating}
                         location={restaurant.location.address1}
                         restaurant={restaurant}
+                        restaurantId={restaurant.restaurant_id}
                         review={restaurant.reviews.map((element) => {
+                          console.log("hello + " + restaurant.restaurant_id);
                           return (
                             <div className="restaurants__review">
                               <p>{element.user.name}</p>
@@ -175,7 +171,8 @@ const RestaurantList = (props) => {
                           );
                         })}
                         categories={restaurant.categories
-                          .map((element) => element.title)
+                          .split(",")
+                          .map((element) => element)
                           .join(" / ")}
                       />
                     }
