@@ -50,18 +50,10 @@ const RecipeDetails = (props) => {
   };
 
   const handleUnlikeRecipes = () => {
-    axios.delete(
-      "http://localhost:8080/recipes/favourites",
-      {
-        data: {
-          recipeDetails,
-          userId: 1,
-        },
-      },
-      {
-        "Content-Type": "application/json",
-      }
-    );
+     const recipeId = recipeDetails.recipe_id
+   axios.delete(
+      `http://localhost:8080/recipes/favourites/${recipeId}?userId=${userId}`,
+    )
   };
 
   return (

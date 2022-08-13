@@ -44,16 +44,7 @@ const RestaurantDetails = (props) => {
 
   const handleUnlikeRestaurants = () => {
     axios.delete(
-      `http://localhost:8080/restaurants/favourites`,
-      {
-        data: {
-          restaurantDetails,
-          userId: 1,
-        },
-      },
-      {
-        "Content-Type": "application/json",
-      }
+      `http://localhost:8080/restaurants/favourites/${props.restaurantId}?userId=${userId}`,
     );
   };
   //   console.log(restaurant);
