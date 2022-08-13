@@ -1,38 +1,42 @@
 import React, { useState } from "react";
 import FavouriteRecipes from "../FavouriteRecipes/FavouriteRecipes";
 import FavouriteRestaurants from "../FavouriteRestaurants/FavouriteRestaurants";
-import "./FavouritesSection.scss";
+import { Box, Typography } from "@mui/material";
 
 const FavouritesSection = () => {
   const [showRecipes, setShowRecipes] = useState(true);
   const [showRestaurants, setShowRestaurants] = useState(false);
   return (
-    <div className="favourites-section">
-      <div className="favourites-section__inner-container">
-        <h2
-          className="favourites-section__title"
+    <Box sx={{ display: "flex", flexDirection: "row", gap: "3rem" }}>
+      <Box sx={{ width: "40vw" }}>
+        <Typography
+          variant="h6"
           onClick={() => {
             setShowRecipes(!showRecipes);
             setShowRestaurants(!showRestaurants);
           }}
         >
-          Fav Recipes
-        </h2>
+          <Box sx={{ fontWeight: "600", textDecoration: "underline" }}>
+            Favourite Recipes
+          </Box>
+        </Typography>
         {showRecipes && <FavouriteRecipes />}
-      </div>
-      <div className="favourites-section__inner-container">
-        <h2
-          className="favourites-section__title"
+      </Box>
+      <Box sx={{ width: "40vw" }}>
+        <Typography
+          variant="h6"
           onClick={() => {
             setShowRestaurants(!showRestaurants);
             setShowRecipes(!showRecipes);
           }}
         >
-          Fav Restaurants
-        </h2>
+          <Box sx={{ fontWeight: "600", textDecoration: "underline" }}>
+            Favourite Restaurants
+          </Box>
+        </Typography>
         {showRestaurants && <FavouriteRestaurants />}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

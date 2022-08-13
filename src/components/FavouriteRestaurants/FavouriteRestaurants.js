@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
+import { Typography } from "@mui/material";
 
 const FavouriteRestaurants = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
@@ -53,7 +54,7 @@ const FavouriteRestaurants = () => {
               </UseModal>
             )}
             <img src={restaurant.photos} style={{ width: "300px" }}></img>
-            <p>{restaurant.name}</p>
+            <Typography>{restaurant.name}</Typography>
           </div>
         );
       })}

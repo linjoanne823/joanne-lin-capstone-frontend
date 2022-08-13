@@ -3,12 +3,9 @@ import likeButton from "../../assets/icons/heart-992.svg";
 import whiteLikeButton from "../../assets/icons/heart-917.svg";
 import "./LikeButton.scss";
 import { Box } from "@mui/material";
-import { IoMdListBox } from "react-icons/io";
 
 const LikeButtonRestaurant = (props) => {
   const [liked, setLiked] = useState(props.restaurantDetails.isLiked);
-  console.log("-------");
-  console.log(props.restaurantDetails.isLiked);
 
   const toggleImage = () => {
     setLiked(!liked);

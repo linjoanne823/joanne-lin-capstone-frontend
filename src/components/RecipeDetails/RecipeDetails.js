@@ -18,7 +18,6 @@ const RecipeDetails = (props) => {
       .get(`http://localhost:8080/recipes/${props.recipeId}?userId=${userId}`)
       .then((response) => {
         setRecipeDetails(response.data);
-        // console.log(recipeDetails);
       });
   };
 
@@ -31,7 +30,6 @@ const RecipeDetails = (props) => {
       getSelectRecipe();
       //if not, just return the regular recipe details 
     }
-    console.log(recipeDetails);
   }, {}); //it's an object because there is just one
 
   const navigate = useNavigate();
@@ -74,7 +72,6 @@ const RecipeDetails = (props) => {
 
             <p>Servings: serves {recipeDetails.servings} people</p>
             <p>Ready in: {recipeDetails.readyInMinutes} minutes</p>
-            {console.log(recipeDetails)}
             <Box>
               <ButtonGroup>
                 <Button onClick={() => setShowIngredients(!showIngredients)}>

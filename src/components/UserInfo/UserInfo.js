@@ -34,7 +34,6 @@ const UserInfo = (props) => {
         [e.target.name]: !dietaryRestrictions[e.target.name],
       })
     );
-    console.log(dietaryRestrictions);
   };
 
   const handleAllergiesChange = (e) => {
@@ -44,7 +43,6 @@ const UserInfo = (props) => {
         [e.target.name]: !allergies[e.target.name],
       })
     );
-    console.log(allergies);
   };
 
   const handleCityChange = (e) => {

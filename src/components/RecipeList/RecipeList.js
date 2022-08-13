@@ -65,7 +65,6 @@ const RecipeList = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("The diet is " + diet);
     getRecipes();
   };
 
