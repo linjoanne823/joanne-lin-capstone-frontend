@@ -2,16 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
+import {
+  Typography,
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+} from "@mui/material";
 
 const FavouriteRestaurants = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
+  const [userId, setUserId] = useState(1);
   const getFavouriteRestaurants = () => {
     axios
-      .get("http://localhost:8080/restaurants/favourites")
+      .get(`http://localhost:8080/restaurants/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRestaurants(response.data);
-        console.log(response.data);
       });
   };
 
@@ -19,10 +25,16 @@ const FavouriteRestaurants = () => {
     getFavouriteRestaurants();
   }, []);
   return (
-    <div>
+    <ImageList
+      sx={{
+        mb: 8,
+        gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))!important",
+        marginBottom: 0,
+      }}
+    >
       {favouriteRestaurants.map((restaurant, i) => {
         return (
-          <div
+          <ImageListItem
             onClick={() => {
               setActiveModalIndex(i);
             }}
@@ -32,22 +44,36 @@ const FavouriteRestaurants = () => {
                 {
                   <RestaurantDetails
                     name={restaurant.name}
-                    photo={restaurant.photo}
+                    photo={restaurant.photos}
                     price={restaurant.price}
-                    rating={restaurant.ratings}
+                    rating={restaurant.rating}
                     location={restaurant.location}
-                    reviewText={restaurant.reviews}
+                    favouriteRestaurantDetails={restaurant}
+                    restaurantId={restaurant.restaurant_id}
+                    review={restaurant.reviews.map((element) => {
+                      return (
+                        <div>
+                          <p>{element.user.name}</p>
+                          <p>{"⭐".repeat(element.rating)}</p>
+                          <p>{element.text}</p>
+                        </div>
+                      );
+                    })}
                     categories={restaurant.categories}
                   />
                 }
               </UseModal>
             )}
-            <img src={restaurant.photo} style={{ width: "300px" }}></img>
-            <p>{restaurant.name}</p>
-          </div>
+            <img
+              src={`${restaurant.photos}?w=300&fit=crop&auto=format`}
+              srcSet={`${restaurant.photos}?w=300&fit=crop&auto=format&dpr=2 2x`}
+              loading="lazy"
+            />
+            <ImageListItemBar title={restaurant.name}></ImageListItemBar>
+          </ImageListItem>
         );
       })}
-    </div>
+    </ImageList>
   );
 };
 

@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import "./RestaurantList.scss";
-import Dropdown from "react-dropdown";
-import { convertLength } from "@mui/material/styles/cssUtils";
-import LikeButton from "../LikeButton/LikeButton";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
-import { IoMdRestaurant } from "react-icons/io";
+import {
+  Button,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
+  Typography,
+} from "@mui/material";
 import DietFilter from "../Filters/DietFilter";
+import LocationSearch from "../Filters/LocationSearch";
 
 const RestaurantList = (props) => {
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
@@ -20,8 +23,9 @@ const RestaurantList = (props) => {
   const [location, setLocation] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
-  const [dietaryRestriction, setDietaryRestriction] = useState("");
+  const [diet, setDiet] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
+  const [userId, setUserId] = useState(1);
 
   const getRestaurants = () => {
     const fetchSetOfCategories = (businesses) => {
@@ -30,24 +34,30 @@ const RestaurantList = (props) => {
       businesses.forEach((business) => {
         //loops through all businesses and in each business
         //loops through all the categories
-        business.categories.forEach((category) => {
-          if (!presetCategories.includes(category.title))
+        business.categories.split(",").forEach((category) => {
+          if (!presetCategories.includes(category))
             //this excludes the preset ones
-            categories.add(category.title); //and only adds those not in preset
+            categories.add(category); //and only adds those not in preset
         });
       });
       return [...categories].sort(); //will convert Set back into an array and sort it alphabetically
     };
 
+    const spoonacularToYelpMap = {
+      "Gluten-Free": "gluten_free",
+      Vegan: "vegan",
+      Vegetarian: "vegatarian",
+    };
+
     const data = JSON.stringify({
       term: "restaurant",
       location: location || "Vancouver",
-      categories: dietaryRestriction,
+      categories: spoonacularToYelpMap[diet] || "",
     });
 
     const config = {
       method: "POST",
-      url: "http://localhost:8080/restaurants/",
+      url: `http://localhost:8080/restaurants/?userId=${userId}`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -56,10 +66,8 @@ const RestaurantList = (props) => {
 
     axios(config)
       .then((response) => {
-        console.log(response.data.search.business);
-        setRestaurants(response.data.search.business);
-        setCategories(fetchSetOfCategories(response.data.search.business));
-        console.log(categories);
+        setRestaurants(response.data);
+        setCategories(fetchSetOfCategories(response.data));
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +77,6 @@ const RestaurantList = (props) => {
   useEffect(() => {
     getRestaurants();
   }, []);
-  console.log(restaurants);
 
   const handleLocationChange = (e) => {
     e.preventDefault();
@@ -78,7 +85,7 @@ const RestaurantList = (props) => {
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
-    return setDietaryRestriction(e.target.value);
+    return setDiet(e.target.value);
   };
 
   const handleSelectCategories = (e) => {
@@ -89,39 +96,53 @@ const RestaurantList = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     getRestaurants();
-    console.log(restaurants);
   };
-
-  console.log(categories);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
-        {/* <form onSubmit={handleSubmit}> */}
-        <DietFilter
-          diet={dietaryRestriction}
-          handleSelectDietaryRestriction={handleSelectDietaryRestriction}
-        />
-        {/* <input
-            type="text"
-            placeholder="Enter a different city"
-            onChange={handleLocationChange}
-          ></input> */}
-        {/* </form> */}
-        <button onClick={handleSubmit}>Search</button>
-        <form onSubmit={handleSubmit}>
-          <select onChange={handleSelectCategories}>
+   
+        <FormControl onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"row"}}>
+          <DietFilter
+            diet={diet}
+            handleSelectDietaryRestriction={handleSelectDietaryRestriction}
+          />
+          <LocationSearch
+            location={location}
+            handleLocationChange={handleLocationChange}
+          />
+        </FormControl>
+
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          size="small"
+          style={{ margin: "1rem" }}
+          onClick={handleSubmit}
+        >
+          Search!
+        </Button>
+        <FormControl sx={{ m: 1, minWidth: 200 }} onSubmit={handleSubmit}>
+          <InputLabel>Categories</InputLabel>
+          <Select
+            labelId="demo-simple-select-autowidth-label"
+            id="demo-simple-select-autowidth"
+            label="Categories"
+            onChange={handleSelectCategories}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
             {categories.map((category, index) => {
               return (
-                <option key={index} value={category}>
+                <MenuItem key={index} value={category}>
                   {category}
-                </option>
+                </MenuItem>
               );
             })}
-          </select>
-        </form>
+          </Select>
+        </FormControl>
       </Box>
-      <button onClick={handleSubmit}>Filter</button>
       <ImageList
         sx={{
           mb: 8,
@@ -131,20 +152,15 @@ const RestaurantList = (props) => {
       >
         {restaurants
           .filter((restaurant) => {
-            return restaurant.categories.some((category) => {
-              return category.title === selectCategory || selectCategory === "";
+            return restaurant.categories.split(",").some((category) => {
+              return category === selectCategory || selectCategory === "";
             });
           })
           .map((restaurant, i) => {
             return (
               <ImageListItem
                 className="restaurants__card"
-                key={restaurant.id}
-                // style={{
-                //   backgroundImage: `url(${restaurant.photos})`,
-                //   backgroundSize: "18.125rem 12.5rem",
-                //   backgroundRepeat: "no-repeat",
-                // }}
+                key={i}
                 onClick={() => setActiveModalIndex(i)}
               >
                 <img
@@ -154,7 +170,6 @@ const RestaurantList = (props) => {
                   loading="lazy"
                 />
                 {activeModalIndex === i && (
-                  // <div onClick={() => props.closeModal(-1)}>
                   <UseModal closeModal={setActiveModalIndex}>
                     {
                       <RestaurantDetails
@@ -163,22 +178,26 @@ const RestaurantList = (props) => {
                         price={restaurant.price}
                         rating={restaurant.rating}
                         location={restaurant.location.address1}
+                        restaurant={restaurant}
+                        restaurantId={restaurant.restaurant_id}
                         review={restaurant.reviews.map((element) => {
                           return (
-                            <div className="restaurants__review">
-                              <p>{element.user.name}</p>
-                              <p>{"⭐".repeat(element.rating)}</p>
-                              <p>{element.text}</p>
-                            </div>
+                            <Box sx={{ borderBottom: "1px solid black" }}>
+                              <Typography>{element.user.name}</Typography>
+                              <Typography>
+                                {"⭐".repeat(element.rating)}
+                              </Typography>
+                              <Typography>{element.text}</Typography>
+                            </Box>
                           );
                         })}
                         categories={restaurant.categories
-                          .map((element) => element.title)
+                          .split(",")
+                          .map((element) => element)
                           .join(" / ")}
                       />
                     }
                   </UseModal>
-                  // </div>
                 )}
                 <ImageListItemBar
                   className="recipes__text"

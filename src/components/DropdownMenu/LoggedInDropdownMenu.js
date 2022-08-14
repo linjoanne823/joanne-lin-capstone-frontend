@@ -10,6 +10,7 @@ import { MdOutlineExplore } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiLogOutCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 const LoggedInDropdownMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");
@@ -32,7 +33,9 @@ const LoggedInDropdownMenu = () => {
             <MdOutlineExplore />
           </DropdownItem>
           <DropdownItem>
-            <AiOutlineHeart />
+            <Link to ={"/favourites"}>
+              <AiOutlineHeart />
+            </Link>
           </DropdownItem>
           <DropdownItem>
             <BiLogOutCircle />
@@ -50,10 +53,14 @@ const LoggedInDropdownMenu = () => {
             <IoIosArrowDropleft />
           </DropdownItem>
           <DropdownItem>
-            <Link to={"/recipes"}>Find Recipes</Link>
+            <Link to={"/recipes"}>
+              <Typography>Find Recipes</Typography>
+            </Link>
           </DropdownItem>
           <DropdownItem>
-            <Link to={"/restaurants"}>Find Restaurants</Link>
+            <Link to={"/restaurants"}>
+              <Typography>Find Restaurants</Typography>
+            </Link>
           </DropdownItem>
         </div>
       </CSSTransition>

@@ -5,7 +5,7 @@ import "./RecipeDetails.scss";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import LikeButton from "../LikeButton/LikeButton";
+import LikeButton from "../LikeButton/LikeButtonRecipes";
 
 const RecipeDetails = (props) => {
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -18,18 +18,19 @@ const RecipeDetails = (props) => {
       .get(`http://localhost:8080/recipes/${props.recipeId}?userId=${userId}`)
       .then((response) => {
         setRecipeDetails(response.data);
-        console.log(recipeDetails);
       });
   };
 
   useEffect(() => {
     if (props.favouriteRecipeDetails) {
       setRecipeDetails(props.favouriteRecipeDetails);
+      //if the recipe is favourited, then update recipe details 
+      //to the favourited recipe details 
     } else {
       getSelectRecipe();
+      //if not, just return the regular recipe details 
     }
-    console.log(recipeDetails);
-  }, {});
+  }, {}); //it's an object because there is just one
 
   const navigate = useNavigate();
 
@@ -46,14 +47,11 @@ const RecipeDetails = (props) => {
     );
   };
 
-  const handleUnlikeRecipes = (e) => {
-    // e.preventDefault();
-    // axios.post('http://localhost:8080/recipes/favourites',{
-    //     recipeDetails,
-    //     userId:1,
-    // },{
-    //     'Content-Type':"application/json"
-    // })
+  const handleUnlikeRecipes = () => {
+     const recipeId = recipeDetails.recipe_id
+   axios.delete(
+      `http://localhost:8080/recipes/favourites/${recipeId}?userId=${userId}`,
+    )
   };
 
   return (
@@ -74,7 +72,6 @@ const RecipeDetails = (props) => {
 
             <p>Servings: serves {recipeDetails.servings} people</p>
             <p>Ready in: {recipeDetails.readyInMinutes} minutes</p>
-            {console.log(recipeDetails)}
             <Box>
               <ButtonGroup>
                 <Button onClick={() => setShowIngredients(!showIngredients)}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import "./RecipeList.scss";
-import LikeButton from "../LikeButton/LikeButton";
+import LikeButton from "../LikeButton/LikeButtonRecipes";
 import UseModal from "../Modal/UseModal";
 import RecipeDetails from "../RecipeDetails/RecipeDetails";
 import ImageList from "@mui/material/ImageList";
@@ -47,7 +47,6 @@ const RecipeList = (props) => {
   useEffect(() => {
     getRecipes();
   }, []);
-  console.log(recipes);
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
@@ -66,7 +65,6 @@ const RecipeList = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("The diet is " + diet);
     getRecipes();
   };
 
