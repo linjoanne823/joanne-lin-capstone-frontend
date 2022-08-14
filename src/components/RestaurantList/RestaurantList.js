@@ -170,7 +170,7 @@ const RestaurantList = (props) => {
                   loading="lazy"
                 />
                 {activeModalIndex === i && (
-                  <UseModal closeModal={setActiveModalIndex}>
+                  <UseModal closeModal={() => setActiveModalIndex(-1)}>
                     {
                       <RestaurantDetails
                         name={restaurant.name}

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import UseModal from "../Modal/UseModal";
 import UserInfo from "../UserInfo/UserInfo";
 import Button from "@mui/material/Button";
-import "./UserSignUp.scss";
 import axios from "axios";
+import { Box, TextField } from "@mui/material";
 
 const UserSignUp = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -61,53 +61,43 @@ const UserSignUp = (props) => {
         {showSignUpForm ? (
           <div>
             <h2>Sign Up</h2>
-            <form>
-              <div className="signup__input-container">
-                <label className="signup__label">First Name:</label>
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  name="firstName"
-                  onChange={handleChange}
-                  className="signup__input"
-                ></input>
-              </div>
-              <div className="signup__input-container">
-                <label className="signup__label">Last Name:</label>
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  name="lastName"
-                  onChange={handleChange}
-                  className="signup__input"
-                ></input>
-              </div>
-              <div className="signup__input-container">
-                <label className="signup__label">Email:</label>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  onChange={handleChange}
-                  className="signup__input"
-                ></input>
-              </div>
-              <div className="signup__input-container">
-                <label className="signup__label">Password:</label>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  onChange={handleChange}
-                  className="signup__input"
-                ></input>
-              </div>
-            </form>
-            <div className="signup__button">
+            <Box component="form" autoComplete="off" noValidate>
+              <TextField
+                name="firstName"
+                label="First Name"
+                onChange={handleChange}
+                style={{ marginBottom: "1rem", width: "25rem" }}
+                // className="signup__input"
+              ></TextField>
+              <TextField
+                name="lastName"
+                label="Last Name"
+                onChange={handleChange}
+                style={{ marginBottom: "1rem", width: "25rem" }}
+              ></TextField>
+              <TextField
+                type="email"
+                placeholder="Email"
+                name="email"
+                label="Email Address"
+                onChange={handleChange}
+                style={{ marginBottom: "1rem", width: "25rem" }}
+              ></TextField>
+              <TextField
+                type="password"
+                id="outlined-password-input"
+                placeholder="Password"
+                name="password"
+                label="Password"
+                onChange={handleChange}
+                style={{ marginBottom: "1rem", width: "25rem" }}
+              ></TextField>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Button variant="outlined" onClick={handleSubmit}>
                 Create Account
               </Button>
-            </div>
+            </Box>
           </div>
         ) : null}
         {goToUserInfo && <UserInfo />}

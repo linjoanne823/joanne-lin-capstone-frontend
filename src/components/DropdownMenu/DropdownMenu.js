@@ -6,7 +6,7 @@ import leftArrow from "../../assets/icons/left-arrow-back.svg";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 import UseModal from "../Modal/UseModal";
-import UserSignUp from "../UserSignUp/UserSignUp";
+import UserSignUp from "../User/UserSignUp";
 
 const DropdownMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");
@@ -45,7 +45,11 @@ const DropdownMenu = () => {
               }}
             >
               {activeModal && (
-                <UseModal closeModal={setActiveModal}>
+                <UseModal
+                  closeModal={() => {
+                    setActiveModal(!activeModal);
+                  }}
+                >
                   <UserSignUp />
                 </UseModal>
               )}
