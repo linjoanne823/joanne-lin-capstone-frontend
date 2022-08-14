@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
-import { Typography } from "@mui/material";
+import {
+  Typography,
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+} from "@mui/material";
 
 const FavouriteRestaurants = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
@@ -20,10 +25,16 @@ const FavouriteRestaurants = () => {
     getFavouriteRestaurants();
   }, []);
   return (
-    <div>
+    <ImageList
+      sx={{
+        mb: 8,
+        gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))!important",
+        marginBottom: 0,
+      }}
+    >
       {favouriteRestaurants.map((restaurant, i) => {
         return (
-          <div
+          <ImageListItem
             onClick={() => {
               setActiveModalIndex(i);
             }}
@@ -53,12 +64,16 @@ const FavouriteRestaurants = () => {
                 }
               </UseModal>
             )}
-            <img src={restaurant.photos} style={{ width: "300px" }}></img>
-            <Typography>{restaurant.name}</Typography>
-          </div>
+            <img
+              src={`${restaurant.photos}?w=300&fit=crop&auto=format`}
+              srcSet={`${restaurant.photos}?w=300&fit=crop&auto=format&dpr=2 2x`}
+              loading="lazy"
+            />
+            <ImageListItemBar title={restaurant.name}></ImageListItemBar>
+          </ImageListItem>
         );
       })}
-    </div>
+    </ImageList>
   );
 };
 
