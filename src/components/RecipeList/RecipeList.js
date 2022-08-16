@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-// import "./RecipeList.scss";
 import LikeButton from "../LikeButton/LikeButtonRecipes";
 import UseModal from "../Modal/UseModal";
 import RecipeDetails from "../RecipeDetails/RecipeDetails";
@@ -12,20 +11,22 @@ import { Button } from "@mui/material";
 import DietFilter from "../Filters/DietFilter";
 import CuisineFilter from "../Filters/CuisineFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
+import { UserContext } from "../../contexts/UserContext";
 
-const RecipeList = (props) => {
+const RecipeList = () => {
+  const { dietContext, setDietContext, allergiesContext, setAllergiesContext } = useContext(UserContext);
   const [recipes, setRecipes] = useState([]);
-  const [diet, setDiet] = useState("");
-  const [intolerances, setIntolerances] = useState([]);
+  // const  [diet, setDiet] = useState("");
+  // const [intolerances, setIntolerances] = useState([]);
   const [cuisine, setCuisine] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
   const [noRecipesFound, setNoRecipesFound] = useState(false);
 
   const buildQueryString = () => {
     let queryString = "";
-    if (diet) queryString += `diet=${diet}&`;
+    if (dietContext) queryString += `diet=${dietContext}&`;
 
-    if (intolerances) queryString += `intolerances=${intolerances}&`;
+    if (allergiesContext) queryString += `intolerances=${allergiesContext}&`;
 
     if (cuisine) queryString += `cuisine=${cuisine}`;
 
@@ -50,12 +51,12 @@ const RecipeList = (props) => {
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
-    return setDiet(e.target.value);
+    return setDietContext(e.target.value);
   };
 
   const handleSelectAllergies = (e) => {
     e.preventDefault();
-    return setIntolerances(e.target.value);
+    return setAllergiesContext(e.target.value);
   };
 
   const handleSelectCuisine = (e) => {
@@ -72,11 +73,11 @@ const RecipeList = (props) => {
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
         <DietFilter
-          diet={diet}
+          diet={dietContext}
           handleSelectDietaryRestriction={handleSelectDietaryRestriction}
         />
         <AllergyFilter
-          intolerances={intolerances}
+          intolerances={allergiesContext}
           handleSelectAllergies={handleSelectAllergies}
         />
         <CuisineFilter

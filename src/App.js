@@ -21,7 +21,7 @@ function App() {
     <div>
       <UserContext.Provider value={{ userId, setUserId, allergiesContext, setAllergiesContext,
       locationContext, setLocationContext, dietContext, setDietContext, emailContext, setEmailContext,
-      firstNameContext, setFirstNameContext, lastNameContext, setLastNameContext }}>
+      firstNameContext, setFirstNameContext, lastNameContext, setLastNameContext, user:"foo" }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" exact element={<Home />} />
