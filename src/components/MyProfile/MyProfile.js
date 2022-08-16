@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./MyProfile.scss";
 import Select from "react-select";
 import DietOptions from "../Options/DietOptions";
@@ -6,8 +6,23 @@ import TextField from "@mui/material/TextField";
 import AllergyOptions from "../Options/AllergyOptions";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { UserContext } from "../../contexts/UserContext";
 
 const MyProfile = () => {
+  const {
+    allergiesContext,
+    setAllergiesContext,
+    locationContext,
+    setLocationContext,
+    dietContext,
+    setDietContext,
+    emailContext,
+    setEmailContext,
+    firstNameContext,
+    setFirstNameContext,
+    lastNameContext,
+    setLastNameContext,
+  } = useContext(UserContext);
   const [firstName, setFirstName] = useState("Joanne");
   const [lastName, setLastName] = useState("Lin");
   const [email, setEmail] = useState("joanne@gmail.com");

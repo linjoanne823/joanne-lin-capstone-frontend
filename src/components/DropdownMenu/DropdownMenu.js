@@ -6,11 +6,14 @@ import leftArrow from "../../assets/icons/left-arrow-back.svg";
 import { AiOutlineHome } from "react-icons/ai";
 import { AiOutlineUser } from "react-icons/ai";
 import UseModal from "../Modal/UseModal";
-import UserSignUp from "../UserSignUp/UserSignUp";
+import UserSignUp from "../User/UserSignUp";
+import UserLogin from "../User/UserLogin";
 
 const DropdownMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");
-  const [activeModal, setActiveModal] = useState(false);
+  const [activeSignUpModal, setActiveSignUpModal] = useState(false);
+  const [activeLogInModal, setActiveLogInModal] = useState(false);
+
   return (
     <div className="dropdown">
       <CSSTransition
@@ -41,18 +44,39 @@ const DropdownMenu = () => {
           <DropdownItem>
             <div
               onClick={() => {
-                setActiveModal(!activeModal);
+                setActiveSignUpModal(!activeSignUpModal);
               }}
             >
-              {activeModal && (
-                <UseModal closeModal={setActiveModal}>
+              {activeSignUpModal && (
+                <UseModal
+                  closeModal={() => {
+                    setActiveSignUpModal(!activeSignUpModal);
+                  }}
+                >
                   <UserSignUp />
                 </UseModal>
               )}
               Sign up
             </div>
           </DropdownItem>
-          <DropdownItem>Log in</DropdownItem>
+          <DropdownItem>
+            <div
+              onClick={() => {
+                setActiveLogInModal(!activeLogInModal);
+              }}
+            >
+              {activeLogInModal && (
+                <UseModal
+                  closeModal={() => {
+                    setActiveLogInModal(!activeLogInModal);
+                  }}
+                >
+                  <UserLogin />
+                </UseModal>
+              )}
+              Log In
+            </div>
+          </DropdownItem>
           <DropdownItem>Test User</DropdownItem>
         </div>
       </CSSTransition>

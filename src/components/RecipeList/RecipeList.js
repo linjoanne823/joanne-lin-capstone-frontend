@@ -118,7 +118,7 @@ const RecipeList = (props) => {
                   />
 
                   {activeModalIndex === i && (
-                    <UseModal closeModal={setActiveModalIndex}>
+                    <UseModal closeModal={() => setActiveModalIndex(-1)}>
                       {<RecipeDetails recipeId={recipe.id} />}
                     </UseModal>
                   )}
