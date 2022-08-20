@@ -34,7 +34,7 @@ const LoggedInDropdownMenu = () => {
           </DropdownItem>
           <DropdownItem>
             <Link to ={"/favourites"}>
-              <AiOutlineHeart />
+              <Typography>Favourites</Typography>
             </Link>
           </DropdownItem>
           <DropdownItem>

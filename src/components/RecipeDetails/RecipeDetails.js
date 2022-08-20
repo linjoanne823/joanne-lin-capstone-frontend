@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import "./RecipeDetails.scss";
@@ -6,12 +6,13 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import LikeButton from "../LikeButton/LikeButtonRecipes";
+import { UserContext } from "../../contexts/UserContext";
 
 const RecipeDetails = (props) => {
   const [recipeDetails, setRecipeDetails] = useState({});
   const [showIngredients, setShowIngredients] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
-  const [userId, setUserId] = useState(1);
+  const { userId } = useContext(UserContext);
 
   const getSelectRecipe = () => {
     axios
@@ -24,11 +25,11 @@ const RecipeDetails = (props) => {
   useEffect(() => {
     if (props.favouriteRecipeDetails) {
       setRecipeDetails(props.favouriteRecipeDetails);
-      //if the recipe is favourited, then update recipe details 
-      //to the favourited recipe details 
+      //if the recipe is favourited, then update recipe details
+      //to the favourited recipe details
     } else {
       getSelectRecipe();
-      //if not, just return the regular recipe details 
+      //if not, just return the regular recipe details
     }
   }, {}); //it's an object because there is just one
 
@@ -39,7 +40,7 @@ const RecipeDetails = (props) => {
       "http://localhost:8080/recipes/favourites",
       {
         recipeDetails,
-        userId: 1,
+        userId: userId,
       },
       {
         "Content-Type": "application/json",
@@ -48,10 +49,10 @@ const RecipeDetails = (props) => {
   };
 
   const handleUnlikeRecipes = () => {
-     const recipeId = recipeDetails.recipe_id
-   axios.delete(
-      `http://localhost:8080/recipes/favourites/${recipeId}?userId=${userId}`,
-    )
+    const recipeId = recipeDetails.recipe_id;
+    axios.delete(
+      `http://localhost:8080/recipes/favourites/${recipeId}?userId=${userId}`
+    );
   };
 
   return (

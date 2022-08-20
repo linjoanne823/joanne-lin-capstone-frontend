@@ -9,6 +9,7 @@ import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
 import DietFilter from "../Filters/DietFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
+import { Typography } from "@mui/material";
 
 const MyProfile = () => {
   const {
@@ -37,34 +38,34 @@ const MyProfile = () => {
   // const [dietaryRestriction, setDietaryRestriction] = useState("");
   // const [allergies, setAllergies] = useState([]);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .put(
-  //       "http://localhost:8080/users/",
-  //       {
-  //         firstNameContext,
-  //         lastNameContext,
-  //         emailContext,
-  //         password,
-  //         locationContext,
-  //         userId,
-  //         dietContext,
-  //         allergiesContext,
-  //       },
-  //       {
-  //         "Content-Type": "application/json",
-  //       }
-  //     )
-  //     .then((response) => {
-  //       // console.log(response);
-  //     });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(
+        `http://localhost:8080/users/${userId}`,
+        {
+          firstNameContext,
+          lastNameContext,
+          emailContext,
+          // password,
+          locationContext,
+          userId,
+          dietContext,
+          allergiesContext,
+        },
+        {
+          "Content-Type": "application/json",
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      });
+  };
 
   return (
     <div className="my-profile">
       <div>
-        <h2 className="my-profile__title">Your Profile</h2>
+        <Typography style={{fontSize:"1.5rem", paddingLeft:"1rem"}}>My Profile</Typography>
 
         <div className="my-profile__container">
           <div className="my-profile__input-container">
@@ -106,7 +107,7 @@ const MyProfile = () => {
             />
           </div> */}
           <div>
-            <TextField
+            <TextField style={{marginLeft:"1rem"}}
               id="outlined-basic"
               label="City"
               type="text"
@@ -118,9 +119,9 @@ const MyProfile = () => {
           <AllergyFilter intolerances={allergiesContext} />
         </div>
         <div className="my-profile__button">
-          {/* <Button variant="outlined" onClick={handleSubmit}>
+          <Button variant="outlined" onClick={handleSubmit}>
             Save
-          </Button> */}
+          </Button>
         </div>
       </div>
     </div>
