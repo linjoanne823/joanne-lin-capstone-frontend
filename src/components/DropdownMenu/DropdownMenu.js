@@ -9,7 +9,7 @@ import UseModal from "../Modal/UseModal";
 import UserSignUp from "../User/UserSignUp";
 import UserLogin from "../User/UserLogin";
 
-const DropdownMenu = () => {
+const DropdownMenu = (props) => {
   const [activeMenu, setActiveMenu] = useState("main");
   const [activeSignUpModal, setActiveSignUpModal] = useState(false);
   const [activeLogInModal, setActiveLogInModal] = useState(false);
@@ -71,7 +71,7 @@ const DropdownMenu = () => {
                     setActiveLogInModal(!activeLogInModal);
                   }}
                 >
-                  <UserLogin />
+                  <UserLogin/>
                 </UseModal>
               )}
               Log In

@@ -4,7 +4,7 @@ import UseModal from "../Modal/UseModal";
 import RecipeDetails from "../RecipeDetails/RecipeDetails";
 import { Box, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
 import { UserContext } from "../../contexts/UserContext";
-
+import config from "../../config";
 const FavouriteRecipes = () => {
   const [favouriteRecipes, setFavouriteRecipes] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
@@ -12,7 +12,7 @@ const FavouriteRecipes = () => {
 
   const getFavouriteRecipes = () => {
     axios
-      .get(`http://localhost:8080/recipes/favourites/?userId=${userId}`)
+      .get(`${config.backend_url}:8080/recipes/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRecipes(response.data);
       });

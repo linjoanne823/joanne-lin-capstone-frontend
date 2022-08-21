@@ -12,6 +12,7 @@ import DietFilter from "../Filters/DietFilter";
 import CuisineFilter from "../Filters/CuisineFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
 import { UserContext } from "../../contexts/UserContext";
+import config from "../../config";
 
 const RecipeList = () => {
   const { dietContext, setDietContext, allergiesContext, setAllergiesContext, userId } = useContext(UserContext);
@@ -35,7 +36,7 @@ const RecipeList = () => {
 
   const getRecipes = () => {
     axios
-      .get(`http://localhost:8080/recipes/?${buildQueryString()}?${userId}`)
+      .get(`${config.backend_url}:8080/recipes/?${buildQueryString()}?${userId}`)
       .then((response) => {
         setNoRecipesFound(response.data.results.length === 0);
         return setRecipes(response.data.results);

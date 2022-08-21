@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LikeButtonRestaurant from "../LikeButton/LikeButtonRestaurants";
 import { Box, Typography } from "@mui/material";
+import config from "../../config";
 
 const RestaurantDetails = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState({});
@@ -10,7 +11,7 @@ const RestaurantDetails = (props) => {
   const getSelectRestaurant = () => {
     axios
       .get(
-        `http://localhost:8080/restaurants/${props.restaurantId}?userId=${userId}`
+        `${config.backend_url}:8080/restaurants/${props.restaurantId}?userId=${userId}`
       )
       .then((response) => {
         setRestaurantDetails(response.data);
@@ -28,7 +29,7 @@ const RestaurantDetails = (props) => {
 
   const handleLikeRestaurants = () => {
     axios.post(
-      "http://localhost:8080/restaurants/favourites",
+      `${config.backend_url}:8080/restaurants/favourites`,
       {
         restaurantDetails,
         userId: 1,
@@ -41,7 +42,7 @@ const RestaurantDetails = (props) => {
 
   const handleUnlikeRestaurants = () => {
     axios.delete(
-      `http://localhost:8080/restaurants/favourites/${props.restaurantId}?userId=${userId}`
+      `${config.backend_url}:8080/restaurants/favourites/${props.restaurantId}?userId=${userId}`
     );
   };
   return (

@@ -10,6 +10,7 @@ import { UserContext } from "../../contexts/UserContext";
 import DietFilter from "../Filters/DietFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
 import { Typography } from "@mui/material";
+import config from "../../config";
 
 const MyProfile = () => {
   const {
@@ -36,7 +37,7 @@ const MyProfile = () => {
     e.preventDefault();
     axios
       .put(
-        `http://localhost:8080/users/${userId}`,
+        `${config.backend_url}:8080/users/${userId}`,
         {
           firstNameContext,
           lastNameContext,

@@ -8,6 +8,7 @@ import AllergyFilter from "../Filters/AllergyFilter";
 import LocationSearch from "../Filters/LocationSearch";
 import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
+import config from "../../config";
 const UserSignUp = (props) => {
   const {
     userId,
@@ -23,7 +24,9 @@ const UserSignUp = (props) => {
     firstNameContext,
     setFirstNameContext,
     lastNameContext,
-    setLastNameContext
+    setLastNameContext,
+    isLoggedIn,
+    setIsLoggedIn
   } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
@@ -36,7 +39,6 @@ const UserSignUp = (props) => {
   const [message, setMessage] = useState("");
   const [isSignupError, setIsSignupError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isSignedUp, setIsSignedUp] = useState(false);
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
@@ -80,7 +82,7 @@ const UserSignUp = (props) => {
     console.log(location);
     axios
       .post(
-        "http://localhost:8080/users/signup",
+        `${config.backend_url}:8080/users/signup`,
         {
           firstName: firstName,
           lastName: lastName,
@@ -97,7 +99,7 @@ const UserSignUp = (props) => {
       .then((response) => {
         console.log(response);
         setMessage("Successfully signed up!");
-        setIsSignedUp(true);
+        setIsLoggedIn(true);
         setUserId(response.data.data.user.user_id);
         setAllergiesContext(response.data.data.user.allergies);
         setLocationContext(response.data.data.user.city);
@@ -125,7 +127,7 @@ const UserSignUp = (props) => {
 
     <div>
       <div>
-        {!isSignedUp ? (
+        {!isLoggedIn ? (
           
           <div>
             <h2>Sign Up</h2>

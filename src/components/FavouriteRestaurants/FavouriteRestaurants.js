@@ -8,6 +8,7 @@ import {
   ImageListItem,
   ImageListItemBar,
 } from "@mui/material";
+import config from "../../config";
 
 const FavouriteRestaurants = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
@@ -15,7 +16,7 @@ const FavouriteRestaurants = () => {
   const [userId, setUserId] = useState(1);
   const getFavouriteRestaurants = () => {
     axios
-      .get(`http://localhost:8080/restaurants/favourites/?userId=${userId}`)
+      .get(`${config.backend_url}:8080/restaurants/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRestaurants(response.data);
       });
