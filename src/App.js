@@ -41,13 +41,15 @@ function App() {
           setFirstNameContext,
           lastNameContext,
           setLastNameContext,
+          isLoggedIn,
+          setIsLoggedIn
         }}
       >
         {!isLoggedIn ? (
-          <UseModal>
-            <UserLogin isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-          </UseModal>
-          // <LandingPage/>
+          // <UseModal>
+          //   <UserLogin isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+          // </UseModal>
+          <LandingPage/>
         ) : (
           <Navigation/>
         )}

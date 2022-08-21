@@ -24,7 +24,9 @@ const UserSignUp = (props) => {
     firstNameContext,
     setFirstNameContext,
     lastNameContext,
-    setLastNameContext
+    setLastNameContext,
+    isLoggedIn,
+    setIsLoggedIn
   } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
@@ -37,7 +39,6 @@ const UserSignUp = (props) => {
   const [message, setMessage] = useState("");
   const [isSignupError, setIsSignupError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isSignedUp, setIsSignedUp] = useState(false);
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
@@ -98,7 +99,7 @@ const UserSignUp = (props) => {
       .then((response) => {
         console.log(response);
         setMessage("Successfully signed up!");
-        setIsSignedUp(true);
+        setIsLoggedIn(true);
         setUserId(response.data.data.user.user_id);
         setAllergiesContext(response.data.data.user.allergies);
         setLocationContext(response.data.data.user.city);
@@ -126,7 +127,7 @@ const UserSignUp = (props) => {
 
     <div>
       <div>
-        {!isSignedUp ? (
+        {!isLoggedIn ? (
           
           <div>
             <h2>Sign Up</h2>

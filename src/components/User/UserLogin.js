@@ -12,7 +12,7 @@ const UserLogin = (props) => {
   const [isLoginError, setIsLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showLoginForm, setShowLoginForm] = useState(true);
-  const { userId, setUserId } = useContext(UserContext);
+  const { userId, setUserId, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -39,7 +39,8 @@ const UserLogin = (props) => {
       )
       .then((response) => {
         console.log(response);
-        props.setIsLoggedIn(true);
+        setIsLoggedIn(true);
+        console.log("hello");
         setUserId(response.data.data.user.user_id);
       })
       .catch((err) => {
@@ -51,7 +52,7 @@ const UserLogin = (props) => {
 
   return (
     <div>
-      {!props.isLoggedIn ? (
+      {!isLoggedIn ? (
         <div>
           <h2>Log In</h2>
           {isLoginError && (
