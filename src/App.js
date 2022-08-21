@@ -8,6 +8,9 @@ import Recipes from "./pages/Recipes/Recipes";
 import Restaurants from "./pages/Restaurants/Restaurants";
 import { UserContext } from "./contexts/UserContext";
 import { contextType } from "react-modal";
+import UserLogin from "./components/User/UserLogin";
+import UseModal from "./components/Modal/UseModal";
+import Navigation from "./routes/Navigation";
 
 function App() {
   const [userId, setUserId] = useState("");
@@ -17,20 +20,35 @@ function App() {
   const [emailContext, setEmailContext] = useState("");
   const [firstNameContext, setFirstNameContext] = useState("");
   const [lastNameContext, setLastNameContext] = useState("");
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div>
-      <UserContext.Provider value={{ userId, setUserId, allergiesContext, setAllergiesContext,
-      locationContext, setLocationContext, dietContext, setDietContext, emailContext, setEmailContext,
-      firstNameContext, setFirstNameContext, lastNameContext, setLastNameContext }}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/recipes" element={<Recipes />} />
-            <Route path="/restaurants" element={<Restaurants />} />
-            <Route path="/favourites" element={<Favourites />} />
-          </Routes>
-        </BrowserRouter>
+      <UserContext.Provider
+        value={{
+          userId,
+          setUserId,
+          allergiesContext,
+          setAllergiesContext,
+          locationContext,
+          setLocationContext,
+          dietContext,
+          setDietContext,
+          emailContext,
+          setEmailContext,
+          firstNameContext,
+          setFirstNameContext,
+          lastNameContext,
+          setLastNameContext,
+        }}
+      >
+        {!isLoggedIn ? (
+          <UseModal>
+            <UserLogin isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+          </UseModal>
+        ) : (
+          <Navigation/>
+        )}
       </UserContext.Provider>
     </div>
   );

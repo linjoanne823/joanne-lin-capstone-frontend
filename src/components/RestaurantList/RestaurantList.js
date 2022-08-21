@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
@@ -16,16 +16,25 @@ import {
 } from "@mui/material";
 import DietFilter from "../Filters/DietFilter";
 import LocationSearch from "../Filters/LocationSearch";
+import { UserContext } from "../../contexts/UserContext";
 
 const RestaurantList = (props) => {
+
+  const {
+    userId,
+    locationContext,
+    setLocationContext,
+    dietContext,
+    setDietContext
+  } = useContext(UserContext)
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
   const [restaurants, setRestaurants] = useState([]);
-  const [location, setLocation] = useState("");
+  // const [location, setLocation] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectCategory, setSelectCategory] = useState("");
-  const [diet, setDiet] = useState("");
+  // const [diet, setDiet] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
-  const [userId, setUserId] = useState(1);
+  // const [userId, setUserId] = useState(1);
 
   const getRestaurants = () => {
     const fetchSetOfCategories = (businesses) => {
@@ -51,8 +60,8 @@ const RestaurantList = (props) => {
 
     const data = JSON.stringify({
       term: "restaurant",
-      location: location || "Vancouver",
-      categories: spoonacularToYelpMap[diet] || "",
+      location: locationContext || "Vancouver",
+      categories: spoonacularToYelpMap[dietContext] || "",
     });
 
     const config = {
@@ -80,12 +89,12 @@ const RestaurantList = (props) => {
 
   const handleLocationChange = (e) => {
     e.preventDefault();
-    return setLocation(e.target.value);
+    return setLocationContext(e.target.value);
   };
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
-    return setDiet(e.target.value);
+    return setDietContext(e.target.value);
   };
 
   const handleSelectCategories = (e) => {
@@ -104,11 +113,11 @@ const RestaurantList = (props) => {
    
         <FormControl onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"row"}}>
           <DietFilter
-            diet={diet}
+            diet={dietContext}
             handleSelectDietaryRestriction={handleSelectDietaryRestriction}
           />
           <LocationSearch
-            location={location}
+            location={locationContext}
             handleLocationChange={handleLocationChange}
           />
         </FormControl>

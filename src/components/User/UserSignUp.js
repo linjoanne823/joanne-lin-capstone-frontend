@@ -7,15 +7,23 @@ import DietFilter from "../Filters/DietFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
 import LocationSearch from "../Filters/LocationSearch";
 import { UserContext } from "../../contexts/UserContext";
+import { Link } from "react-router-dom";
 const UserSignUp = (props) => {
   const {
+    userId,
     setUserId,
+    allergiesContext,
     setAllergiesContext,
+    locationContext,
     setLocationContext,
+    dietContext,
     setDietContext,
+    emailContext,
     setEmailContext,
+    firstNameContext,
     setFirstNameContext,
-    setLastNameContext,
+    lastNameContext,
+    setLastNameContext
   } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
@@ -61,6 +69,8 @@ const UserSignUp = (props) => {
     return setIntolerances(e.target.value);
   };
 
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setMessage({
@@ -102,13 +112,24 @@ const UserSignUp = (props) => {
         setErrorMessage("This user already exists :)");
       });
   };
+  // setUserId(userId);
+  // setFirstNameContext(firstNameContext);
+  // setLastNameContext(lastNameContext);
+  // setAllergiesContext(allergiesContext);
+  // setLocationContext(locationContext);
+  // setDietContext(dietContext);
+  // setEmailContext(emailContext);
+  
 
   return (
+
     <div>
       <div>
         {!isSignedUp ? (
+          
           <div>
             <h2>Sign Up</h2>
+            {firstNameContext}
             {isSignupError && (
               <label style={{ color: "red" }}>{errorMessage}</label>
             )}
@@ -162,7 +183,10 @@ const UserSignUp = (props) => {
             </Box>
           </div>
         ) : (
-          <h2>You are now registered!</h2>
+          <div>
+          <h2>{firstNameContext} now registered!</h2>
+          <Link to={'/profile'}><Button>Go to Profile</Button></Link>
+          </div>
         )}
       </div>
     </div>

@@ -1,16 +1,18 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import UseModal from "../Modal/UseModal";
 import RecipeDetails from "../RecipeDetails/RecipeDetails";
 import { Box, ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import { UserContext } from "../../contexts/UserContext";
 
 const FavouriteRecipes = () => {
   const [favouriteRecipes, setFavouriteRecipes] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
+  const { userId } = useContext(UserContext);
 
   const getFavouriteRecipes = () => {
     axios
-      .get(`http://localhost:8080/recipes/favourites/?userId=${1}`)
+      .get(`http://localhost:8080/recipes/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRecipes(response.data);
       });

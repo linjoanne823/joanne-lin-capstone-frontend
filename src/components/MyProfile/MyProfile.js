@@ -7,6 +7,9 @@ import AllergyOptions from "../Options/AllergyOptions";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
+import DietFilter from "../Filters/DietFilter";
+import AllergyFilter from "../Filters/AllergyFilter";
+import { Typography } from "@mui/material";
 
 const MyProfile = () => {
   const {
@@ -22,44 +25,41 @@ const MyProfile = () => {
     setFirstNameContext,
     lastNameContext,
     setLastNameContext,
+    userId,
+    user,
   } = useContext(UserContext);
-  const [firstName, setFirstName] = useState("Joanne");
-  const [lastName, setLastName] = useState("Lin");
-  const [email, setEmail] = useState("joanne@gmail.com");
-  const [password, setPassword] = useState("abc");
-  const [city, setCity] = useState("");
-  const [userId, setUserId] = useState(1);
-
-  const [dietaryRestriction, setDietaryRestriction] = useState("");
-  const [allergies, setAllergies] = useState([]);
+  
+  // const [password, setPassword] = useState("abc");
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .put(
-        "http://localhost:8080/users/",
+        `http://localhost:8080/users/${userId}`,
         {
-          firstName,
-          lastName,
-          email,
-          password,
-          city,
+          firstNameContext,
+          lastNameContext,
+          emailContext,
+          // password,
+          locationContext,
           userId,
-          dietaryRestriction,
-          allergies,
+          dietContext,
+          allergiesContext,
         },
         {
           "Content-Type": "application/json",
         }
       )
       .then((response) => {
-        // console.log(response);
+        console.log(response);
       });
   };
+
   return (
     <div className="my-profile">
       <div>
-        <h2 className="my-profile__title">Edit Profile</h2>
+        <Typography style={{fontSize:"1.5rem", paddingLeft:"1rem"}}>My Profile</Typography>
 
         <div className="my-profile__container">
           <div className="my-profile__input-container">
@@ -67,8 +67,8 @@ const MyProfile = () => {
               id="outlined-basic"
               label="First Name"
               variant="outlined"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={firstNameContext}
+              onChange={(e) => setFirstNameContext(e.target.value)}
             />
           </div>
           <div className="my-profile__input-container">
@@ -76,8 +76,8 @@ const MyProfile = () => {
               id="outlined-basic"
               label="Last Name"
               variant="outlined"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={lastNameContext}
+              onChange={(e) => setLastNameContext(e.target.value)}
             />
           </div>
           <div className="my-profile__input-container">
@@ -85,13 +85,13 @@ const MyProfile = () => {
               id="outlined-basic"
               label="Email"
               variant="outlined"
-              value={email}
+              value={emailContext}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setEmailContext(e.target.value);
               }}
             />
           </div>
-          <div className="my-profile__input-container">
+          {/* <div className="my-profile__input-container">
             <TextField
               id="outlined-password-input"
               label="Password"
@@ -99,34 +99,18 @@ const MyProfile = () => {
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
+          </div> */}
           <div>
-            <TextField
+            <TextField style={{marginLeft:"1rem"}}
               id="outlined-basic"
               label="City"
               type="text"
-              onChange={(e) => setCity(e.target.value)}
+              value={locationContext}
+              onChange={(e) => setLocationContext(e.target.value)}
             />
           </div>
-          <p className="my-profile__label">Dietary Restrictions:</p>
-          <Select
-            closeMenuOnSelect={false}
-            options={DietOptions}
-            className="my-profile__multi-select"
-            // value={DietOptions[0]}
-            onChange={(e) => setDietaryRestriction(e.value)}
-          />
-          <p className="my-profile__label">Allergies:</p>
-          <Select
-            closeMenuOnSelect={false}
-            isMulti
-            options={AllergyOptions}
-            // value={AllergyOptions[0]}
-            className="my-profile__multi-select"
-            onChange={(e) =>
-              setAllergies(e.map((selectedOption) => selectedOption.value))
-            }
-          />
+          <DietFilter diet={dietContext}/>
+          <AllergyFilter intolerances={allergiesContext} />
         </div>
         <div className="my-profile__button">
           <Button variant="outlined" onClick={handleSubmit}>

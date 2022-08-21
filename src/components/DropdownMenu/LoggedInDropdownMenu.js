@@ -24,21 +24,25 @@ const LoggedInDropdownMenu = () => {
       >
         <div className="menu">
           <DropdownItem>
-            <AiOutlineHome />
-          </DropdownItem>
-          <DropdownItem>
-            <AiOutlineUser />
-          </DropdownItem>
-          <DropdownItem goToMenu="explore" setActiveMenu={setActiveMenu}>
-            <MdOutlineExplore />
-          </DropdownItem>
-          <DropdownItem>
-            <Link to ={"/favourites"}>
-              <AiOutlineHeart />
+            <Link to={"/"}>
+              <Typography>Home</Typography>
             </Link>
           </DropdownItem>
           <DropdownItem>
-            <BiLogOutCircle />
+            <Link to={"/profile"}>
+              <Typography>Profile</Typography>
+            </Link>
+          </DropdownItem>
+          <DropdownItem goToMenu="explore" setActiveMenu={setActiveMenu}>
+            <Typography>Explore</Typography>
+          </DropdownItem>
+          <DropdownItem>
+            <Link to={"/favourites"}>
+              <Typography>Favourites</Typography>
+            </Link>
+          </DropdownItem>
+          <DropdownItem>
+            <Typography>Logout</Typography>
           </DropdownItem>
         </div>
       </CSSTransition>
