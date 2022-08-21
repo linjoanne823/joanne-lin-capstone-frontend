@@ -28,15 +28,9 @@ const MyProfile = () => {
     userId,
     user,
   } = useContext(UserContext);
-  // const [firstName, setFirstName] = useState("Joanne");
-  // const [lastName, setLastName] = useState("Lin");
-  // const [email, setEmail] = useState("joanne@gmail.com");
+  
   // const [password, setPassword] = useState("abc");
-  // const [city, setCity] = useState("");
-  // const [userId, setUserId] = useState(1);
-
-  // const [dietaryRestriction, setDietaryRestriction] = useState("");
-  // const [allergies, setAllergies] = useState([]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();

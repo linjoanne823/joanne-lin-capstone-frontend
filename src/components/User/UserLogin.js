@@ -5,10 +5,9 @@ import axios from "axios";
 import { Box, TextField } from "@mui/material";
 import { UserContext } from "../../contexts/UserContext";
 
-const UserLogin = () => {
+const UserLogin = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginError, setIsLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showLoginForm, setShowLoginForm] = useState(true);
@@ -39,7 +38,7 @@ const UserLogin = () => {
       )
       .then((response) => {
         console.log(response);
-        setIsLoggedIn(true);
+        props.setIsLoggedIn(true);
         setUserId(response.data.data.user.user_id)
       })
       .catch((err) => {
@@ -51,7 +50,7 @@ const UserLogin = () => {
 
   return (
     <div>
-      {!isLoggedIn ? (
+      {!props.isLoggedIn ? (
         <div>
           <h2>Log In</h2>
           {isLoginError && (
