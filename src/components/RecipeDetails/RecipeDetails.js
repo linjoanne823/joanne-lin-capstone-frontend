@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import LikeButton from "../LikeButton/LikeButtonRecipes";
 import { UserContext } from "../../contexts/UserContext";
+import config from "../../config";
 
 const RecipeDetails = (props) => {
   const [recipeDetails, setRecipeDetails] = useState({});
@@ -16,7 +17,7 @@ const RecipeDetails = (props) => {
 
   const getSelectRecipe = () => {
     axios
-      .get(`http://localhost:8080/recipes/${props.recipeId}?userId=${userId}`)
+      .get(`${config.backend_url}:8080/recipes/${props.recipeId}?userId=${userId}`)
       .then((response) => {
         setRecipeDetails(response.data);
       });
@@ -37,7 +38,7 @@ const RecipeDetails = (props) => {
 
   const handleLikeRecipes = () => {
     axios.post(
-      "http://localhost:8080/recipes/favourites",
+      `${config.backend_url}:8080/recipes/favourites`,
       {
         recipeDetails,
         userId: userId,
@@ -51,7 +52,7 @@ const RecipeDetails = (props) => {
   const handleUnlikeRecipes = () => {
     const recipeId = recipeDetails.recipe_id;
     axios.delete(
-      `http://localhost:8080/recipes/favourites/${recipeId}?userId=${userId}`
+      `${config.backend_url}:8080/recipes/favourites/${recipeId}?userId=${userId}`
     );
   };
 

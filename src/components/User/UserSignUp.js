@@ -8,6 +8,7 @@ import AllergyFilter from "../Filters/AllergyFilter";
 import LocationSearch from "../Filters/LocationSearch";
 import { UserContext } from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
+import config from "../../config";
 const UserSignUp = (props) => {
   const {
     userId,
@@ -80,7 +81,7 @@ const UserSignUp = (props) => {
     console.log(location);
     axios
       .post(
-        "http://localhost:8080/users/signup",
+        `${config.backend_url}:8080/users/signup`,
         {
           firstName: firstName,
           lastName: lastName,

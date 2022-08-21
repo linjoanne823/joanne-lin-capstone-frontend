@@ -11,6 +11,7 @@ import { contextType } from "react-modal";
 import UserLogin from "./components/User/UserLogin";
 import UseModal from "./components/Modal/UseModal";
 import Navigation from "./routes/Navigation";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 function App() {
   const [userId, setUserId] = useState("");
@@ -46,6 +47,7 @@ function App() {
           <UseModal>
             <UserLogin isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
           </UseModal>
+          // <LandingPage/>
         ) : (
           <Navigation/>
         )}

@@ -17,6 +17,7 @@ import {
 import DietFilter from "../Filters/DietFilter";
 import LocationSearch from "../Filters/LocationSearch";
 import { UserContext } from "../../contexts/UserContext";
+import config from "../../config";
 
 const RestaurantList = (props) => {
 
@@ -66,7 +67,7 @@ const RestaurantList = (props) => {
 
     const config = {
       method: "POST",
-      url: `http://localhost:8080/restaurants/?userId=${userId}`,
+      url: `${config.backend_url}:8080/restaurants/?userId=${userId}`,
       headers: {
         "Content-Type": "application/json",
       },
