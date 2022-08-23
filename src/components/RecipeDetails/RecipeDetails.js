@@ -81,25 +81,25 @@ const RecipeDetails = (props) => {
 
             {showIngredients ? (
               <Typography>
-                {recipeDetails.ingredients.toString().split(",").join("\n").split('\n').map(str=><li>{str}</li>)}
+                {recipeDetails.ingredients
+                  .toString()
+                  .split(",")
+                  .join("\n")
+                  .split("\n")
+                  .map((str) => (
+                    <li>{str}</li>
+                  ))}
               </Typography>
             ) : null}
-            <Button onClick={() => setShowInstructions(!showInstructions)}>
-              Instructions
-            </Button>
+            <Box>
+              <Button onClick={() => setShowInstructions(!showInstructions)}>
+                Instructions
+              </Button>
+            </Box>
 
             {showInstructions ? (
-              <>{recipeDetails.instructions}</>
-            ) : //   <ol>
-            //     {recipeDetails.analyzedInstructions[0].steps.map((element) => {
-            //       return (
-            //         <li key={element.step.number} className="recipe__text">
-            //           {element.step}
-            //         </li>
-            //       );
-            //     })}
-            //   </ol>
-            null}
+              <>{recipeDetails.instructions.toString().split(",").join("\n")}</>
+            ) : null}
           </div>
         </Box>
       ) : (
