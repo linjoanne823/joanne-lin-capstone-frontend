@@ -27,9 +27,8 @@ const MyProfile = () => {
     lastNameContext,
     setLastNameContext,
     userId,
-    user,
-    password,
-    setPassword
+    passwordContext,
+    setPasswordContext
   } = useContext(UserContext);
   
   
@@ -43,7 +42,7 @@ const MyProfile = () => {
           firstNameContext,
           lastNameContext,
           emailContext,
-          password,
+          passwordContext,
           locationContext,
           userId,
           dietContext,
@@ -98,8 +97,8 @@ const MyProfile = () => {
               id="outlined-password-input"
               label="Password"
               type="password"
-              autoComplete="current-password"
-              onChange={(e) => setPassword(e.target.value)}
+              value={passwordContext}
+              onChange={(e) => setPasswordContext(e.target.value)}
             />
           </div>
           <div>

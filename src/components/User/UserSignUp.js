@@ -26,7 +26,9 @@ const UserSignUp = (props) => {
     lastNameContext,
     setLastNameContext,
     isLoggedIn,
-    setIsLoggedIn
+    setIsLoggedIn, 
+    passwordContext,
+    setPasswordContext
   } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
@@ -108,6 +110,7 @@ const UserSignUp = (props) => {
         setEmailContext(response.data.data.user.email);
         setFirstNameContext(response.data.data.user.first_name);
         setLastNameContext(response.data.data.user.last_name);
+        setPasswordContext(response.data.data.user.password)
       })
       .catch((err) => {
         console.log(err);
