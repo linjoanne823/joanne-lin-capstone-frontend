@@ -13,14 +13,14 @@ const Home = () => {
         <Link to={"/recipes"}>
           <Button
             variant="contained"
-            sx={{position:'absolute', left:"25rem", top:"10rem", zIndex:"10", backgroundColor:"#242526"}}>
+            sx={{position:'absolute', left:"40rem", top:"10rem", zIndex:"10", backgroundColor:"#242526"}}>
             Explore Recipes
           </Button>
         </Link>
         <Link to={"/restaurants"}>
           <Button
           variant="contained"
-          sx={{position:'absolute', left:"50rem", top:"10rem", zIndex:"10", backgroundColor:"#242526"}}>
+          sx={{position:'absolute', left:"60rem", top:"10rem", zIndex:"10", backgroundColor:"#242526"}}>
           Explore Restaurants
           </Button>
         </Link>
