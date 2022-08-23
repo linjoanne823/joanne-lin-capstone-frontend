@@ -65,7 +65,7 @@ const RestaurantList = (props) => {
       categories: spoonacularToYelpMap[dietContext] || "",
     });
 
-    const config = {
+    const configuration = {
       method: "POST",
       url: `${config.backend_url}:8080/restaurants/?userId=${userId}`,
       headers: {
@@ -74,7 +74,7 @@ const RestaurantList = (props) => {
       data: data,
     };
 
-    axios(config)
+    axios(configuration)
       .then((response) => {
         setRestaurants(response.data);
         setCategories(fetchSetOfCategories(response.data));

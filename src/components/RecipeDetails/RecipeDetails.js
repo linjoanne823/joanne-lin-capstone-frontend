@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 import "./RecipeDetails.scss";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import { Typography, Button, Box } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import LikeButton from "../LikeButton/LikeButtonRecipes";
 import { UserContext } from "../../contexts/UserContext";
@@ -17,7 +16,9 @@ const RecipeDetails = (props) => {
 
   const getSelectRecipe = () => {
     axios
-      .get(`${config.backend_url}:8080/recipes/${props.recipeId}?userId=${userId}`)
+      .get(
+        `${config.backend_url}:8080/recipes/${props.recipeId}?userId=${userId}`
+      )
       .then((response) => {
         setRecipeDetails(response.data);
       });
@@ -59,10 +60,7 @@ const RecipeDetails = (props) => {
   return (
     <div>
       {Object.keys(recipeDetails).length > 0 ? (
-        <div>
-          <button onClick={() => navigate(-1)} className="recipe__back-button">
-            ↩{" "}
-          </button>
+        <Box sx={{ height: "60vh" }}>
           <img src={recipeDetails.image} className="recipe__image"></img>
           <div className="recipe__text">
             <LikeButton
@@ -74,24 +72,21 @@ const RecipeDetails = (props) => {
 
             <p>Servings: serves {recipeDetails.servings} people</p>
             <p>Ready in: {recipeDetails.readyInMinutes} minutes</p>
+
             <Box>
-              <ButtonGroup>
-                <Button onClick={() => setShowIngredients(!showIngredients)}>
-                  Ingredients
-                </Button>
-                <Button onClick={() => setShowInstructions(!showInstructions)}>
-                  Instructions
-                </Button>
-              </ButtonGroup>
+              <Button onClick={() => setShowIngredients(!showIngredients)}>
+                Ingredients
+              </Button>
             </Box>
+
             {showIngredients ? (
-              <>{recipeDetails.ingredients}</>
-            ) : //   <ul>
-            //     {recipeDetails.extendedIngredients.map((element) => {
-            //       return <li className="recipe__text"> {element.original}</li>;
-            //     })}
-            //   </ul>
-            null}
+              <Typography>
+                {recipeDetails.ingredients.toString().split(",").join("\n").split('\n').map(str=><li>{str}</li>)}
+              </Typography>
+            ) : null}
+            <Button onClick={() => setShowInstructions(!showInstructions)}>
+              Instructions
+            </Button>
 
             {showInstructions ? (
               <>{recipeDetails.instructions}</>
@@ -106,7 +101,7 @@ const RecipeDetails = (props) => {
             //   </ol>
             null}
           </div>
-        </div>
+        </Box>
       ) : (
         <p>loading...</p>
       )}

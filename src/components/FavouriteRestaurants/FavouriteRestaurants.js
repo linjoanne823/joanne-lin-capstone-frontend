@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import UseModal from "../Modal/UseModal";
 import RestaurantDetails from "../RestaurantDetails/RestaurantDetails";
@@ -9,14 +9,17 @@ import {
   ImageListItemBar,
 } from "@mui/material";
 import config from "../../config";
+import { UserContext } from "../../contexts/UserContext";
 
 const FavouriteRestaurants = () => {
   const [favouriteRestaurants, setFavouriteRestaurants] = useState([]);
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
-  const [userId, setUserId] = useState(1);
+  const { userId } = useContext(UserContext);
   const getFavouriteRestaurants = () => {
     axios
-      .get(`${config.backend_url}:8080/restaurants/favourites/?userId=${userId}`)
+      .get(
+        `${config.backend_url}:8080/restaurants/favourites/?userId=${userId}`
+      )
       .then((response) => {
         setFavouriteRestaurants(response.data);
       });

@@ -1,17 +1,32 @@
 import React from "react";
-import Carousel from "../../components/Carousel/Carousel";
 import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
-import Header from "../../components/Header/Header";
-import "./Home.scss";
+import { Box, Button } from "@mui/material";
+import video from "../../assets/video/food.mp4";
+import { Link } from "react-router-dom";
+import LoggedInDropdownMenu from "../../components/DropdownMenu/LoggedInDropdownMenu";
 
 const Home = () => {
   return (
-    <div>
-      <div className="homepage__body">
-        <DropdownMenu />
-        <Carousel />
-      </div>
-    </div>
+    <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <LoggedInDropdownMenu/>
+      <Box>
+        <Link to={"/recipes"}>
+          <Button
+            variant="contained"
+            sx={{position:'absolute', left:"25rem", top:"10rem", zIndex:"10", backgroundColor:"#242526"}}>
+            Explore Recipes
+          </Button>
+        </Link>
+        <Link to={"/restaurants"}>
+          <Button
+          variant="contained"
+          sx={{position:'absolute', left:"50rem", top:"10rem", zIndex:"10", backgroundColor:"#242526"}}>
+          Explore Restaurants
+          </Button>
+        </Link>
+        <video src={video} autoPlay={true} style={{ width: "90vw" }}></video>
+      </Box>
+    </Box>
   );
 };
 
