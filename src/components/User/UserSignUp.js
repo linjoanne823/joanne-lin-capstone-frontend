@@ -39,6 +39,7 @@ const UserSignUp = (props) => {
   const [message, setMessage] = useState("");
   const [isSignupError, setIsSignupError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSignedUp, setIsSignedUp] = useState(false)
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
@@ -99,7 +100,7 @@ const UserSignUp = (props) => {
       .then((response) => {
         console.log(response);
         setMessage("Successfully signed up!");
-        setIsLoggedIn(true);
+        setIsSignedUp(true)
         setUserId(response.data.data.user.user_id);
         setAllergiesContext(response.data.data.user.allergies);
         setLocationContext(response.data.data.user.city);
@@ -114,24 +115,17 @@ const UserSignUp = (props) => {
         setErrorMessage("This user already exists :)");
       });
   };
-  // setUserId(userId);
-  // setFirstNameContext(firstNameContext);
-  // setLastNameContext(lastNameContext);
-  // setAllergiesContext(allergiesContext);
-  // setLocationContext(locationContext);
-  // setDietContext(dietContext);
-  // setEmailContext(emailContext);
-  
+
 
   return (
 
     <div>
       <div>
-        {!isLoggedIn ? (
+        {!isSignedUp ? (
           
           <div>
             <h2>Sign Up</h2>
-            {firstNameContext}
+            
             {isSignupError && (
               <label style={{ color: "red" }}>{errorMessage}</label>
             )}
@@ -187,7 +181,7 @@ const UserSignUp = (props) => {
         ) : (
           <div>
           <h2>{firstNameContext} now registered!</h2>
-          <Link to={'/profile'}><Button>Go to Profile</Button></Link>
+         <Button onClick={()=>setIsLoggedIn(true)}>Explore</Button>
           </div>
         )}
       </div>
