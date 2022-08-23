@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import LikeButtonRestaurant from "../LikeButton/LikeButtonRestaurants";
 import { Box, Typography } from "@mui/material";
 import config from "../../config";
+import { UserContext } from "../../contexts/UserContext";
 
 const RestaurantDetails = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState({});
-  const [userId, setUserId] = useState(1);
+  const { userId } = useContext(UserContext);
 
   const getSelectRestaurant = () => {
     axios
@@ -32,7 +33,7 @@ const RestaurantDetails = (props) => {
       `${config.backend_url}:8080/restaurants/favourites`,
       {
         restaurantDetails,
-        userId: 1,
+        userId: userId,
       },
       {
         "Content-Type": "application/json",
