@@ -9,7 +9,7 @@ import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
 import DietFilter from "../Filters/DietFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import config from "../../config";
 
 const MyProfile = () => {
@@ -28,9 +28,10 @@ const MyProfile = () => {
     setLastNameContext,
     userId,
     user,
+    password,
+    setPassword
   } = useContext(UserContext);
   
-  // const [password, setPassword] = useState("abc");
   
 
   const handleSubmit = (e) => {
@@ -42,7 +43,7 @@ const MyProfile = () => {
           firstNameContext,
           lastNameContext,
           emailContext,
-          // password,
+          password,
           locationContext,
           userId,
           dietContext,
@@ -92,7 +93,7 @@ const MyProfile = () => {
               }}
             />
           </div>
-          {/* <div className="my-profile__input-container">
+          <div className="my-profile__input-container">
             <TextField
               id="outlined-password-input"
               label="Password"
@@ -100,7 +101,7 @@ const MyProfile = () => {
               autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div> */}
+          </div>
           <div>
             <TextField style={{marginLeft:"1rem"}}
               id="outlined-basic"
@@ -110,8 +111,11 @@ const MyProfile = () => {
               onChange={(e) => setLocationContext(e.target.value)}
             />
           </div>
-          <DietFilter diet={dietContext}/>
-          <AllergyFilter intolerances={allergiesContext} />
+          <Box sx={{paddingLeft:"0.5rem"}}>
+            <DietFilter diet={dietContext}/>
+            <AllergyFilter intolerances={allergiesContext} />
+          </Box>
+          
         </div>
         <div className="my-profile__button">
           <Button variant="outlined" onClick={handleSubmit}>

@@ -21,6 +21,7 @@ function App() {
   const [emailContext, setEmailContext] = useState("");
   const [firstNameContext, setFirstNameContext] = useState("");
   const [lastNameContext, setLastNameContext] = useState("");
+  const [password, setPassword]=useState("")
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
@@ -42,7 +43,9 @@ function App() {
           lastNameContext,
           setLastNameContext,
           isLoggedIn,
-          setIsLoggedIn
+          setIsLoggedIn,
+          password,
+          setPassword
         }}
       >
         {!isLoggedIn ? (
