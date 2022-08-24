@@ -23,7 +23,7 @@ The end users are people who don't have the time to browse through the internet 
 - React.js
 - Material UI 
 - SCSS 
-- AWS S3 
+- Deployed on AWS S3 
 
 
 ## Features
