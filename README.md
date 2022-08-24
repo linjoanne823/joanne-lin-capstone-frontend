@@ -27,7 +27,6 @@ The end users are people who don't have the time to browse through the internet 
 
 
 ## Features
-List the ready features here:
 - Users can specify their dietary restrictions and intolerances when they search for recipes and restaurants 
 - Users can save recipes and restaurants to favourites and revisit them at a later time
 
