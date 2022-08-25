@@ -21,6 +21,7 @@ function App() {
   const [emailContext, setEmailContext] = useState("");
   const [firstNameContext, setFirstNameContext] = useState("");
   const [lastNameContext, setLastNameContext] = useState("");
+  const [passwordContext, setPasswordContext]=useState("")
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
@@ -42,13 +43,12 @@ function App() {
           lastNameContext,
           setLastNameContext,
           isLoggedIn,
-          setIsLoggedIn
+          setIsLoggedIn,
+          passwordContext,
+          setPasswordContext
         }}
       >
         {!isLoggedIn ? (
-          // <UseModal>
-          //   <UserLogin isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-          // </UseModal>
           <LandingPage/>
         ) : (
           <Navigation/>

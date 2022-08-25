@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import LikeButtonRestaurant from "../LikeButton/LikeButtonRestaurants";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import config from "../../config";
+import { UserContext } from "../../contexts/UserContext";
 
 const RestaurantDetails = (props) => {
   const [restaurantDetails, setRestaurantDetails] = useState({});
-  const [userId, setUserId] = useState(1);
+  const { userId } = useContext(UserContext);
 
   const getSelectRestaurant = () => {
     axios
@@ -14,6 +15,7 @@ const RestaurantDetails = (props) => {
         `${config.backend_url}:8080/restaurants/${props.restaurantId}?userId=${userId}`
       )
       .then((response) => {
+        console.log(response.data)
         setRestaurantDetails(response.data);
       });
   };
@@ -29,10 +31,10 @@ const RestaurantDetails = (props) => {
 
   const handleLikeRestaurants = () => {
     axios.post(
-      `${config.backend_url}:8080/restaurants/favourites`,
+      `${config.backend_url}:8080/restaurants/favourites?userId=${userId}`,
       {
         restaurantDetails,
-        userId: 1,
+        userId: userId,
       },
       {
         "Content-Type": "application/json",
@@ -59,6 +61,7 @@ const RestaurantDetails = (props) => {
             handleLike={handleLikeRestaurants}
             handleUnlike={handleUnlikeRestaurants}
           />
+          <Button target="_blank" href={`https://www.doordash.com/en-CA/search/store/${restaurantDetails.name}/?event_type=search`}>Order on Doordash</Button>
           <Typography component="span" variant="h5">
             <Box sx={{ fontWeight: "600" }}>{restaurantDetails.name}</Box>
           </Typography>

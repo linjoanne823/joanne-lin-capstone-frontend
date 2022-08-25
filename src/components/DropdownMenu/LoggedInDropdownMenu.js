@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import DropdownItem from "../DropdownItem/DropdownItem";
 import "./DropdownMenu.scss";
 import { CSSTransition } from "react-transition-group";
-import leftArrow from "../../assets/icons/left-arrow-back.svg";
-import { AiOutlineHome } from "react-icons/ai";
-import { AiOutlineUser } from "react-icons/ai";
 import { IoIosArrowDropleft } from "react-icons/io";
-import { MdOutlineExplore } from "react-icons/md";
-import { AiOutlineHeart } from "react-icons/ai";
-import { BiLogOutCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 
@@ -41,9 +35,7 @@ const LoggedInDropdownMenu = () => {
               <Typography>Favourites</Typography>
             </Link>
           </DropdownItem>
-          <DropdownItem>
-            <Typography>Logout</Typography>
-          </DropdownItem>
+         
         </div>
       </CSSTransition>
       <CSSTransition

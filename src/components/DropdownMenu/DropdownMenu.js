@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import DropdownItem from "../DropdownItem/DropdownItem";
 import "./DropdownMenu.scss";
 import { CSSTransition } from "react-transition-group";
-import leftArrow from "../../assets/icons/left-arrow-back.svg";
-import { AiOutlineHome } from "react-icons/ai";
-import { AiOutlineUser } from "react-icons/ai";
+import { IoIosArrowDropleft } from "react-icons/io";
 import UseModal from "../Modal/UseModal";
 import UserSignUp from "../User/UserSignUp";
 import UserLogin from "../User/UserLogin";
+import { Typography } from "@mui/material";
 
 const DropdownMenu = (props) => {
   const [activeMenu, setActiveMenu] = useState("main");
@@ -24,10 +23,10 @@ const DropdownMenu = (props) => {
       >
         <div className="menu">
           <DropdownItem>
-            <AiOutlineHome />
+            <Typography>Home</Typography>
           </DropdownItem>
           <DropdownItem goToMenu="user" setActiveMenu={setActiveMenu}>
-            <AiOutlineUser />
+            <Typography>User</Typography>
           </DropdownItem>
         </div>
       </CSSTransition>
@@ -39,7 +38,7 @@ const DropdownMenu = (props) => {
       >
         <div className="menu">
           <DropdownItem setActiveMenu={setActiveMenu} goToMenu="main">
-            <img src={leftArrow} className="menu__icon" />
+           <IoIosArrowDropleft/>
           </DropdownItem>
           <DropdownItem>
             <div
@@ -56,7 +55,7 @@ const DropdownMenu = (props) => {
                   <UserSignUp />
                 </UseModal>
               )}
-              Sign up
+              <Typography>Sign up</Typography>
             </div>
           </DropdownItem>
           <DropdownItem>
@@ -74,10 +73,9 @@ const DropdownMenu = (props) => {
                   <UserLogin/>
                 </UseModal>
               )}
-              Log In
+              <Typography>Log In</Typography>
             </div>
           </DropdownItem>
-          <DropdownItem>Test User</DropdownItem>
         </div>
       </CSSTransition>
     </div>
