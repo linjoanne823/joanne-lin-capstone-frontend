@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext} from "react";
 import UseModal from "../Modal/UseModal";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -102,7 +102,7 @@ const UserSignUp = (props) => {
       .then((response) => {
         console.log(response);
         setMessage("Successfully signed up!");
-        setIsSignedUp(true)
+        setIsSignedUp(true);
         setUserId(response.data.data.user.user_id);
         setAllergiesContext(response.data.data.user.allergies);
         setLocationContext(response.data.data.user.city);
@@ -118,6 +118,8 @@ const UserSignUp = (props) => {
         setErrorMessage("This user already exists :)");
       });
   };
+
+  
 
 
   return (

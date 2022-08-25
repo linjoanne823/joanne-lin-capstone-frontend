@@ -24,6 +24,7 @@ function App() {
   const [passwordContext, setPasswordContext]=useState("")
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div>
       <UserContext.Provider
@@ -45,7 +46,7 @@ function App() {
           isLoggedIn,
           setIsLoggedIn,
           passwordContext,
-          setPasswordContext
+          setPasswordContext,
         }}
       >
         {!isLoggedIn ? (

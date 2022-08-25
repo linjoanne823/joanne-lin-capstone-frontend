@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import LoggedInDropdownMenu from "../../components/DropdownMenu/LoggedInDropdownMenu";
 
 const Home = () => {
+  
   return (
     <Box sx={{ display: "flex", flexDirection: "row" }}>
       <LoggedInDropdownMenu />
@@ -15,7 +16,7 @@ const Home = () => {
             variant="contained"
             sx={{
               position: "absolute",
-              left: "40rem",
+              left: "30rem",
               top: "10rem",
               zIndex: "10",
               backgroundColor: "#242526",
@@ -29,7 +30,7 @@ const Home = () => {
             variant="contained"
             sx={{
               position: "absolute",
-              left: "60rem",
+              left: "50rem",
               top: "10rem",
               zIndex: "10",
               backgroundColor: "#242526",

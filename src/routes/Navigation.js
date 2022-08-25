@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { UserContext } from "../contexts/UserContext";
@@ -10,25 +10,18 @@ import Restaurants from "../pages/Restaurants/Restaurants";
 import Favourites from "../pages/Favourites/Favourites";
 
 function Navigation() {
-//   const [userId, setUserId] = useState("");
-//   const [allergiesContext, setAllergiesContext] = useState([]);
-//   const [locationContext, setLocationContext] = useState("");
-//   const [dietContext, setDietContext] = useState("");
-//   const [emailContext, setEmailContext] = useState("");
-//   const [firstNameContext, setFirstNameContext] = useState("");
-//   const [lastNameContext, setLastNameContext] = useState("");
+
   return (
     <div>
-    
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact element={<Home/>} />
-            <Route path="/profile" element={<Profile/>} />
-            <Route path="/recipes" element={<Recipes/>} />
-            <Route path="/restaurants" element={<Restaurants/>} />
-            <Route path="/favourites" element={<Favourites/>} />
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/favourites" element={<Favourites />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
