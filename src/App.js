@@ -1,23 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import React, { useState } from "react";
+import Home from "./pages/Home/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Profile from "./pages/Profile/Profile";
+import Favourites from "./pages/Favourites/Favourites";
+import Recipes from "./pages/Recipes/Recipes";
+import Restaurants from "./pages/Restaurants/Restaurants";
+import { UserContext } from "./contexts/UserContext";
+import { contextType } from "react-modal";
+import UserLogin from "./components/User/UserLogin";
+import UseModal from "./components/Modal/UseModal";
+import Navigation from "./routes/Navigation";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 function App() {
+  const [userId, setUserId] = useState("");
+  const [allergiesContext, setAllergiesContext] = useState([]);
+  const [locationContext, setLocationContext] = useState("");
+  const [dietContext, setDietContext] = useState("");
+  const [emailContext, setEmailContext] = useState("");
+  const [firstNameContext, setFirstNameContext] = useState("");
+  const [lastNameContext, setLastNameContext] = useState("");
+  const [passwordContext, setPasswordContext]=useState("")
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <UserContext.Provider
+        value={{
+          userId,
+          setUserId,
+          allergiesContext,
+          setAllergiesContext,
+          locationContext,
+          setLocationContext,
+          dietContext,
+          setDietContext,
+          emailContext,
+          setEmailContext,
+          firstNameContext,
+          setFirstNameContext,
+          lastNameContext,
+          setLastNameContext,
+          isLoggedIn,
+          setIsLoggedIn,
+          passwordContext,
+          setPasswordContext,
+        }}
+      >
+        {!isLoggedIn ? (
+          <LandingPage/>
+        ) : (
+          <Navigation/>
+        )}
+      </UserContext.Provider>
     </div>
   );
 }
