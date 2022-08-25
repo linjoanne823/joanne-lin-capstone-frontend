@@ -98,7 +98,7 @@ const RecipeDetails = (props) => {
             </Box>
 
             {showInstructions ? (
-              <>{recipeDetails.instructions.toString().split(",").join("\n")}</>
+              <>{recipeDetails.instructions.toString().split(/(?=[A-Z])/).join("\n").split("\n").map((str)=>(<li>{str}</li>))}</>
             ) : null}
           </div>
         </Box>
