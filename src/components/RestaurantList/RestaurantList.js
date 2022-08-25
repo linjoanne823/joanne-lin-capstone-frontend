@@ -13,6 +13,8 @@ import {
   MenuItem,
   InputLabel,
   Typography,
+  Card,
+  CardContent
 } from "@mui/material";
 import DietFilter from "../Filters/DietFilter";
 import LocationSearch from "../Filters/LocationSearch";
@@ -109,8 +111,8 @@ const RestaurantList = (props) => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Box sx={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
+    <Card sx={{ flexGrow: 1 }}>
+      <CardContent sx={{ display: "flex", flexDirection: "row", margin: "1rem", flexWrap:"wrap" }} >
    
         <FormControl onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"row"}}>
           <DietFilter
@@ -152,7 +154,7 @@ const RestaurantList = (props) => {
             })}
           </Select>
         </FormControl>
-      </Box>
+      </CardContent>
       <ImageList
         sx={{
           mb: 8,
@@ -217,7 +219,7 @@ const RestaurantList = (props) => {
             );
           })}
       </ImageList>
-    </Box>
+    </Card>
   );
 };
 
