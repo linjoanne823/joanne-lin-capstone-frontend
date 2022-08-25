@@ -61,7 +61,7 @@ const RestaurantDetails = (props) => {
             handleLike={handleLikeRestaurants}
             handleUnlike={handleUnlikeRestaurants}
           />
-          <Button href={`https://www.doordash.com/en-CA/search/store/${restaurantDetails.name}/?event_type=search`}>Order on Doordash</Button>
+          <Button target="_blank" href={`https://www.doordash.com/en-CA/search/store/${restaurantDetails.name}/?event_type=search`}>Order on Doordash</Button>
           <Typography component="span" variant="h5">
             <Box sx={{ fontWeight: "600" }}>{restaurantDetails.name}</Box>
           </Typography>

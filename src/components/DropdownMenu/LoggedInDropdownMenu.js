@@ -35,9 +35,7 @@ const LoggedInDropdownMenu = () => {
               <Typography>Favourites</Typography>
             </Link>
           </DropdownItem>
-          <DropdownItem>
-            <Typography>Logout</Typography>
-          </DropdownItem>
+         
         </div>
       </CSSTransition>
       <CSSTransition
