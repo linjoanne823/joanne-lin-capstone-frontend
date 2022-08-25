@@ -7,6 +7,7 @@ import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
+  Box
 } from "@mui/material";
 import config from "../../config";
 import { UserContext } from "../../contexts/UserContext";
@@ -56,11 +57,11 @@ const FavouriteRestaurants = () => {
                     restaurantId={restaurant.restaurant_id}
                     review={restaurant.reviews.map((element) => {
                       return (
-                        <div>
-                          <p>{element.user.name}</p>
-                          <p>{"⭐".repeat(element.rating)}</p>
-                          <p>{element.text}</p>
-                        </div>
+                        <Box sx={{borderBottom: "1px solid black"}}>
+                          <Typography>{element.user.name}</Typography>
+                          <Typography>{"⭐".repeat(element.rating)}</Typography>
+                          <Typography>{element.text}</Typography>
+                        </Box>
                       );
                     })}
                     categories={restaurant.categories}
