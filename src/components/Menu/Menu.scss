@@ -1,6 +1,7 @@
 .dropdown {
   top: 58px;
   width:90px;
+  height:100vh;
   background-color: #242526;
   border: 1px solid #474a4d;
   padding: 1rem;
@@ -9,6 +10,7 @@
 .menu {
   width: 100%;
   font-size: 13px;
+  height:100vh;
 
   &__icon {
     width: 2rem;
