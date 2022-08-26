@@ -4,7 +4,7 @@ import "./DropdownMenu.scss";
 import { CSSTransition } from "react-transition-group";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Typography, Card } from "@mui/material";
 
 const LoggedInDropdownMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");

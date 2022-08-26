@@ -1,4 +1,4 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import UseModal from "../Modal/UseModal";
 import Button from "@mui/material/Button";
 import axios from "axios";
@@ -26,9 +26,9 @@ const UserSignUp = (props) => {
     lastNameContext,
     setLastNameContext,
     isLoggedIn,
-    setIsLoggedIn, 
+    setIsLoggedIn,
     passwordContext,
-    setPasswordContext
+    setPasswordContext,
   } = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
@@ -41,7 +41,7 @@ const UserSignUp = (props) => {
   const [message, setMessage] = useState("");
   const [isSignupError, setIsSignupError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isSignedUp, setIsSignedUp] = useState(false)
+  const [isSignedUp, setIsSignedUp] = useState(false);
 
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
@@ -73,8 +73,6 @@ const UserSignUp = (props) => {
     e.preventDefault();
     return setIntolerances(e.target.value);
   };
-
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,7 +108,7 @@ const UserSignUp = (props) => {
         setEmailContext(response.data.data.user.email);
         setFirstNameContext(response.data.data.user.first_name);
         setLastNameContext(response.data.data.user.last_name);
-        setPasswordContext(response.data.data.user.password)
+        setPasswordContext(response.data.data.user.password);
       })
       .catch((err) => {
         console.log(err);
@@ -119,22 +117,22 @@ const UserSignUp = (props) => {
       });
   };
 
-  
-
-
   return (
-
     <div>
       <div>
         {!isSignedUp ? (
-          
           <div>
             <h2>Sign Up</h2>
-            
+
             {isSignupError && (
               <label style={{ color: "red" }}>{errorMessage}</label>
             )}
-            <Box component="form" autoComplete="off" noValidate>
+            <Box
+              component="form"
+              autoComplete="off"
+              noValidate
+              sx={{ height: "60vh" }}
+            >
               <TextField
                 name="firstName"
                 label="First Name"
@@ -176,17 +174,18 @@ const UserSignUp = (props) => {
                 location={location}
                 handleLocationChange={handleLocationChange}
               />
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Button variant="outlined" onClick={handleSubmit}>
-                Create Account
-              </Button>
+
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Button variant="outlined" onClick={handleSubmit} style={{marginBottom:"2rem"}}>
+                  Create Account
+                </Button>
+              </Box>
             </Box>
           </div>
         ) : (
           <div>
-          <h2>{firstNameContext} now registered!</h2>
-         <Button onClick={()=>setIsLoggedIn(true)}>Explore</Button>
+            <h2>{firstNameContext} now registered!</h2>
+            <Button onClick={() => setIsLoggedIn(true)}>Explore</Button>
           </div>
         )}
       </div>
