@@ -112,9 +112,9 @@ const RestaurantList = (props) => {
 
   return (
     <Card sx={{ flexGrow: 1 }}>
-      <CardContent sx={{ display: "flex", flexDirection: "row", margin: "1rem", flexWrap:"wrap" }} >
+      <CardContent sx={{ display: "flex", flexDirection: "row", margin: "0.5rem", flexWrap:"wrap" }} >
    
-        <FormControl onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"row"}}>
+        <FormControl onSubmit={handleSubmit} sx={{display:"flex", flexDirection:"row", flexWrap:"wrap"}}>
           <DietFilter
             diet={dietContext}
             handleSelectDietaryRestriction={handleSelectDietaryRestriction}

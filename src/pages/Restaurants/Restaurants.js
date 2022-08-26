@@ -8,7 +8,7 @@ const Restaurants = () => {
     <Box sx={{ display: "flex", flexDirection: "row" }}>
       <LoggedInDropdownMenu />
      
-        <RestaurantList />
+      <RestaurantList />
       
     </Box>
   );
