@@ -1,5 +1,5 @@
 import React from "react";
-import LoggedInDropdownMenu from "../../components/DropdownMenu/LoggedInDropdownMenu";
+import LoggedInDropdownMenu from "../../components/Menu/HomeMenu";
 import { Box } from "@mui/material";
 import RestaurantList from "../../components/RestaurantList/RestaurantList";
 

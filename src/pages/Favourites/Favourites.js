@@ -1,7 +1,7 @@
 import React from "react";
 import FavouritesSection from "../../components/FavouritesSection/FavouritesSection";
 import { Box } from "@mui/material";
-import LoggedInDropdownMenu from "../../components/DropdownMenu/LoggedInDropdownMenu";
+import LoggedInDropdownMenu from "../../components/Menu/HomeMenu";
 
 const Favourites = () => {
   return (

@@ -1,9 +1,9 @@
 import React from "react";
-import DropdownMenu from "../../components/DropdownMenu/DropdownMenu";
+import DropdownMenu from "../../components/Menu/LandingMenu";
 import { Box, Button, Card, CardMedia, CardContent } from "@mui/material";
 import video from "../../assets/video/food.mp4";
 import { Link } from "react-router-dom";
-import LoggedInDropdownMenu from "../../components/DropdownMenu/LoggedInDropdownMenu";
+import LoggedInDropdownMenu from "../../components/Menu/HomeMenu";
 
 const Home = () => {
   return (

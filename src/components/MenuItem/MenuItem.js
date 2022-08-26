@@ -1,7 +1,7 @@
 import React from "react";
-import "./DropdownItem.scss";
+import "./MenuItem.scss";
 
-const DropdownItem = (props) => {
+const MenuItem = (props) => {
   return (
     <a href="#" className="menu-item" onClick={()=>props.goToMenu && props.setActiveMenu(props.goToMenu)}>
       {props.children}
@@ -9,4 +9,4 @@ const DropdownItem = (props) => {
   );
 };
 
-export default DropdownItem;
+export default MenuItem;

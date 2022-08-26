@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import DropdownItem from "../DropdownItem/DropdownItem";
-import "./DropdownMenu.scss";
+import DropdownItem from "../MenuItem/MenuItem";
+import "./Menu.scss";
 import { CSSTransition } from "react-transition-group";
 import { IoIosArrowDropleft } from "react-icons/io";
 import UseModal from "../Modal/UseModal";
@@ -8,7 +8,7 @@ import UserSignUp from "../User/UserSignUp";
 import UserLogin from "../User/UserLogin";
 import { Typography } from "@mui/material";
 
-const DropdownMenu = (props) => {
+const LandingMenu = (props) => {
   const [activeMenu, setActiveMenu] = useState("main");
   const [activeSignUpModal, setActiveSignUpModal] = useState(false);
   const [activeLogInModal, setActiveLogInModal] = useState(false);
@@ -82,4 +82,4 @@ const DropdownMenu = (props) => {
   );
 };
 
-export default DropdownMenu;
+export default LandingMenu;

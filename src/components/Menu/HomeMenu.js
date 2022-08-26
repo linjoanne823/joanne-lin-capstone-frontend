@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import DropdownItem from "../DropdownItem/DropdownItem";
-import "./DropdownMenu.scss";
+import DropdownItem from "../MenuItem/MenuItem";
+import "./Menu.scss";
 import { CSSTransition } from "react-transition-group";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Typography, Card } from "@mui/material";
 
-const LoggedInDropdownMenu = () => {
+const HomeMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");
   return (
     <div className="dropdown">
@@ -64,4 +64,4 @@ const LoggedInDropdownMenu = () => {
   );
 };
 
-export default LoggedInDropdownMenu;
+export default HomeMenu;

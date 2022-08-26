@@ -1,9 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./MyProfile.scss";
-import Select from "react-select";
-import DietOptions from "../Options/DietOptions";
 import TextField from "@mui/material/TextField";
-import AllergyOptions from "../Options/AllergyOptions";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";

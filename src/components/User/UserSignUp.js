@@ -131,19 +131,19 @@ const UserSignUp = (props) => {
               component="form"
               autoComplete="off"
               noValidate
-              sx={{ height: "60vh" }}
+              sx={{ height: "60vh"}}
             >
               <TextField
                 name="firstName"
                 label="First Name"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "25rem" }}
+                style={{ marginBottom: "1rem", width: "15rem" }}
               ></TextField>
               <TextField
                 name="lastName"
                 label="Last Name"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "25rem" }}
+                style={{ marginBottom: "1rem", width: "15rem" }}
               ></TextField>
               <TextField
                 type="email"
@@ -151,7 +151,7 @@ const UserSignUp = (props) => {
                 name="email"
                 label="Email Address"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "25rem" }}
+                style={{ marginBottom: "1rem", width: "15rem" }}
               ></TextField>
               <TextField
                 type="password"
@@ -160,7 +160,7 @@ const UserSignUp = (props) => {
                 name="password"
                 label="Password"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "25rem" }}
+                style={{ marginBottom: "1rem", width: "15rem" }}
               ></TextField>
               <DietFilter
                 diet={diet}

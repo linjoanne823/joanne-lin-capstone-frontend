@@ -65,7 +65,7 @@ const UserLogin = (props) => {
               name="email"
               label="Email Address"
               onChange={handleChange}
-              style={{ marginBottom: "1rem", width: "25rem" }}
+              style={{ marginBottom: "1rem", width: "15rem" }}
             ></TextField>
             <TextField
               type="password"
@@ -74,7 +74,7 @@ const UserLogin = (props) => {
               name="password"
               label="Password"
               onChange={handleChange}
-              style={{ marginBottom: "1rem", width: "25rem" }}
+              style={{ marginBottom: "1rem", width: "15rem" }}
             ></TextField>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "center" }}>

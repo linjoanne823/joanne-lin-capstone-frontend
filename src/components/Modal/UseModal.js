@@ -14,7 +14,7 @@ const UseModal = (props) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 450,
+    width: 300,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -29,7 +29,7 @@ const UseModal = (props) => {
             x
           </Button>
 
-          <Typography>{props.children}</Typography>
+          <Typography style={{marginLeft:"1rem", marginRight:"1rem"}}>{props.children}</Typography>
         </Box>
       </Modal>
     </div>
