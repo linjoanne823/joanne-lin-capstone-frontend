@@ -6,8 +6,7 @@ import RecipeDetails from "../RecipeDetails/RecipeDetails";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import Box from "@mui/material/Box";
-import { Button } from "@mui/material";
+import { Button, Card, CardContent, Typography } from "@mui/material";
 import DietFilter from "../Filters/DietFilter";
 import CuisineFilter from "../Filters/CuisineFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
@@ -17,8 +16,6 @@ import config from "../../config";
 const RecipeList = () => {
   const { dietContext, setDietContext, allergiesContext, setAllergiesContext, userId } = useContext(UserContext);
   const [recipes, setRecipes] = useState([]);
-  // const  [diet, setDiet] = useState("");
-  // const [intolerances, setIntolerances] = useState([]);
   const [cuisine, setCuisine] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
   const [noRecipesFound, setNoRecipesFound] = useState(false);
@@ -71,8 +68,8 @@ const RecipeList = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Box sx={{ display: "flex", flexDirection: "row", margin: "1rem" }}>
+    <Card sx={{ flexGrow: 1 }}>
+      <CardContent sx={{ display: "flex", flexDirection: "row", margin: "1rem", flexWrap:"wrap"}}>
         <DietFilter
           diet={dietContext}
           handleSelectDietaryRestriction={handleSelectDietaryRestriction}
@@ -93,7 +90,7 @@ const RecipeList = () => {
         >
           Submit
         </Button>
-      </Box>
+      </CardContent>
 
       <ImageList
         sx={{
@@ -103,13 +100,12 @@ const RecipeList = () => {
         }}
       >
         {noRecipesFound
-          ? "Oh nuu :/"
+          ? <Typography style={{paddingBottom:"1rem", paddingLeft:"0.5rem"}}>Oh nuu :/ Maybe try a different combo?</Typography>
           : recipes.map((recipe, i) => {
               return (
                 <ImageListItem
                   className="recipes__card"
                   key={recipe.id}
-                  // style={{ backgroundImage: `url(${recipe.image})` }}
                   onClick={() => setActiveModalIndex(i)}
                 >
                   <img
@@ -133,7 +129,7 @@ const RecipeList = () => {
               );
             })}
       </ImageList>
-    </Box>
+    </Card>
   );
 };
 

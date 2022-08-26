@@ -1,10 +1,9 @@
 .dropdown {
   top: 58px;
-  width: 150px;
+  width:90px;
   background-color: #242526;
   border: 1px solid #474a4d;
   padding: 1rem;
-  overflow: hidden;
 }
 
 .menu {
@@ -28,6 +27,7 @@
 
 .menu-primary-exit {
   position: absolute;
+  transform: translateX(0%)
 }
 
 .menu-primary-exit-active {
@@ -45,11 +45,12 @@
   transition: all 0.5s ease;
 }
 
-// .menu-secondary-exit {
-//   position: absolute;
-// }
+.menu-secondary-exit {
+  position: absolute;
+  opacity:0;
+}
 
 .menu-secondary-exit-active {
-  transform: translateX(110%);
+  transform: translateX(100%);
   transition: all 0.5s ease;
 }
