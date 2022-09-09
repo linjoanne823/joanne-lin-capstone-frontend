@@ -130,7 +130,6 @@ const RestaurantList = (props) => {
           onClick={handleSubmit}
           size="small"
           style={{ margin: "1rem" }}
-          onClick={handleSubmit}
         >
           Search!
         </Button>

@@ -14,8 +14,9 @@ import { UserContext } from "../../contexts/UserContext";
 import config from "../../config";
 
 const RecipeList = () => {
+
   const { dietContext, setDietContext, allergiesContext, setAllergiesContext, userId } = useContext(UserContext);
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState<{id:number; image: string; title: string}[]>([]);
   const [cuisine, setCuisine] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
   const [noRecipesFound, setNoRecipesFound] = useState(false);
