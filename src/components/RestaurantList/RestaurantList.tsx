@@ -22,6 +22,32 @@ import { UserContext } from "../../contexts/UserContext";
 import config from "../../config";
 
 const RestaurantList = (props) => {
+type Restaurant = {
+  photos: string;
+  categories: string;
+  name: string;
+  price: number;
+  rating: number;
+  location: Location;
+  restaurant_id: string;
+  reviews: Array<Reviews>;
+}
+
+type Location = {
+  address1: string;
+}
+
+type Reviews = {
+  user: ReviewUser;
+  rating: number;
+  text: string;
+}
+
+type ReviewUser = {
+  name: string;
+}
+
+type Categories = string | Array<string>
 
   const {
     userId,
@@ -31,16 +57,13 @@ const RestaurantList = (props) => {
     setDietContext
   } = useContext(UserContext)
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
-  const [restaurants, setRestaurants] = useState([]);
-  // const [location, setLocation] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [categories, setCategories] = useState<Categories[]>([]);
   const [selectCategory, setSelectCategory] = useState("");
-  // const [diet, setDiet] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
-  // const [userId, setUserId] = useState(1);
 
   const getRestaurants = () => {
-    const fetchSetOfCategories = (businesses) => {
+    const fetchSetOfCategories= (businesses) => {
       //set automatically eliminates duplicates
       const categories = new Set();
       businesses.forEach((business) => {
@@ -76,10 +99,13 @@ const RestaurantList = (props) => {
       data: data,
     };
 
+
     axios(configuration)
       .then((response) => {
         setRestaurants(response.data);
-        setCategories(fetchSetOfCategories(response.data));
+        const a: unknown = fetchSetOfCategories(response.data);
+        const b: Categories[] = a as Categories[];
+        setCategories(b);
       })
       .catch((error) => {
         console.log(error);
