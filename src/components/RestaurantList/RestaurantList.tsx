@@ -47,7 +47,9 @@ type ReviewUser = {
   name: string;
 }
 
-type Categories = string | Array<string>
+type Businesses = {
+  categories: string
+}
 
   const {
     userId,
@@ -58,14 +60,14 @@ type Categories = string | Array<string>
   } = useContext(UserContext)
   const presetCategories = ["Vegan", "Gluten-Free", "Vegetarian"];
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
-  const [categories, setCategories] = useState<Categories[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
   const [selectCategory, setSelectCategory] = useState("");
   const [activeModalIndex, setActiveModalIndex] = useState(-1);
 
   const getRestaurants = () => {
-    const fetchSetOfCategories= (businesses) => {
+    const fetchSetOfCategories = (businesses: Businesses[]): string[] => {
       //set automatically eliminates duplicates
-      const categories = new Set();
+      const categories = new Set<string>();
       businesses.forEach((business) => {
         //loops through all businesses and in each business
         //loops through all the categories
@@ -103,9 +105,9 @@ type Categories = string | Array<string>
     axios(configuration)
       .then((response) => {
         setRestaurants(response.data);
-        const a: unknown = fetchSetOfCategories(response.data);
-        const b: Categories[] = a as Categories[];
-        setCategories(b);
+        // const a: unknown = fetchSetOfCategories(response.data);
+        // const b: Categories[] = a as Categories[];
+        setCategories(fetchSetOfCategories(response.data));
       })
       .catch((error) => {
         console.log(error);
