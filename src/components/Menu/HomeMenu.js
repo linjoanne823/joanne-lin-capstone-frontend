@@ -8,6 +8,7 @@ import { Typography, Card } from "@mui/material";
 
 const HomeMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");
+ 
   return (
     <div className="dropdown">
       <CSSTransition
@@ -34,6 +35,13 @@ const HomeMenu = () => {
             <Link to={"/favourites"}>
               <Typography>Favourites</Typography>
             </Link>
+          </DropdownItem>
+          <DropdownItem>
+              <Typography onClick={()=>{
+                sessionStorage.clear()
+                window.location.reload(false)
+              }
+              }>Log Out</Typography>
           </DropdownItem>
          
         </div>

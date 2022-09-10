@@ -98,7 +98,8 @@ const UserSignUp = (props) => {
         }
       )
       .then((response) => {
-        console.log(response);
+        console.log("-------" + (response.data.data.token));
+        sessionStorage.setItem('token', response.data.data.token)
         setMessage("Successfully signed up!");
         setIsSignedUp(true);
         setUserId(response.data.data.user.user_id);

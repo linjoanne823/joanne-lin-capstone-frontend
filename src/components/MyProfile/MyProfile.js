@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./MyProfile.scss";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -24,22 +24,40 @@ const MyProfile = () => {
     lastNameContext,
     setLastNameContext,
     userId,
-    passwordContext,
-    setPasswordContext
   } = useContext(UserContext);
-  
+
+  const getUser = () =>{
+    const token = sessionStorage.getItem("token");
+    axios
+    .get(`${config.backend_url}:8080/users/`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      console.log(response.data)
+      setFirstNameContext(response.data.first_name);
+      setLastNameContext(response.data.last_name);
+      setEmailContext(response.data.email);
+      setLocationContext(response.data.city);
+      setDietContext(response.data.dietary_restrictions);
+      setAllergiesContext(response.data.allergies);
+    })
+    .catch((err) => console.log(err));
+  }
+
+  useEffect(()=>{
+    getUser()
+  }, {})
   
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .put(
-        `${config.backend_url}:8080/users/${userId}`,
+        `${config.backend_url}:8080/users/?userId=${userId}`,
         {
           firstNameContext,
           lastNameContext,
           emailContext,
-          passwordContext,
           locationContext,
           userId,
           dietContext,
@@ -57,7 +75,9 @@ const MyProfile = () => {
   return (
     <div className="my-profile">
       <div>
-        <Typography style={{fontSize:"1.5rem", paddingLeft:"1rem"}}>My Profile</Typography>
+        <Typography style={{ fontSize: "1.5rem", paddingLeft: "1rem" }}>
+          My Profile
+        </Typography>
 
         <div className="my-profile__container">
           <div className="my-profile__input-container">
@@ -89,29 +109,20 @@ const MyProfile = () => {
               }}
             />
           </div>
-          <div className="my-profile__input-container">
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              value={passwordContext}
-              onChange={(e) => setPasswordContext(e.target.value)}
-            />
-          </div>
           <div>
-            <TextField style={{marginLeft:"1rem"}}
+            <TextField
+              style={{ marginLeft: "1rem" }}
               id="outlined-basic"
               label="City"
               type="text"
               value={locationContext}
               onChange={(e) => setLocationContext(e.target.value)}
             />
-          </div>
-          <Box sx={{paddingLeft:"0.5rem"}}>
-            <DietFilter diet={dietContext}/>
+          </div> 
+          <Box sx={{ paddingLeft: "0.5rem" }}>
+            <DietFilter diet={dietContext} />
             <AllergyFilter intolerances={allergiesContext} />
-          </Box>
-          
+          </Box> 
         </div>
         <div className="my-profile__button">
           <Button variant="outlined" onClick={handleSubmit}>

@@ -1,5 +1,5 @@
 import "./App.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Home from "./pages/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile/Profile";
@@ -12,6 +12,8 @@ import UserLogin from "./components/User/UserLogin";
 import UseModal from "./components/Modal/UseModal";
 import Navigation from "./routes/Navigation";
 import LandingPage from "./pages/LandingPage/LandingPage";
+import axios from "axios";
+import config from "./config";
 
 function App() {
   const [userId, setUserId] = useState("");
@@ -24,6 +26,17 @@ function App() {
   const [passwordContext, setPasswordContext]=useState("")
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const verifyUser = () => {
+    const token = sessionStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+    console.log(token);
+   
+  };
+  useEffect(() => {
+    verifyUser();
+  }, {});
 
   return (
     <div>
