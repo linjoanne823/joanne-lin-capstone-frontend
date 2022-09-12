@@ -31,15 +31,6 @@ const AllergyFilter = (props) => {
     "Soy",
   ];
 
-  //   const handleChange = (event) => {
-  //     const {
-  //       target: { value },
-  //     } = event;
-  //     setAllergies(
-  //       // On autofill we get a stringified value.
-  //       typeof value === "string" ? value.split(",") : value
-  //     );
-  //   };
 
   function getStyles(options, intolerances, theme) {
     return {
@@ -52,7 +43,7 @@ const AllergyFilter = (props) => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 240 }}>
         <InputLabel id="demo-multiple-name-label">Intolerances</InputLabel>
         <Select
           labelId="demo-multiple-name-label"

@@ -7,7 +7,7 @@ import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
-  Box
+  Box,
 } from "@mui/material";
 import config from "../../config";
 import { UserContext } from "../../contexts/UserContext";
@@ -18,9 +18,7 @@ const FavouriteRestaurants = () => {
   const { userId } = useContext(UserContext);
   const getFavouriteRestaurants = () => {
     axios
-      .get(
-        `${config.backend_url}:8080/restaurants/favourites/?userId=${userId}`
-      )
+      .get(`${config.backend_url}/restaurants/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRestaurants(response.data);
       });
@@ -57,7 +55,7 @@ const FavouriteRestaurants = () => {
                     restaurantId={restaurant.restaurant_id}
                     review={restaurant.reviews.map((element) => {
                       return (
-                        <Box sx={{borderBottom: "1px solid black"}}>
+                        <Box sx={{ borderBottom: "1px solid black" }}>
                           <Typography>{element.user.name}</Typography>
                           <Typography>{"⭐".repeat(element.rating)}</Typography>
                           <Typography>{element.text}</Typography>

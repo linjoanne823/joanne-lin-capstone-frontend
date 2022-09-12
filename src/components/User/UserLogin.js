@@ -12,7 +12,8 @@ const UserLogin = (props) => {
   const [isLoginError, setIsLoginError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showLoginForm, setShowLoginForm] = useState(true);
-  const { userId, setUserId, isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+  const { userId, setUserId, isLoggedIn, setIsLoggedIn } =
+    useContext(UserContext);
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -28,7 +29,7 @@ const UserLogin = (props) => {
     e.preventDefault();
     axios
       .post(
-        `${config.backend_url}:8080/users/login`,
+        `${config.backend_url}/users/login`,
         {
           email: email,
           password: password,
@@ -40,7 +41,7 @@ const UserLogin = (props) => {
       .then((response) => {
         console.log(response);
         setIsLoggedIn(true);
-        console.log("hello");
+        sessionStorage.setItem("token", response.data.data.token);
         setUserId(response.data.data.user.user_id);
       })
       .catch((err) => {

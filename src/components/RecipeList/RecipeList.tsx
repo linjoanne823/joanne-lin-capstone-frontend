@@ -34,7 +34,7 @@ const RecipeList = () => {
 
   const getRecipes = () => {
     axios
-      .get(`${config.backend_url}:8080/recipes/?${buildQueryString()}?${userId}`)
+      .get(`${config.backend_url}/recipes/?${buildQueryString()}?${userId}`)
       .then((response) => {
         setNoRecipesFound(response.data.results.length === 0);
         return setRecipes(response.data.results);

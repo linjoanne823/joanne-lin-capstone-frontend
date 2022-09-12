@@ -1,6 +1,8 @@
 const config = {
-    backend_url:'http://localhost'
-    // backend_url:'http://ec2-54-241-76-100.us-west-1.compute.amazonaws.com'
-}
+//   backend_url: "http://localhost:8080",
+  backend_url:'https://foodiegram-api.joannelin.ca',
+//   home_page: "http://localhost:3001",
+  home_page: "https://foodiegram.joannelin.ca"
+};
 
-export default config; 
+export default config;

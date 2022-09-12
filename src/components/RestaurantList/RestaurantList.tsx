@@ -94,7 +94,7 @@ type Businesses = {
 
     const configuration = {
       method: "POST",
-      url: `${config.backend_url}:8080/restaurants/?userId=${userId}`,
+      url: `${config.backend_url}/restaurants/?userId=${userId}`,
       headers: {
         "Content-Type": "application/json",
       },

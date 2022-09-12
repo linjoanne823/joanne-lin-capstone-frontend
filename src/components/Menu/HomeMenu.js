@@ -5,6 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import { IoIosArrowDropleft } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Typography, Card } from "@mui/material";
+import config from '../../config';
 
 const HomeMenu = () => {
   const [activeMenu, setActiveMenu] = useState("main");
@@ -39,7 +40,7 @@ const HomeMenu = () => {
           <DropdownItem>
               <Typography onClick={()=>{
                 sessionStorage.clear()
-                window.location.reload(false)
+                window.location.href= config.home_page;
               }
               }>Log Out</Typography>
           </DropdownItem>

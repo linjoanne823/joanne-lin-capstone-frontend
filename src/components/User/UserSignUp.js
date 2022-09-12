@@ -83,7 +83,7 @@ const UserSignUp = (props) => {
     console.log(location);
     axios
       .post(
-        `${config.backend_url}:8080/users/signup`,
+        `${config.backend_url}/users/signup`,
         {
           firstName: firstName,
           lastName: lastName,
@@ -98,8 +98,8 @@ const UserSignUp = (props) => {
         }
       )
       .then((response) => {
-        console.log("-------" + (response.data.data.token));
-        sessionStorage.setItem('token', response.data.data.token)
+        console.log("-------" + response.data.data.token);
+        sessionStorage.setItem("token", response.data.data.token);
         setMessage("Successfully signed up!");
         setIsSignedUp(true);
         setUserId(response.data.data.user.user_id);
@@ -132,19 +132,19 @@ const UserSignUp = (props) => {
               component="form"
               autoComplete="off"
               noValidate
-              sx={{ height: "60vh"}}
+              sx={{ height: "60vh" }}
             >
               <TextField
                 name="firstName"
                 label="First Name"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "15rem" }}
+                style={{ marginBottom: "1rem", width: "15rem", marginLeft:"0.5rem" }}
               ></TextField>
               <TextField
                 name="lastName"
                 label="Last Name"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "15rem" }}
+                style={{ marginBottom: "1rem", width: "15rem", marginLeft:"0.5rem" }}
               ></TextField>
               <TextField
                 type="email"
@@ -152,7 +152,7 @@ const UserSignUp = (props) => {
                 name="email"
                 label="Email Address"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "15rem" }}
+                style={{ marginBottom: "1rem", width: "15rem", marginLeft:"0.5rem" }}
               ></TextField>
               <TextField
                 type="password"
@@ -161,7 +161,7 @@ const UserSignUp = (props) => {
                 name="password"
                 label="Password"
                 onChange={handleChange}
-                style={{ marginBottom: "1rem", width: "15rem" }}
+                style={{ marginBottom: "1rem", width: "15rem", marginLeft:"0.5rem" }}
               ></TextField>
               <DietFilter
                 diet={diet}
@@ -177,7 +177,11 @@ const UserSignUp = (props) => {
               />
 
               <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <Button variant="outlined" onClick={handleSubmit} style={{marginBottom:"2rem"}}>
+                <Button
+                  variant="outlined"
+                  onClick={handleSubmit}
+                  style={{ marginBottom: "2rem" }}
+                >
                   Create Account
                 </Button>
               </Box>

@@ -16,9 +16,7 @@ const RecipeDetails = (props) => {
 
   const getSelectRecipe = () => {
     axios
-      .get(
-        `${config.backend_url}:8080/recipes/${props.recipeId}?userId=${userId}`
-      )
+      .get(`${config.backend_url}/recipes/${props.recipeId}?userId=${userId}`)
       .then((response) => {
         setRecipeDetails(response.data);
       });
@@ -39,7 +37,7 @@ const RecipeDetails = (props) => {
 
   const handleLikeRecipes = () => {
     axios.post(
-      `${config.backend_url}:8080/recipes/favourites`,
+      `${config.backend_url}/recipes/favourites`,
       {
         recipeDetails,
         userId: userId,
@@ -53,7 +51,7 @@ const RecipeDetails = (props) => {
   const handleUnlikeRecipes = () => {
     const recipeId = recipeDetails.recipe_id;
     axios.delete(
-      `${config.backend_url}:8080/recipes/favourites/${recipeId}?userId=${userId}`
+      `${config.backend_url}/recipes/favourites/${recipeId}?userId=${userId}`
     );
   };
 
@@ -98,7 +96,16 @@ const RecipeDetails = (props) => {
             </Box>
 
             {showInstructions ? (
-              <>{recipeDetails.instructions.toString().split(/(?=[A-Z])/).join("\n").split("\n").map((str)=>(<li>{str}</li>))}</>
+              <>
+                {recipeDetails.instructions
+                  .toString()
+                  .split(/(?=[A-Z])/)
+                  .join("\n")
+                  .split("\n")
+                  .map((str) => (
+                    <li>{str}</li>
+                  ))}
+              </>
             ) : null}
           </div>
         </Box>

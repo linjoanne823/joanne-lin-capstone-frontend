@@ -4,7 +4,7 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 const DietFilter = (props) => {
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 200 }}>
+      <FormControl sx={{ m: 1, width: 240 }}>
         <InputLabel id="demo-simple-select-autowidth-label">
           Dietary Restriction
         </InputLabel>

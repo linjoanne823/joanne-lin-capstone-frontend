@@ -12,7 +12,7 @@ const FavouriteRecipes = () => {
 
   const getFavouriteRecipes = () => {
     axios
-      .get(`${config.backend_url}:8080/recipes/favourites/?userId=${userId}`)
+      .get(`${config.backend_url}/recipes/favourites/?userId=${userId}`)
       .then((response) => {
         setFavouriteRecipes(response.data);
       });

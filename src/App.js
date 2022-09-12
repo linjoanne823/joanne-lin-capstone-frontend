@@ -23,20 +23,51 @@ function App() {
   const [emailContext, setEmailContext] = useState("");
   const [firstNameContext, setFirstNameContext] = useState("");
   const [lastNameContext, setLastNameContext] = useState("");
-  const [passwordContext, setPasswordContext]=useState("")
+  const [passwordContext, setPasswordContext] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const verifyUser = () => {
     const token = sessionStorage.getItem("token");
     if (token) {
-      setIsLoggedIn(true);
+      setIsLoading(true);
+      axios
+        .get(`${config.backend_url}/users/`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setFirstNameContext(response.data.first_name);
+          setLastNameContext(response.data.last_name);
+          setEmailContext(response.data.email);
+          setLocationContext(response.data.city);
+          setDietContext(response.data.dietary_restrictions);
+          setAllergiesContext(response.data.allergies);
+          setUserId(response.data.user_id);
+          setIsLoggedIn(true);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsLoading(false);
+          setIsLoggedIn(false)
+        });
     }
     console.log(token);
-   
   };
   useEffect(() => {
     verifyUser();
   }, {});
+
+  const renderPage = () => {
+    if (isLoading){
+      return <div>loading...</div>
+    }else if(isLoggedIn){
+      return <Navigation/>
+    }else {
+      return <LandingPage/>
+    }
+  }
 
   return (
     <div>
@@ -62,11 +93,8 @@ function App() {
           setPasswordContext,
         }}
       >
-        {!isLoggedIn ? (
-          <LandingPage/>
-        ) : (
-          <Navigation/>
-        )}
+      
+        {renderPage()}
       </UserContext.Provider>
     </div>
   );

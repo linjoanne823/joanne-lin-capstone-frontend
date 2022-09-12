@@ -6,6 +6,7 @@ import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
 import DietFilter from "../Filters/DietFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
+import LocationSearch from "components/Filters/LocationSearch";
 import { Typography, Box } from "@mui/material";
 import config from "../../config";
 
@@ -26,34 +27,12 @@ const MyProfile = () => {
     userId,
   } = useContext(UserContext);
 
-  const getUser = () =>{
-    const token = sessionStorage.getItem("token");
-    axios
-    .get(`${config.backend_url}:8080/users/`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((response) => {
-      console.log(response.data)
-      setFirstNameContext(response.data.first_name);
-      setLastNameContext(response.data.last_name);
-      setEmailContext(response.data.email);
-      setLocationContext(response.data.city);
-      setDietContext(response.data.dietary_restrictions);
-      setAllergiesContext(response.data.allergies);
-    })
-    .catch((err) => console.log(err));
-  }
-
-  useEffect(()=>{
-    getUser()
-  }, {})
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .put(
-        `${config.backend_url}:8080/users/?userId=${userId}`,
+        `${config.backend_url}/users/?userId=${userId}`,
         {
           firstNameContext,
           lastNameContext,
@@ -70,6 +49,11 @@ const MyProfile = () => {
       .then((response) => {
         console.log(response);
       });
+  };
+
+  const handleLocationChange = (e) => {
+    e.preventDefault();
+    return setLocationContext(e.target.value);
   };
 
   return (
@@ -109,20 +93,11 @@ const MyProfile = () => {
               }}
             />
           </div>
-          <div>
-            <TextField
-              style={{ marginLeft: "1rem" }}
-              id="outlined-basic"
-              label="City"
-              type="text"
-              value={locationContext}
-              onChange={(e) => setLocationContext(e.target.value)}
-            />
-          </div> 
           <Box sx={{ paddingLeft: "0.5rem" }}>
+            <LocationSearch location={locationContext} handleLocationChange={handleLocationChange}/>
             <DietFilter diet={dietContext} />
             <AllergyFilter intolerances={allergiesContext} />
-          </Box> 
+          </Box>
         </div>
         <div className="my-profile__button">
           <Button variant="outlined" onClick={handleSubmit}>
