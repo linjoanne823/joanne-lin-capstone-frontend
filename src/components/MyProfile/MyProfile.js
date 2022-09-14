@@ -55,6 +55,15 @@ const MyProfile = () => {
     e.preventDefault();
     return setLocationContext(e.target.value);
   };
+  const handleSelectDietaryRestriction = (e) => {
+    e.preventDefault();
+    return setDietContext(e.target.value);
+  };
+
+  const handleSelectAllergies = (e) => {
+    e.preventDefault();
+    return setAllergiesContext(e.target.value);
+  };
 
   return (
     <div className="my-profile">
@@ -95,8 +104,8 @@ const MyProfile = () => {
           </div>
           <Box sx={{ paddingLeft: "0.5rem" }}>
             <LocationSearch location={locationContext} handleLocationChange={handleLocationChange}/>
-            <DietFilter diet={dietContext} />
-            <AllergyFilter intolerances={allergiesContext} />
+            <DietFilter diet={dietContext} handleSelectDietaryRestriction={handleSelectDietaryRestriction}/>
+            <AllergyFilter intolerances={allergiesContext} handleSelectAllergies={handleSelectAllergies}/>
           </Box>
         </div>
         <div className="my-profile__button">

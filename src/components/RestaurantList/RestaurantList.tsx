@@ -105,8 +105,6 @@ type Businesses = {
     axios(configuration)
       .then((response) => {
         setRestaurants(response.data);
-        // const a: unknown = fetchSetOfCategories(response.data);
-        // const b: Categories[] = a as Categories[];
         setCategories(fetchSetOfCategories(response.data));
       })
       .catch((error) => {
