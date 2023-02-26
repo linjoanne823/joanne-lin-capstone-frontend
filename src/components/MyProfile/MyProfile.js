@@ -7,41 +7,62 @@ import { UserContext } from "../../contexts/UserContext";
 import DietFilter from "../Filters/DietFilter";
 import AllergyFilter from "../Filters/AllergyFilter";
 import LocationSearch from "components/Filters/LocationSearch";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box} from "@mui/material";
 import config from "../../config";
 
 const MyProfile = () => {
   const {
-    allergiesContext,
-    setAllergiesContext,
-    locationContext,
-    setLocationContext,
-    dietContext,
-    setDietContext,
-    emailContext,
-    setEmailContext,
-    firstNameContext,
-    setFirstNameContext,
-    lastNameContext,
-    setLastNameContext,
     userId,
   } = useContext(UserContext);
 
+  const token = sessionStorage.getItem("token");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [dietaryRestriction, setDietaryRestriction] = useState("");
+  const [allergies, setAllergies] = useState([]);
+
+
+  const getUser = () =>{
+    axios
+      .get(`${config.backend_url}/users/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        console.log(response.data)
+        setFirstName(response.data.first_name);
+        setLastName(response.data.last_name);
+        setEmail(response.data.email);
+        setLocation(response.data.city);
+        setDietaryRestriction(response.data.dietary_restrictions);
+        setAllergies(response.data.allergies);
+      })
+      .catch((error) => {
+        return console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .put(
-        `${config.backend_url}/users/?userId=${userId}`,
+        `${config.backend_url}/users/?userId=${userId}`, 
+        
         {
-          firstNameContext,
-          lastNameContext,
-          emailContext,
-          locationContext,
+          firstName,
+          lastName,
+          email,
+          location,
           userId,
-          dietContext,
-          allergiesContext,
+          dietaryRestriction,
+          allergies,
         },
+        {headers: { Authorization: `Bearer ${token}` }},
         {
           "Content-Type": "application/json",
         }
@@ -51,21 +72,23 @@ const MyProfile = () => {
       });
   };
 
+  
+
   const handleLocationChange = (e) => {
     e.preventDefault();
-    return setLocationContext(e.target.value);
+    return setLocation(e.target.value);
   };
   const handleSelectDietaryRestriction = (e) => {
     e.preventDefault();
-    return setDietContext(e.target.value);
+    return setDietaryRestriction(e.target.value);
   };
 
   const handleSelectAllergies = (e) => {
     e.preventDefault();
-    return setAllergiesContext(e.target.value);
+    return setAllergies(e.target.value);
   };
-
   return (
+
     <div className="my-profile">
       <div>
         <Typography style={{ fontSize: "1.5rem", paddingLeft: "1rem" }}>
@@ -74,38 +97,38 @@ const MyProfile = () => {
 
         <div className="my-profile__container">
           <div className="my-profile__input-container">
+            <Typography>First Name</Typography>
             <TextField
               id="outlined-basic"
-              label="First Name"
               variant="outlined"
-              value={firstNameContext}
-              onChange={(e) => setFirstNameContext(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="my-profile__input-container">
+            <Typography>Last Name</Typography>
             <TextField
               id="outlined-basic"
-              label="Last Name"
               variant="outlined"
-              value={lastNameContext}
-              onChange={(e) => setLastNameContext(e.target.value)}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
           <div className="my-profile__input-container">
+            <Typography>Email</Typography>
             <TextField
               id="outlined-basic"
-              label="Email"
               variant="outlined"
-              value={emailContext}
+              value={email}
               onChange={(e) => {
-                setEmailContext(e.target.value);
+                setEmail(e.target.value);
               }}
             />
           </div>
           <Box sx={{ paddingLeft: "0.5rem" }}>
-            <LocationSearch location={locationContext} handleLocationChange={handleLocationChange}/>
-            <DietFilter diet={dietContext} handleSelectDietaryRestriction={handleSelectDietaryRestriction}/>
-            <AllergyFilter intolerances={allergiesContext} handleSelectAllergies={handleSelectAllergies}/>
+            <LocationSearch location={location} handleLocationChange={handleLocationChange}/>
+            <DietFilter diet={dietaryRestriction} handleSelectDietaryRestriction={handleSelectDietaryRestriction}/>
+            <AllergyFilter intolerances={allergies} handleSelectAllergies={handleSelectAllergies}/>
           </Box>
         </div>
         <div className="my-profile__button">
