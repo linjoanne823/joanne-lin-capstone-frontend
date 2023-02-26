@@ -23,14 +23,7 @@ const RecipeDetails = (props) => {
   };
 
   useEffect(() => {
-    if (props.favouriteRecipeDetails) {
-      setRecipeDetails(props.favouriteRecipeDetails);
-      //if the recipe is favourited, then update recipe details
-      //to the favourited recipe details
-    } else {
-      getSelectRecipe();
-      //if not, just return the regular recipe details
-    }
+    getSelectRecipe();
   }, {}); //it's an object because there is just one
 
   const navigate = useNavigate();

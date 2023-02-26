@@ -41,6 +41,7 @@ const UserLogin = (props) => {
       .then((response) => {
         console.log(response);
         setIsLoggedIn(true);
+        //set jwt token in session storage 
         sessionStorage.setItem("token", response.data.data.token);
         setUserId(response.data.data.user.user_id);
       })

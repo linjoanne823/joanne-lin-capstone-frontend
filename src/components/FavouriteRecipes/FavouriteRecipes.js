@@ -37,7 +37,7 @@ const FavouriteRecipes = () => {
                 {
                   <RecipeDetails
                     recipeId={recipe.id}
-                    favouriteRecipeDetails={recipe}
+                    recipe={recipe}
                   />
                 }
               </UseModal>

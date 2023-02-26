@@ -10,6 +10,7 @@ import LocationSearch from "components/Filters/LocationSearch";
 import { Typography, Box} from "@mui/material";
 import config from "../../config";
 
+
 const MyProfile = () => {
   const {
     userId,
@@ -91,10 +92,7 @@ const MyProfile = () => {
 
     <div className="my-profile">
       <div>
-        <Typography style={{ fontSize: "1.5rem", paddingLeft: "1rem" }}>
-          My Profile
-        </Typography>
-
+        <Typography style={{ fontSize: "1.5rem", paddingLeft: "1rem" }}>My Profile</Typography>
         <div className="my-profile__container">
           <div className="my-profile__input-container">
             <Typography>First Name</Typography>

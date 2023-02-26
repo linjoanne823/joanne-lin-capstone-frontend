@@ -1,14 +1,22 @@
 import React from "react";
 import LoggedInDropdownMenu from "../../components/Menu/HomeMenu";
 import MyProfile from "../../components/MyProfile/MyProfile";
-import "./Profile.scss";
+import ProfileCard from "components/MyProfile/ProfileCard";
+import { Box } from "@mui/material";
+
+
 
 const Profile = () => {
   return (
-    <div className="profile">
+    <Box sx={{ display: "flex", flexDirection: "row" }}>
       <LoggedInDropdownMenu />
-      <MyProfile />
-    </div>
+      <Box sx={{ display: "flex", flexDirection: "row" }}>
+        <ProfileCard/>
+        <MyProfile />
+      </Box>
+      
+    
+    </Box>
   );
 };
 
