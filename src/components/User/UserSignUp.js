@@ -103,13 +103,13 @@ const UserSignUp = (props) => {
         setMessage("Successfully signed up!");
         setIsSignedUp(true);
         setUserId(response.data.data.user.user_id);
-        // setAllergiesContext(response.data.data.user.allergies);
-        // setLocationContext(response.data.data.user.city);
-        // setDietContext(response.data.data.user.dietary_restrictions);
-        // setEmailContext(response.data.data.user.email);
+        setAllergiesContext(response.data.data.user.allergies);
+        setLocationContext(response.data.data.user.city);
+        setDietContext(response.data.data.user.dietary_restrictions);
+        setEmailContext(response.data.data.user.email);
         setFirstNameContext(response.data.data.user.first_name);
-        // setLastNameContext(response.data.data.user.last_name);
-        // setPasswordContext(response.data.data.user.password);
+        setLastNameContext(response.data.data.user.last_name);
+        setPasswordContext(response.data.data.user.password);
       })
       .catch((err) => {
         console.log(err);

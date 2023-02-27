@@ -14,6 +14,9 @@ import config from "../../config";
 const MyProfile = () => {
   const {
     userId,
+    allergiesContext,
+    locationContext,
+    dietContext,
   } = useContext(UserContext);
 
   const token = sessionStorage.getItem("token");
@@ -47,6 +50,10 @@ const MyProfile = () => {
   useEffect(() => {
     getUser();
   }, []);
+
+  allergiesContext = allergies;
+  dietContext = dietaryRestriction;
+  locationContext = location;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -124,9 +131,9 @@ const MyProfile = () => {
             />
           </div>
           <Box sx={{ paddingLeft: "0.5rem" }}>
-            <LocationSearch location={location} handleLocationChange={handleLocationChange}/>
-            <DietFilter diet={dietaryRestriction} handleSelectDietaryRestriction={handleSelectDietaryRestriction}/>
-            <AllergyFilter intolerances={allergies} handleSelectAllergies={handleSelectAllergies}/>
+            <LocationSearch location={locationContext} handleLocationChange={handleLocationChange}/>
+            <DietFilter diet={dietContext} handleSelectDietaryRestriction={handleSelectDietaryRestriction}/>
+            <AllergyFilter intolerances={allergiesContext} handleSelectAllergies={handleSelectAllergies}/>
           </Box>
         </div>
         <div className="my-profile__button">
